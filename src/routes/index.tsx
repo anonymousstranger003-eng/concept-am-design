@@ -113,25 +113,25 @@ function Home() {
 
       {/* INTRO */}
       <section className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-end">
-        <Reveal className="md:col-span-7">
+        <SlideIn from="left" className="md:col-span-7">
           <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
             <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />The Studio
           </div>
           <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
             A professional architecture and interior design firm — built on honesty, integrity and craft.
           </h2>
-        </Reveal>
-        <Reveal delay={0.15} className="md:col-span-5 md:pl-10">
+        </SlideIn>
+        <SlideIn from="right" delay={0.15} className="md:col-span-5 md:pl-10">
           <p className="text-muted-foreground text-lg leading-relaxed">
-            From compact homes to large commercial campuses, every AM Concept project
-            begins the same way — listening. We believe great buildings are not
-            decorated, they're considered. Each space is shaped by site, climate,
-            client and the quiet discipline of good detailing.
+            From compact homes to large commercial campuses, every AM Concepts
+            project begins the same way — listening. We believe great buildings
+            are not decorated, they're considered. Each space is shaped by site,
+            climate, client and the quiet discipline of good detailing.
           </p>
           <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand transition-colors">
             About the studio <ArrowUpRight className="w-4 h-4" />
           </Link>
-        </Reveal>
+        </SlideIn>
       </section>
 
       {/* STATS */}
