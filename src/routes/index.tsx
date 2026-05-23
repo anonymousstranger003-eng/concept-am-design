@@ -242,7 +242,7 @@ function Home() {
       {/* FOUNDER */}
       <section className="bg-secondary/50 border-y border-black/5">
         <div className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-center">
-          <Reveal className="md:col-span-5">
+          <SlideIn from="left" className="md:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden">
               <img src={founder} alt="Manoj AM, Founder" className="w-full h-full object-cover" loading="lazy" />
               <div className="absolute bottom-0 left-0 right-0 glass p-5">
@@ -250,9 +250,9 @@ function Home() {
                 <div className="font-display text-2xl mt-1">Manoj AM</div>
               </div>
             </div>
-          </Reveal>
+          </SlideIn>
           <div className="md:col-span-7 md:pl-10">
-            <Reveal>
+            <SlideIn from="right">
               <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
                 <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Philosophy
               </div>
