@@ -28,7 +28,7 @@ function About() {
       <PageHeader
         kicker="About the studio"
         title="A Kerala studio designing buildings that feel honest, calm and built to last."
-        sub="AM Concept & India Concepts Architects and Engineers has been quietly shaping homes, workplaces and public buildings across Kerala since 2014 — led by founder Manoj AM."
+        sub="AM Concepts & Architects has been quietly shaping homes, workplaces and public buildings across Kerala since 2014 — led by founder Manoj AM."
       />
 
       <section className="container-x mx-auto max-w-7xl pb-28 grid md:grid-cols-12 gap-10">
