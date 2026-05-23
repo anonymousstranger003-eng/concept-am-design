@@ -175,7 +175,7 @@ function Home() {
           {services.slice(0, 6).map((s, i) => (
             <motion.div
               key={s.title}
-              variants={item}
+              variants={i % 2 === 0 ? itemLeft : itemRight}
               className="group bg-background p-8 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
             >
               <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground group-hover:text-white/50">
@@ -186,6 +186,7 @@ function Home() {
               </h3>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed group-hover:text-white/70">{s.desc}</p>
               <ArrowUpRight className="absolute top-8 right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
+              <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
         </Stagger>
