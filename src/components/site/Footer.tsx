@@ -9,17 +9,17 @@ export function Footer() {
         <div className="md:col-span-5">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 bg-white">
-              <img src={logo} alt="AM Concept" className="w-full h-full object-cover" />
+              <img src={logo} alt="AM Concepts & Architects" className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
-              <div className="font-display text-white text-lg">AM Concept</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">India Concepts · Architects & Engineers</div>
+              <div className="font-display text-white text-lg">AM Concepts & Architects</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">Architecture · Interiors · Engineering</div>
             </div>
           </div>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-white/60">
-            A professional architecture and interior designing firm providing high-quality
-            design services with honesty and integrity. Crafting spaces with character
-            across Kerala and beyond.
+            A professional architecture and interior design firm, led by founder
+            Manoj AM, delivering high-quality design with honesty and integrity.
+            Crafting spaces with character across Kerala and beyond.
           </p>
           <div className="mt-6 flex items-center gap-3">
             {[
