@@ -65,7 +65,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
-          <div>© {new Date().getFullYear()} AM Concept & India Concepts Architects and Engineers. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} AM Concepts & Architects. All rights reserved.</div>
           <div className="font-display tracking-wide">Designed with intent.</div>
         </div>
       </div>
