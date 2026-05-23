@@ -238,10 +238,10 @@ function Home() {
         <div className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-center">
           <Reveal className="md:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden">
-              <img src={founder} alt="Manuji M, Founder" className="w-full h-full object-cover" loading="lazy" />
+              <img src={founder} alt="Manoj AM, Founder" className="w-full h-full object-cover" loading="lazy" />
               <div className="absolute bottom-0 left-0 right-0 glass p-5">
                 <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
-                <div className="font-display text-2xl mt-1">Manuji M</div>
+                <div className="font-display text-2xl mt-1">Manoj AM</div>
               </div>
             </div>
           </Reveal>
@@ -316,7 +316,7 @@ function Home() {
               <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 bg-brand text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
                 Book a Consultation <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href="https://wa.me/919000000000" className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
+              <a href="https://wa.me/919539458218" className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
                 Message on WhatsApp
               </a>
             </div>
