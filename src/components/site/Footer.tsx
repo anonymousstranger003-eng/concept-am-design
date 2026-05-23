@@ -9,17 +9,17 @@ export function Footer() {
         <div className="md:col-span-5">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 bg-white">
-              <img src={logo} alt="AM Concept" className="w-full h-full object-cover" />
+              <img src={logo} alt="AM Concepts & Architects" className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
-              <div className="font-display text-white text-lg">AM Concept</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">India Concepts · Architects & Engineers</div>
+              <div className="font-display text-white text-lg">AM Concepts & Architects</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">Architecture · Interiors · Engineering</div>
             </div>
           </div>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-white/60">
-            A professional architecture and interior designing firm providing high-quality
-            design services with honesty and integrity. Crafting spaces with character
-            across Kerala and beyond.
+            A professional architecture and interior design firm, led by founder
+            Manoj AM, delivering high-quality design with honesty and integrity.
+            Crafting spaces with character across Kerala and beyond.
           </p>
           <div className="mt-6 flex items-center gap-3">
             {[
@@ -27,7 +27,7 @@ export function Footer() {
               { Icon: Facebook, href: "https://facebook.com" },
               { Icon: Linkedin, href: "https://linkedin.com" },
               { Icon: Youtube, href: "https://youtube.com" },
-              { Icon: MessageCircle, href: "https://wa.me/919000000000" },
+              { Icon: MessageCircle, href: "https://wa.me/919539458218" },
             ].map(({ Icon, href }) => (
               <a key={href} href={href} aria-label={href} className="w-9 h-9 rounded-full border border-white/15 grid place-items-center hover:bg-brand hover:border-brand transition-colors">
                 <Icon className="w-4 h-4" />
@@ -58,14 +58,14 @@ export function Footer() {
               <div className="text-white font-medium">Branch Office</div>
               <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> Kasaragod, Kerala, India</div>
             </div>
-            <div className="flex items-center gap-2 text-white/60"><Phone className="w-4 h-4" /> +91 90000 00000</div>
+            <div className="flex items-center gap-2 text-white/60"><Phone className="w-4 h-4" /> +91 95394 58218</div>
             <div className="flex items-center gap-2 text-white/60"><Mail className="w-4 h-4" /> hello@amconcept.in</div>
           </div>
         </div>
       </div>
       <div className="border-t border-white/10">
         <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
-          <div>© {new Date().getFullYear()} AM Concept & India Concepts Architects and Engineers. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} AM Concepts & Architects. All rights reserved.</div>
           <div className="font-display tracking-wide">Designed with intent.</div>
         </div>
       </div>

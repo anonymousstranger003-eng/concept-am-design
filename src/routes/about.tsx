@@ -28,7 +28,7 @@ function About() {
       <PageHeader
         kicker="About the studio"
         title="A Kerala studio designing buildings that feel honest, calm and built to last."
-        sub="AM Concept & India Concepts Architects and Engineers has been quietly shaping homes, workplaces and public buildings across Kerala since 2014 — led by founder Manuji M."
+        sub="AM Concepts & Architects has been quietly shaping homes, workplaces and public buildings across Kerala since 2014 — led by founder Manoj AM."
       />
 
       <section className="container-x mx-auto max-w-7xl pb-28 grid md:grid-cols-12 gap-10">
@@ -63,12 +63,12 @@ function About() {
       <section className="bg-secondary/50 border-y border-black/5">
         <div className="container-x mx-auto max-w-7xl py-28 grid md:grid-cols-12 gap-12 items-center">
           <Reveal className="md:col-span-5">
-            <img src={founder} alt="Manuji M" className="w-full aspect-[4/5] object-cover" loading="lazy" />
+            <img src={founder} alt="Manoj AM" className="w-full aspect-[4/5] object-cover" loading="lazy" />
           </Reveal>
           <div className="md:col-span-7">
             <Reveal>
               <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">Founder</div>
-              <h2 className="font-display text-5xl md:text-6xl leading-[1.05]">Manuji M</h2>
+              <h2 className="font-display text-5xl md:text-6xl leading-[1.05]">Manoj AM</h2>
               <div className="mt-2 text-muted-foreground">Founder & Managing Director</div>
               <p className="mt-8 text-lg text-muted-foreground leading-relaxed max-w-xl">
                 With over a decade of design and execution experience across Kerala,

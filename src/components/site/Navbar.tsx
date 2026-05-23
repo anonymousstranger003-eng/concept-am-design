@@ -43,10 +43,10 @@ export function Navbar() {
           </div>
           <div className="leading-tight">
             <div className="font-display text-[15px] font-semibold tracking-tight text-ink">
-              AM Concept
+              AM Concepts & Architects
             </div>
             <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              India Concepts · Architects & Engineers
+              Architecture · Interiors · Engineering
             </div>
           </div>
         </Link>

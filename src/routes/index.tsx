@@ -10,7 +10,7 @@ import dining from "@/assets/dining-table.jpeg";
 import kitchen from "@/assets/kitchen.jpeg";
 import office from "@/assets/office.jpeg";
 import founder from "@/assets/founder.jpg";
-import { Reveal, Stagger, item } from "@/components/site/Reveal";
+import { Reveal, Stagger, SlideIn, Marquee, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { services, stats } from "@/lib/site-data";
 
@@ -68,9 +68,9 @@ function Home() {
             transition={{ delay: 0.85, duration: 0.9 }}
             className="mt-8 max-w-xl text-white/80 text-base md:text-lg leading-relaxed"
           >
-            AM Concept & India Concepts Architects and Engineers — a Kerala-based
-            studio designing residential, commercial and eco-conscious spaces
-            with honesty, restraint and craft.
+            AM Concepts & Architects — a Kerala-based studio founded by
+            Manoj AM, designing residential, commercial and eco-conscious
+            spaces with honesty, restraint and craft.
           </motion.p>
 
           <motion.div
@@ -113,25 +113,25 @@ function Home() {
 
       {/* INTRO */}
       <section className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-end">
-        <Reveal className="md:col-span-7">
+        <SlideIn from="left" className="md:col-span-7">
           <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
             <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />The Studio
           </div>
           <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
             A professional architecture and interior design firm — built on honesty, integrity and craft.
           </h2>
-        </Reveal>
-        <Reveal delay={0.15} className="md:col-span-5 md:pl-10">
+        </SlideIn>
+        <SlideIn from="right" delay={0.15} className="md:col-span-5 md:pl-10">
           <p className="text-muted-foreground text-lg leading-relaxed">
-            From compact homes to large commercial campuses, every AM Concept project
-            begins the same way — listening. We believe great buildings are not
-            decorated, they're considered. Each space is shaped by site, climate,
-            client and the quiet discipline of good detailing.
+            From compact homes to large commercial campuses, every AM Concepts
+            project begins the same way — listening. We believe great buildings
+            are not decorated, they're considered. Each space is shaped by site,
+            climate, client and the quiet discipline of good detailing.
           </p>
           <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand transition-colors">
             About the studio <ArrowUpRight className="w-4 h-4" />
           </Link>
-        </Reveal>
+        </SlideIn>
       </section>
 
       {/* STATS */}
@@ -146,6 +146,11 @@ function Home() {
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* MARQUEE BAND */}
+      <section className="py-10 md:py-14 border-b border-black/5 bg-background">
+        <Marquee items={["Residential Architecture", "Commercial Design", "Interior Design", "Landscape", "Renovation", "Engineering", "Consultation", "Eco-Conscious Build"]} />
       </section>
 
       {/* SERVICES */}
@@ -170,7 +175,7 @@ function Home() {
           {services.slice(0, 6).map((s, i) => (
             <motion.div
               key={s.title}
-              variants={item}
+              variants={i % 2 === 0 ? itemLeft : itemRight}
               className="group bg-background p-8 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
             >
               <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground group-hover:text-white/50">
@@ -181,6 +186,7 @@ function Home() {
               </h3>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed group-hover:text-white/70">{s.desc}</p>
               <ArrowUpRight className="absolute top-8 right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
+              <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
         </Stagger>
@@ -236,24 +242,24 @@ function Home() {
       {/* FOUNDER */}
       <section className="bg-secondary/50 border-y border-black/5">
         <div className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-center">
-          <Reveal className="md:col-span-5">
+          <SlideIn from="left" className="md:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden">
-              <img src={founder} alt="Manuji M, Founder" className="w-full h-full object-cover" loading="lazy" />
+              <img src={founder} alt="Manoj AM, Founder" className="w-full h-full object-cover" loading="lazy" />
               <div className="absolute bottom-0 left-0 right-0 glass p-5">
                 <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
-                <div className="font-display text-2xl mt-1">Manuji M</div>
+                <div className="font-display text-2xl mt-1">Manoj AM</div>
               </div>
             </div>
-          </Reveal>
+          </SlideIn>
           <div className="md:col-span-7 md:pl-10">
-            <Reveal>
+            <SlideIn from="right">
               <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
                 <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Philosophy
               </div>
               <h2 className="font-display text-4xl md:text-5xl leading-[1.1] max-w-xl">
                 "Design should feel inevitable — like it could not have been any other way."
               </h2>
-            </Reveal>
+            </SlideIn>
             <Stagger className="grid sm:grid-cols-2 gap-6 mt-12">
               {[
                 { Icon: Compass, t: "Site-led design", d: "Every project starts with the land, light and life around it." },
@@ -316,7 +322,7 @@ function Home() {
               <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 bg-brand text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
                 Book a Consultation <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href="https://wa.me/919000000000" className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
+              <a href="https://wa.me/919539458218" className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
                 Message on WhatsApp
               </a>
             </div>
