@@ -68,9 +68,9 @@ function Home() {
             transition={{ delay: 0.85, duration: 0.9 }}
             className="mt-8 max-w-xl text-white/80 text-base md:text-lg leading-relaxed"
           >
-            AM Concept & India Concepts Architects and Engineers — a Kerala-based
-            studio designing residential, commercial and eco-conscious spaces
-            with honesty, restraint and craft.
+            AM Concepts & Architects — a Kerala-based studio founded by
+            Manoj AM, designing residential, commercial and eco-conscious
+            spaces with honesty, restraint and craft.
           </motion.p>
 
           <motion.div
