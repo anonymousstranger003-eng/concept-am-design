@@ -259,7 +259,7 @@ function Home() {
               <h2 className="font-display text-4xl md:text-5xl leading-[1.1] max-w-xl">
                 "Design should feel inevitable — like it could not have been any other way."
               </h2>
-            </Reveal>
+            </SlideIn>
             <Stagger className="grid sm:grid-cols-2 gap-6 mt-12">
               {[
                 { Icon: Compass, t: "Site-led design", d: "Every project starts with the land, light and life around it." },
