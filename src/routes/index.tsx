@@ -148,6 +148,11 @@ function Home() {
         </div>
       </section>
 
+      {/* MARQUEE BAND */}
+      <section className="py-10 md:py-14 border-b border-black/5 bg-background">
+        <Marquee items={["Residential Architecture", "Commercial Design", "Interior Design", "Landscape", "Renovation", "Engineering", "Consultation", "Eco-Conscious Build"]} />
+      </section>
+
       {/* SERVICES */}
       <section className="container-x mx-auto max-w-7xl py-28 md:py-40">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
