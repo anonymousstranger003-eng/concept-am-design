@@ -1,5 +1,5 @@
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { motion, type Variants, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, type ReactNode } from "react";
 
 const variants: Variants = {
   hidden: { opacity: 0, y: 28 },
