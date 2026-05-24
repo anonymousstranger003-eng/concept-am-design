@@ -34,39 +34,49 @@ function Home() {
   return (
     <div className="overflow-clip">
       {/* HERO */}
-      <section ref={heroRef} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
+      <section ref={heroRef} className="relative h-[92svh] min-h-[560px] md:h-[100svh] md:min-h-[640px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <img src={hero} alt="Modern architecture" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/75" />
         </motion.div>
 
-        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pb-20 md:pb-28">
+        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pb-16 md:pb-28">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex items-center gap-3 text-white/70 text-[11px] uppercase tracking-[0.3em] mb-8"
+            className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-8"
           >
-            <span className="w-8 h-px bg-white/50" />
+            <span className="w-6 md:w-8 h-px bg-white/50" />
             Est. 2014 · Kerala, India
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-white text-5xl md:text-7xl xl:text-[7.5rem] leading-[0.95] max-w-5xl"
-          >
-            Architecture that <em className="italic text-white/85">listens</em>.
-            <br />
-            Interiors that <span className="text-brand">last</span>.
-          </motion.h1>
+          <h1 className="font-display text-white text-[2.5rem] sm:text-5xl md:text-7xl xl:text-[7.5rem] leading-[0.95] max-w-5xl tracking-[-0.02em]">
+            <span className="block overflow-hidden">
+              <motion.span
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-block"
+              >
+                Architecture that <em className="italic text-white/85">listens</em>.
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden">
+              <motion.span
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-block"
+              >
+                Interiors that <span className="text-brand">last</span>.
+              </motion.span>
+            </span>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 0.9 }}
-            className="mt-8 max-w-xl text-white/80 text-base md:text-lg leading-relaxed"
+            transition={{ delay: 0.95, duration: 0.9 }}
+            className="mt-6 md:mt-8 max-w-xl text-white/80 text-sm md:text-lg leading-relaxed"
           >
             AM Concepts & Architects — a Kerala-based studio founded by
             Manoj AM, designing residential, commercial and eco-conscious
@@ -76,17 +86,21 @@ function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.9 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
+            transition={{ delay: 1.1, duration: 0.9 }}
+            className="mt-8 md:mt-10 flex flex-wrap items-center gap-3"
           >
-            <Link to="/contact" className="group inline-flex items-center gap-3 px-7 py-4 bg-brand text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-              Book Consultation
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-            <Link to="/portfolio" className="group inline-flex items-center gap-3 px-7 py-4 glass-dark text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
-              View Projects
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+            <Magnetic>
+              <Link to="/contact" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+                Book Consultation
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link to="/portfolio" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
+                View Projects
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </Magnetic>
           </motion.div>
         </div>
 
