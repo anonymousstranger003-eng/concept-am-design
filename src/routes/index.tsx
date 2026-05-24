@@ -126,37 +126,38 @@ function Home() {
       </section>
 
       {/* INTRO */}
-      <section className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-end">
+      <section className="container-x mx-auto max-w-7xl py-20 md:py-40 grid md:grid-cols-12 gap-8 md:gap-12 items-end">
         <SlideIn from="left" className="md:col-span-7">
-          <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-            <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />The Studio
+          <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+            <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />The Studio
           </div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
-            A professional architecture and interior design firm — built on honesty, integrity and craft.
-          </h2>
+          <WordsReveal
+            text="A professional architecture and interior design firm — built on honesty, integrity and craft."
+            className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] tracking-[-0.02em]"
+          />
         </SlideIn>
         <SlideIn from="right" delay={0.15} className="md:col-span-5 md:pl-10">
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
             From compact homes to large commercial campuses, every AM Concepts
             project begins the same way — listening. We believe great buildings
             are not decorated, they're considered. Each space is shaped by site,
             climate, client and the quiet discipline of good detailing.
           </p>
-          <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand transition-colors">
-            About the studio <ArrowUpRight className="w-4 h-4" />
+          <Link to="/about" className="mt-6 md:mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand transition-colors group">
+            About the studio <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </SlideIn>
       </section>
 
       {/* STATS */}
       <section className="border-y border-black/5 bg-secondary/60">
-        <div className="container-x mx-auto max-w-7xl py-16 md:py-20 grid grid-cols-2 md:grid-cols-5 gap-y-10">
+        <div className="container-x mx-auto max-w-7xl py-14 md:py-20 grid grid-cols-2 md:grid-cols-5 gap-y-10">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08} className="text-center md:border-r last:border-r-0 border-black/10">
-              <div className="font-display text-5xl md:text-6xl text-ink">
+              <div className="font-display text-4xl md:text-6xl text-ink">
                 <Counter to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
+              <div className="mt-2 text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground px-2">{s.label}</div>
             </Reveal>
           ))}
         </div>
