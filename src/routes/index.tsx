@@ -169,19 +169,20 @@ function Home() {
       </section>
 
       {/* SERVICES */}
-      <section className="container-x mx-auto max-w-7xl py-28 md:py-40">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+      <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-12 md:mb-16">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-              <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />What we do
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />What we do
             </div>
-            <h2 className="font-display text-4xl md:text-6xl max-w-2xl leading-[1.05]">
-              Twelve disciplines, one design language.
-            </h2>
+            <WordsReveal
+              text="Twelve disciplines, one design language."
+              className="font-display text-3xl sm:text-4xl md:text-6xl max-w-2xl leading-[1.05] tracking-[-0.02em]"
+            />
           </Reveal>
           <Reveal delay={0.15}>
-            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand">
-              All services <ArrowUpRight className="w-4 h-4" />
+            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand group">
+              All services <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Reveal>
         </div>
@@ -191,16 +192,16 @@ function Home() {
             <motion.div
               key={s.title}
               variants={i % 2 === 0 ? itemLeft : itemRight}
-              className="group bg-background p-8 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
+              className="group bg-background p-7 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
             >
               <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground group-hover:text-white/50">
                 0{i + 1} / Service
               </div>
-              <h3 className="font-display text-2xl md:text-3xl mt-6 leading-tight group-hover:text-white">
+              <h3 className="font-display text-xl md:text-3xl mt-5 md:mt-6 leading-tight group-hover:text-white">
                 {s.title}
               </h3>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed group-hover:text-white/70">{s.desc}</p>
-              <ArrowUpRight className="absolute top-8 right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
+              <ArrowUpRight className="absolute top-7 right-7 md:top-8 md:right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
               <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
@@ -208,47 +209,57 @@ function Home() {
       </section>
 
       {/* PORTFOLIO */}
-      <section className="container-x mx-auto max-w-7xl pb-28 md:pb-40">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
+      <section className="container-x mx-auto max-w-7xl pb-20 md:pb-40">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-12">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-              <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Selected works
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Selected works
             </div>
-            <h2 className="font-display text-4xl md:text-6xl max-w-2xl leading-[1.05]">
-              Spaces designed to be lived in, not photographed.
-            </h2>
+            <WordsReveal
+              text="Spaces designed to be lived in, not photographed."
+              className="font-display text-3xl sm:text-4xl md:text-6xl max-w-2xl leading-[1.05] tracking-[-0.02em]"
+            />
           </Reveal>
           <Reveal delay={0.15}>
-            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand">
-              Full portfolio <ArrowUpRight className="w-4 h-4" />
+            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand group">
+              Full portfolio <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-12 gap-4 md:gap-6">
+        <div className="grid grid-cols-12 gap-3 md:gap-6">
           {portfolioPreview.map((p, i) => {
-            const spans = ["col-span-12 md:col-span-7 aspect-[4/3]", "col-span-12 md:col-span-5 aspect-[4/5]", "col-span-6 md:col-span-4 aspect-[4/5]", "col-span-6 md:col-span-4 aspect-[4/5]", "col-span-12 md:col-span-4 aspect-[4/5]", "col-span-12 aspect-[16/7]"];
+            const spans = [
+              "col-span-12 md:col-span-7 aspect-[4/3]",
+              "col-span-12 md:col-span-5 aspect-[4/3] md:aspect-[4/5]",
+              "col-span-6 md:col-span-4 aspect-[3/4]",
+              "col-span-6 md:col-span-4 aspect-[3/4]",
+              "col-span-12 md:col-span-4 aspect-[4/3] md:aspect-[3/4]",
+              "col-span-12 aspect-[16/9] md:aspect-[16/7]",
+            ];
+            const dir: ("bottom" | "left" | "right")[] = ["bottom", "right", "left", "right", "left", "bottom"];
             return (
-              <Reveal key={p.title} delay={i * 0.05} className={spans[i]}>
+              <div key={p.title} className={spans[i]}>
                 <a href="/portfolio" className="group relative block w-full h-full overflow-hidden bg-secondary">
-                  <motion.img
+                  <ImageReveal
                     src={p.img}
                     alt={p.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                    from={dir[i]}
+                    className="w-full h-full"
+                    imgClassName="transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-90" />
-                  <div className="absolute left-5 bottom-5 right-5 text-white flex items-end justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/0 to-black/0 opacity-90 pointer-events-none" />
+                  <div className="absolute left-4 md:left-5 bottom-4 md:bottom-5 right-4 md:right-5 text-white flex items-end justify-between pointer-events-none">
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.25em] text-white/70">{p.category}</div>
-                      <div className="font-display text-2xl mt-1">{p.title}</div>
+                      <div className="font-display text-xl md:text-2xl mt-1">{p.title}</div>
                     </div>
-                    <div className="w-10 h-10 rounded-full glass-dark grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-full glass-dark grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
                 </a>
-              </Reveal>
+              </div>
             );
           })}
         </div>
