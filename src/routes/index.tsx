@@ -10,7 +10,7 @@ import dining from "@/assets/dining-table.jpeg";
 import kitchen from "@/assets/kitchen.jpeg";
 import office from "@/assets/office.jpeg";
 import founder from "@/assets/founder.jpg";
-import { Reveal, Stagger, SlideIn, Marquee, item, itemLeft, itemRight } from "@/components/site/Reveal";
+import { Reveal, Stagger, SlideIn, Marquee, WordsReveal, ImageReveal, Parallax, Magnetic, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { services, stats } from "@/lib/site-data";
 
