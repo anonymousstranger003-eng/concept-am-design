@@ -267,35 +267,41 @@ function Home() {
 
       {/* FOUNDER */}
       <section className="bg-secondary/50 border-y border-black/5">
-        <div className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-center">
+        <div className="container-x mx-auto max-w-7xl py-20 md:py-40 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
           <SlideIn from="left" className="md:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <img src={founder} alt="Manoj AM, Founder" className="w-full h-full object-cover" loading="lazy" />
-              <div className="absolute bottom-0 left-0 right-0 glass p-5">
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
-                <div className="font-display text-2xl mt-1">Manoj AM</div>
-              </div>
+            <Parallax range={30}>
+              <ImageReveal
+                src={founder}
+                alt="Manoj AM, Founder"
+                from="left"
+                className="aspect-[4/5]"
+              />
+            </Parallax>
+            <div className="relative -mt-16 mx-4 glass p-5 z-10">
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
+              <div className="font-display text-xl md:text-2xl mt-1">Manoj AM</div>
             </div>
           </SlideIn>
           <div className="md:col-span-7 md:pl-10">
             <SlideIn from="right">
-              <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-                <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Philosophy
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+                <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Philosophy
               </div>
-              <h2 className="font-display text-4xl md:text-5xl leading-[1.1] max-w-xl">
-                "Design should feel inevitable — like it could not have been any other way."
-              </h2>
+              <WordsReveal
+                text={`"Design should feel inevitable — like it could not have been any other way."`}
+                className="font-display italic text-2xl sm:text-3xl md:text-5xl leading-[1.15] max-w-xl tracking-[-0.015em]"
+              />
             </SlideIn>
-            <Stagger className="grid sm:grid-cols-2 gap-6 mt-12">
+            <Stagger className="grid sm:grid-cols-2 gap-4 md:gap-6 mt-10 md:mt-12">
               {[
                 { Icon: Compass, t: "Site-led design", d: "Every project starts with the land, light and life around it." },
                 { Icon: Leaf, t: "Eco-conscious", d: "Climate-responsive buildings using regional, low-impact materials." },
                 { Icon: Sparkles, t: "Crafted detail", d: "Joinery, materiality and lighting resolved to the millimetre." },
                 { Icon: ShieldCheck, t: "Integrity", d: "Transparent fees, honest timelines, full documentation." },
               ].map(({ Icon, t, d }) => (
-                <motion.div key={t} variants={item} className="p-6 bg-background border border-black/5">
-                  <Icon className="w-5 h-5 text-brand" />
-                  <div className="font-display text-xl mt-4">{t}</div>
+                <motion.div key={t} variants={item} className="p-5 md:p-6 bg-background border border-black/5 group hover:border-brand/40 transition-colors">
+                  <Icon className="w-5 h-5 text-brand transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110" />
+                  <div className="font-display text-lg md:text-xl mt-3 md:mt-4">{t}</div>
                   <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{d}</p>
                 </motion.div>
               ))}
@@ -305,14 +311,17 @@ function Home() {
       </section>
 
       {/* OFFICES */}
-      <section className="container-x mx-auto max-w-7xl py-28 md:py-40">
+      <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
         <Reveal>
-          <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-            <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Studios
+          <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+            <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Studios
           </div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.05] max-w-3xl">Two studios. One coastline.</h2>
+          <WordsReveal
+            text="Two studios. One coastline."
+            className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] max-w-3xl tracking-[-0.02em]"
+          />
         </Reveal>
-        <Stagger className="grid md:grid-cols-2 gap-6 mt-14">
+        <Stagger className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10 md:mt-14">
           {[
             { city: "Calicut", role: "Corporate Head Office", map: "https://www.google.com/maps?q=Calicut,Kerala&output=embed" },
             { city: "Kasaragod", role: "Branch Office", map: "https://www.google.com/maps?q=Kasaragod,Kerala&output=embed" },
@@ -321,13 +330,13 @@ function Home() {
               <div className="aspect-[16/10] overflow-hidden bg-secondary">
                 <iframe src={o.map} title={o.city} loading="lazy" className="w-full h-full grayscale-[40%] group-hover:grayscale-0 transition-all duration-700" />
               </div>
-              <div className="p-8 flex items-end justify-between">
+              <div className="p-6 md:p-8 flex items-end justify-between gap-4">
                 <div>
-                  <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
-                  <div className="font-display text-3xl mt-2">{o.city}, Kerala</div>
+                  <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
+                  <div className="font-display text-2xl md:text-3xl mt-2">{o.city}, Kerala</div>
                 </div>
-                <Link to="/contact" className="text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2">
-                  Visit <ArrowUpRight className="w-4 h-4" />
+                <Link to="/contact" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2 group/v whitespace-nowrap">
+                  Visit <ArrowUpRight className="w-4 h-4 transition-transform group-hover/v:translate-x-0.5 group-hover/v:-translate-y-0.5" />
                 </Link>
               </div>
             </motion.div>
@@ -336,19 +345,22 @@ function Home() {
       </section>
 
       {/* CTA */}
-      <section className="container-x mx-auto max-w-7xl pb-28">
-        <Reveal className="relative overflow-hidden bg-ink text-white p-12 md:p-20">
-          <div className="absolute -right-20 -top-20 w-[420px] h-[420px] rounded-full bg-brand/30 blur-3xl" />
+      <section className="container-x mx-auto max-w-7xl pb-20 md:pb-28">
+        <Reveal className="relative overflow-hidden bg-ink text-white p-8 md:p-20">
+          <div className="absolute -right-20 -top-20 w-[320px] md:w-[420px] h-[320px] md:h-[420px] rounded-full bg-brand/30 blur-3xl" />
           <div className="relative max-w-3xl">
-            <div className="text-xs uppercase tracking-[0.3em] text-white/50 mb-6">Start a project</div>
-            <h2 className="font-display text-4xl md:text-6xl text-white leading-[1.05]">
-              Have a site, a brief, or just an instinct? Let's talk.
-            </h2>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 bg-brand text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-                Book a Consultation <ArrowUpRight className="w-4 h-4" />
-              </Link>
-              <a href="https://wa.me/919539458218" className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/50 mb-5 md:mb-6">Start a project</div>
+            <WordsReveal
+              text="Have a site, a brief, or just an instinct? Let's talk."
+              className="font-display text-3xl sm:text-4xl md:text-6xl text-white leading-[1.05] tracking-[-0.02em]"
+            />
+            <div className="mt-8 md:mt-10 flex flex-wrap gap-3">
+              <Magnetic>
+                <Link to="/contact" className="inline-flex items-center gap-2 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+                  Book a Consultation <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </Magnetic>
+              <a href="https://wa.me/919539458218" className="inline-flex items-center gap-2 px-6 md:px-7 py-3.5 md:py-4 border border-white/30 text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
                 Message on WhatsApp
               </a>
             </div>
