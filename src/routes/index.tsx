@@ -10,7 +10,7 @@ import dining from "@/assets/dining-table.jpeg";
 import kitchen from "@/assets/kitchen.jpeg";
 import office from "@/assets/office.jpeg";
 import founder from "@/assets/founder.jpg";
-import { Reveal, Stagger, SlideIn, Marquee, item, itemLeft, itemRight } from "@/components/site/Reveal";
+import { Reveal, Stagger, SlideIn, Marquee, WordsReveal, ImageReveal, Parallax, Magnetic, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { services, stats } from "@/lib/site-data";
 
@@ -34,39 +34,49 @@ function Home() {
   return (
     <div className="overflow-clip">
       {/* HERO */}
-      <section ref={heroRef} className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
+      <section ref={heroRef} className="relative h-[92svh] min-h-[560px] md:h-[100svh] md:min-h-[640px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <img src={hero} alt="Modern architecture" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/75" />
         </motion.div>
 
-        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pb-20 md:pb-28">
+        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pb-16 md:pb-28">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex items-center gap-3 text-white/70 text-[11px] uppercase tracking-[0.3em] mb-8"
+            className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-8"
           >
-            <span className="w-8 h-px bg-white/50" />
+            <span className="w-6 md:w-8 h-px bg-white/50" />
             Est. 2014 · Kerala, India
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-white text-5xl md:text-7xl xl:text-[7.5rem] leading-[0.95] max-w-5xl"
-          >
-            Architecture that <em className="italic text-white/85">listens</em>.
-            <br />
-            Interiors that <span className="text-brand">last</span>.
-          </motion.h1>
+          <h1 className="font-display text-white text-[2.5rem] sm:text-5xl md:text-7xl xl:text-[7.5rem] leading-[0.95] max-w-5xl tracking-[-0.02em]">
+            <span className="block overflow-hidden">
+              <motion.span
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-block"
+              >
+                Architecture that <em className="italic text-white/85">listens</em>.
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden">
+              <motion.span
+                initial={{ y: "110%" }} animate={{ y: 0 }}
+                transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-block"
+              >
+                Interiors that <span className="text-brand">last</span>.
+              </motion.span>
+            </span>
+          </h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85, duration: 0.9 }}
-            className="mt-8 max-w-xl text-white/80 text-base md:text-lg leading-relaxed"
+            transition={{ delay: 0.95, duration: 0.9 }}
+            className="mt-6 md:mt-8 max-w-xl text-white/80 text-sm md:text-lg leading-relaxed"
           >
             AM Concepts & Architects — a Kerala-based studio founded by
             Manoj AM, designing residential, commercial and eco-conscious
@@ -76,17 +86,21 @@ function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.9 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
+            transition={{ delay: 1.1, duration: 0.9 }}
+            className="mt-8 md:mt-10 flex flex-wrap items-center gap-3"
           >
-            <Link to="/contact" className="group inline-flex items-center gap-3 px-7 py-4 bg-brand text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-              Book Consultation
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
-            <Link to="/portfolio" className="group inline-flex items-center gap-3 px-7 py-4 glass-dark text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
-              View Projects
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+            <Magnetic>
+              <Link to="/contact" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+                Book Consultation
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <Link to="/portfolio" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
+                View Projects
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </Magnetic>
           </motion.div>
         </div>
 
@@ -112,37 +126,38 @@ function Home() {
       </section>
 
       {/* INTRO */}
-      <section className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-end">
+      <section className="container-x mx-auto max-w-7xl py-20 md:py-40 grid md:grid-cols-12 gap-8 md:gap-12 items-end">
         <SlideIn from="left" className="md:col-span-7">
-          <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-            <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />The Studio
+          <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+            <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />The Studio
           </div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.05]">
-            A professional architecture and interior design firm — built on honesty, integrity and craft.
-          </h2>
+          <WordsReveal
+            text="A professional architecture and interior design firm — built on honesty, integrity and craft."
+            className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] tracking-[-0.02em]"
+          />
         </SlideIn>
         <SlideIn from="right" delay={0.15} className="md:col-span-5 md:pl-10">
-          <p className="text-muted-foreground text-lg leading-relaxed">
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
             From compact homes to large commercial campuses, every AM Concepts
             project begins the same way — listening. We believe great buildings
             are not decorated, they're considered. Each space is shaped by site,
             climate, client and the quiet discipline of good detailing.
           </p>
-          <Link to="/about" className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand transition-colors">
-            About the studio <ArrowUpRight className="w-4 h-4" />
+          <Link to="/about" className="mt-6 md:mt-8 inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand transition-colors group">
+            About the studio <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </SlideIn>
       </section>
 
       {/* STATS */}
       <section className="border-y border-black/5 bg-secondary/60">
-        <div className="container-x mx-auto max-w-7xl py-16 md:py-20 grid grid-cols-2 md:grid-cols-5 gap-y-10">
+        <div className="container-x mx-auto max-w-7xl py-14 md:py-20 grid grid-cols-2 md:grid-cols-5 gap-y-10">
           {stats.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08} className="text-center md:border-r last:border-r-0 border-black/10">
-              <div className="font-display text-5xl md:text-6xl text-ink">
+              <div className="font-display text-4xl md:text-6xl text-ink">
                 <Counter to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-2 text-xs uppercase tracking-[0.2em] text-muted-foreground">{s.label}</div>
+              <div className="mt-2 text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground px-2">{s.label}</div>
             </Reveal>
           ))}
         </div>
@@ -154,19 +169,20 @@ function Home() {
       </section>
 
       {/* SERVICES */}
-      <section className="container-x mx-auto max-w-7xl py-28 md:py-40">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+      <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-12 md:mb-16">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-              <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />What we do
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />What we do
             </div>
-            <h2 className="font-display text-4xl md:text-6xl max-w-2xl leading-[1.05]">
-              Twelve disciplines, one design language.
-            </h2>
+            <WordsReveal
+              text="Twelve disciplines, one design language."
+              className="font-display text-3xl sm:text-4xl md:text-6xl max-w-2xl leading-[1.05] tracking-[-0.02em]"
+            />
           </Reveal>
           <Reveal delay={0.15}>
-            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand">
-              All services <ArrowUpRight className="w-4 h-4" />
+            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand group">
+              All services <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Reveal>
         </div>
@@ -176,16 +192,16 @@ function Home() {
             <motion.div
               key={s.title}
               variants={i % 2 === 0 ? itemLeft : itemRight}
-              className="group bg-background p-8 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
+              className="group bg-background p-7 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
             >
               <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground group-hover:text-white/50">
                 0{i + 1} / Service
               </div>
-              <h3 className="font-display text-2xl md:text-3xl mt-6 leading-tight group-hover:text-white">
+              <h3 className="font-display text-xl md:text-3xl mt-5 md:mt-6 leading-tight group-hover:text-white">
                 {s.title}
               </h3>
               <p className="text-sm text-muted-foreground mt-3 leading-relaxed group-hover:text-white/70">{s.desc}</p>
-              <ArrowUpRight className="absolute top-8 right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
+              <ArrowUpRight className="absolute top-7 right-7 md:top-8 md:right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
               <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
             </motion.div>
           ))}
@@ -193,47 +209,57 @@ function Home() {
       </section>
 
       {/* PORTFOLIO */}
-      <section className="container-x mx-auto max-w-7xl pb-28 md:pb-40">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12">
+      <section className="container-x mx-auto max-w-7xl pb-20 md:pb-40">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-10 md:mb-12">
           <Reveal>
-            <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-              <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Selected works
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Selected works
             </div>
-            <h2 className="font-display text-4xl md:text-6xl max-w-2xl leading-[1.05]">
-              Spaces designed to be lived in, not photographed.
-            </h2>
+            <WordsReveal
+              text="Spaces designed to be lived in, not photographed."
+              className="font-display text-3xl sm:text-4xl md:text-6xl max-w-2xl leading-[1.05] tracking-[-0.02em]"
+            />
           </Reveal>
           <Reveal delay={0.15}>
-            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand">
-              Full portfolio <ArrowUpRight className="w-4 h-4" />
+            <Link to="/portfolio" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand group">
+              Full portfolio <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-12 gap-4 md:gap-6">
+        <div className="grid grid-cols-12 gap-3 md:gap-6">
           {portfolioPreview.map((p, i) => {
-            const spans = ["col-span-12 md:col-span-7 aspect-[4/3]", "col-span-12 md:col-span-5 aspect-[4/5]", "col-span-6 md:col-span-4 aspect-[4/5]", "col-span-6 md:col-span-4 aspect-[4/5]", "col-span-12 md:col-span-4 aspect-[4/5]", "col-span-12 aspect-[16/7]"];
+            const spans = [
+              "col-span-12 md:col-span-7 aspect-[4/3]",
+              "col-span-12 md:col-span-5 aspect-[4/3] md:aspect-[4/5]",
+              "col-span-6 md:col-span-4 aspect-[3/4]",
+              "col-span-6 md:col-span-4 aspect-[3/4]",
+              "col-span-12 md:col-span-4 aspect-[4/3] md:aspect-[3/4]",
+              "col-span-12 aspect-[16/9] md:aspect-[16/7]",
+            ];
+            const dir: ("bottom" | "left" | "right")[] = ["bottom", "right", "left", "right", "left", "bottom"];
             return (
-              <Reveal key={p.title} delay={i * 0.05} className={spans[i]}>
+              <div key={p.title} className={spans[i]}>
                 <a href="/portfolio" className="group relative block w-full h-full overflow-hidden bg-secondary">
-                  <motion.img
+                  <ImageReveal
                     src={p.img}
                     alt={p.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                    from={dir[i]}
+                    className="w-full h-full"
+                    imgClassName="transition-transform duration-[1400ms] ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-90" />
-                  <div className="absolute left-5 bottom-5 right-5 text-white flex items-end justify-between">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/0 to-black/0 opacity-90 pointer-events-none" />
+                  <div className="absolute left-4 md:left-5 bottom-4 md:bottom-5 right-4 md:right-5 text-white flex items-end justify-between pointer-events-none">
                     <div>
                       <div className="text-[10px] uppercase tracking-[0.25em] text-white/70">{p.category}</div>
-                      <div className="font-display text-2xl mt-1">{p.title}</div>
+                      <div className="font-display text-xl md:text-2xl mt-1">{p.title}</div>
                     </div>
-                    <div className="w-10 h-10 rounded-full glass-dark grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="w-9 h-9 md:w-10 md:h-10 rounded-full glass-dark grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <ArrowUpRight className="w-4 h-4" />
                     </div>
                   </div>
                 </a>
-              </Reveal>
+              </div>
             );
           })}
         </div>
@@ -241,35 +267,41 @@ function Home() {
 
       {/* FOUNDER */}
       <section className="bg-secondary/50 border-y border-black/5">
-        <div className="container-x mx-auto max-w-7xl py-28 md:py-40 grid md:grid-cols-12 gap-12 items-center">
+        <div className="container-x mx-auto max-w-7xl py-20 md:py-40 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
           <SlideIn from="left" className="md:col-span-5">
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <img src={founder} alt="Manoj AM, Founder" className="w-full h-full object-cover" loading="lazy" />
-              <div className="absolute bottom-0 left-0 right-0 glass p-5">
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
-                <div className="font-display text-2xl mt-1">Manoj AM</div>
-              </div>
+            <Parallax range={30}>
+              <ImageReveal
+                src={founder}
+                alt="Manoj AM, Founder"
+                from="left"
+                className="aspect-[4/5]"
+              />
+            </Parallax>
+            <div className="relative -mt-16 mx-4 glass p-5 z-10">
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
+              <div className="font-display text-xl md:text-2xl mt-1">Manoj AM</div>
             </div>
           </SlideIn>
           <div className="md:col-span-7 md:pl-10">
             <SlideIn from="right">
-              <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-                <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Philosophy
+              <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+                <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Philosophy
               </div>
-              <h2 className="font-display text-4xl md:text-5xl leading-[1.1] max-w-xl">
-                "Design should feel inevitable — like it could not have been any other way."
-              </h2>
+              <WordsReveal
+                text={`"Design should feel inevitable — like it could not have been any other way."`}
+                className="font-display italic text-2xl sm:text-3xl md:text-5xl leading-[1.15] max-w-xl tracking-[-0.015em]"
+              />
             </SlideIn>
-            <Stagger className="grid sm:grid-cols-2 gap-6 mt-12">
+            <Stagger className="grid sm:grid-cols-2 gap-4 md:gap-6 mt-10 md:mt-12">
               {[
                 { Icon: Compass, t: "Site-led design", d: "Every project starts with the land, light and life around it." },
                 { Icon: Leaf, t: "Eco-conscious", d: "Climate-responsive buildings using regional, low-impact materials." },
                 { Icon: Sparkles, t: "Crafted detail", d: "Joinery, materiality and lighting resolved to the millimetre." },
                 { Icon: ShieldCheck, t: "Integrity", d: "Transparent fees, honest timelines, full documentation." },
               ].map(({ Icon, t, d }) => (
-                <motion.div key={t} variants={item} className="p-6 bg-background border border-black/5">
-                  <Icon className="w-5 h-5 text-brand" />
-                  <div className="font-display text-xl mt-4">{t}</div>
+                <motion.div key={t} variants={item} className="p-5 md:p-6 bg-background border border-black/5 group hover:border-brand/40 transition-colors">
+                  <Icon className="w-5 h-5 text-brand transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110" />
+                  <div className="font-display text-lg md:text-xl mt-3 md:mt-4">{t}</div>
                   <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{d}</p>
                 </motion.div>
               ))}
@@ -279,14 +311,17 @@ function Home() {
       </section>
 
       {/* OFFICES */}
-      <section className="container-x mx-auto max-w-7xl py-28 md:py-40">
+      <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
         <Reveal>
-          <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
-            <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />Studios
+          <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+            <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Studios
           </div>
-          <h2 className="font-display text-4xl md:text-6xl leading-[1.05] max-w-3xl">Two studios. One coastline.</h2>
+          <WordsReveal
+            text="Two studios. One coastline."
+            className="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] max-w-3xl tracking-[-0.02em]"
+          />
         </Reveal>
-        <Stagger className="grid md:grid-cols-2 gap-6 mt-14">
+        <Stagger className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10 md:mt-14">
           {[
             { city: "Calicut", role: "Corporate Head Office", map: "https://www.google.com/maps?q=Calicut,Kerala&output=embed" },
             { city: "Kasaragod", role: "Branch Office", map: "https://www.google.com/maps?q=Kasaragod,Kerala&output=embed" },
@@ -295,13 +330,13 @@ function Home() {
               <div className="aspect-[16/10] overflow-hidden bg-secondary">
                 <iframe src={o.map} title={o.city} loading="lazy" className="w-full h-full grayscale-[40%] group-hover:grayscale-0 transition-all duration-700" />
               </div>
-              <div className="p-8 flex items-end justify-between">
+              <div className="p-6 md:p-8 flex items-end justify-between gap-4">
                 <div>
-                  <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
-                  <div className="font-display text-3xl mt-2">{o.city}, Kerala</div>
+                  <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
+                  <div className="font-display text-2xl md:text-3xl mt-2">{o.city}, Kerala</div>
                 </div>
-                <Link to="/contact" className="text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2">
-                  Visit <ArrowUpRight className="w-4 h-4" />
+                <Link to="/contact" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2 group/v whitespace-nowrap">
+                  Visit <ArrowUpRight className="w-4 h-4 transition-transform group-hover/v:translate-x-0.5 group-hover/v:-translate-y-0.5" />
                 </Link>
               </div>
             </motion.div>
@@ -310,19 +345,22 @@ function Home() {
       </section>
 
       {/* CTA */}
-      <section className="container-x mx-auto max-w-7xl pb-28">
-        <Reveal className="relative overflow-hidden bg-ink text-white p-12 md:p-20">
-          <div className="absolute -right-20 -top-20 w-[420px] h-[420px] rounded-full bg-brand/30 blur-3xl" />
+      <section className="container-x mx-auto max-w-7xl pb-20 md:pb-28">
+        <Reveal className="relative overflow-hidden bg-ink text-white p-8 md:p-20">
+          <div className="absolute -right-20 -top-20 w-[320px] md:w-[420px] h-[320px] md:h-[420px] rounded-full bg-brand/30 blur-3xl" />
           <div className="relative max-w-3xl">
-            <div className="text-xs uppercase tracking-[0.3em] text-white/50 mb-6">Start a project</div>
-            <h2 className="font-display text-4xl md:text-6xl text-white leading-[1.05]">
-              Have a site, a brief, or just an instinct? Let's talk.
-            </h2>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 bg-brand text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-                Book a Consultation <ArrowUpRight className="w-4 h-4" />
-              </Link>
-              <a href="https://wa.me/919539458218" className="inline-flex items-center gap-2 px-7 py-4 border border-white/30 text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/50 mb-5 md:mb-6">Start a project</div>
+            <WordsReveal
+              text="Have a site, a brief, or just an instinct? Let's talk."
+              className="font-display text-3xl sm:text-4xl md:text-6xl text-white leading-[1.05] tracking-[-0.02em]"
+            />
+            <div className="mt-8 md:mt-10 flex flex-wrap gap-3">
+              <Magnetic>
+                <Link to="/contact" className="inline-flex items-center gap-2 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+                  Book a Consultation <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </Magnetic>
+              <a href="https://wa.me/919539458218" className="inline-flex items-center gap-2 px-6 md:px-7 py-3.5 md:py-4 border border-white/30 text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/10 transition-colors">
                 Message on WhatsApp
               </a>
             </div>

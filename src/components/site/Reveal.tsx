@@ -1,5 +1,5 @@
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { motion, type Variants, useScroll, useTransform, useSpring } from "framer-motion";
+import { useRef, type ReactNode } from "react";
 
 const variants: Variants = {
   hidden: { opacity: 0, y: 28 },
@@ -85,16 +85,118 @@ export function Marquee({ items, className }: { items: string[]; className?: str
   return (
     <div className={`overflow-hidden ${className ?? ""}`}>
       <motion.div
-        className="flex gap-16 whitespace-nowrap"
+        className="flex gap-10 md:gap-16 whitespace-nowrap"
         animate={{ x: ["0%", "-33.333%"] }}
         transition={{ duration: 40, ease: "linear", repeat: Infinity }}
       >
         {loop.map((t, i) => (
-          <span key={i} className="font-display text-3xl md:text-5xl text-ink/80 flex items-center gap-16">
-            {t} <span className="w-2 h-2 rounded-full bg-brand inline-block" />
+          <span key={i} className="font-display italic text-2xl md:text-5xl text-ink/80 flex items-center gap-10 md:gap-16">
+            {t} <span className="w-1.5 h-1.5 rounded-full bg-brand inline-block" />
           </span>
         ))}
       </motion.div>
     </div>
   );
 }
+
+/** Word-by-word mask reveal — premium editorial feel without flashy colours. */
+export function WordsReveal({
+  text, className, delay = 0, as: As = "h2",
+}: { text: string; className?: string; delay?: number; as?: any }) {
+  const words = text.split(" ");
+  return (
+    <As className={className}>
+      <motion.span
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ staggerChildren: 0.045, delayChildren: delay }}
+        className="inline"
+      >
+        {words.map((w, i) => (
+          <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.25em]">
+            <motion.span
+              className="inline-block"
+              variants={{
+                hidden: { y: "110%", opacity: 0 },
+                visible: { y: "0%", opacity: 1, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
+              }}
+            >
+              {w}
+            </motion.span>
+          </span>
+        ))}
+      </motion.span>
+    </As>
+  );
+}
+
+/** Clip-path reveal for images — cinematic curtain entrance. */
+export function ImageReveal({
+  src, alt, className, imgClassName, from = "bottom",
+}: { src: string; alt: string; className?: string; imgClassName?: string; from?: "bottom" | "left" | "right" }) {
+  const clip = {
+    bottom: { hidden: "inset(0 0 100% 0)", visible: "inset(0 0 0% 0)" },
+    left:   { hidden: "inset(0 100% 0 0)", visible: "inset(0 0% 0 0)" },
+    right:  { hidden: "inset(0 0 0 100%)", visible: "inset(0 0 0 0%)" },
+  }[from];
+  return (
+    <div className={`relative overflow-hidden ${className ?? ""}`}>
+      <motion.div
+        initial={{ clipPath: clip.hidden }}
+        whileInView={{ clipPath: clip.visible }}
+        viewport={{ once: true, amount: 0.25 }}
+        transition={{ duration: 1.2, ease: [0.77, 0, 0.18, 1] }}
+        className="w-full h-full"
+      >
+        <motion.img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          initial={{ scale: 1.25 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+          className={`w-full h-full object-cover ${imgClassName ?? ""}`}
+        />
+      </motion.div>
+    </div>
+  );
+}
+
+/** Subtle scroll-driven parallax wrapper. */
+export function Parallax({
+  children, range = 60, className,
+}: { children: ReactNode; range?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useSpring(useTransform(scrollYProgress, [0, 1], [range, -range]), { stiffness: 80, damping: 20, mass: 0.4 });
+  return (
+    <div ref={ref} className={className}>
+      <motion.div style={{ y }}>{children}</motion.div>
+    </div>
+  );
+}
+
+/** Magnetic hover — subtle attractor for buttons / icons. */
+export function Magnetic({ children, className, strength = 18 }: { children: ReactNode; className?: string; strength?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  return (
+    <div
+      ref={ref}
+      className={`inline-block ${className ?? ""}`}
+      onMouseMove={(e) => {
+        const el = ref.current; if (!el) return;
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2);
+        const y = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${(x / r.width) * strength}px, ${(y / r.height) * strength}px)`;
+      }}
+      onMouseLeave={() => { if (ref.current) ref.current.style.transform = "translate(0,0)"; }}
+      style={{ transition: "transform 400ms cubic-bezier(0.22,1,0.36,1)" }}
+    >
+      {children}
+    </div>
+  );
+}
+
