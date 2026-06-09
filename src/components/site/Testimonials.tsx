@@ -1,0 +1,80 @@
+import { Quote, Star } from "lucide-react";
+import { Reveal, Stagger, item, WordsReveal } from "@/components/site/Reveal";
+import { motion } from "framer-motion";
+
+const reviews = [
+  {
+    name: "Anoop Nalupurappattil",
+    rating: 5,
+    when: "2 months ago",
+    text: "It is a very beautiful house — we liked it a lot. AM Concepts Architects and Interiors built exactly what we wanted. All the guests who came to the house warming gave great comments. We got the same house we dreamed of. Thank you AM Concepts team.",
+  },
+  {
+    name: "Sudheesh Krishnan, Kanhangad",
+    rating: 4,
+    when: "8 months ago",
+    text: "I am really happy with the interior work done by AM Concepts. The team understood my requirements and delivered exactly what I wanted. The quality of work is excellent and the designs are modern yet timeless. Highly recommended.",
+  },
+  {
+    name: "Archana Sandesh",
+    rating: 5,
+    when: "2 years ago",
+    text: "AM Concepts are undoubtedly one of the finest interior design firms I have come across. Their remarkable talent lies in listening to our ideas and skilfully transforming them into stunning designs. Truly impressed and thoroughly satisfied.",
+  },
+];
+
+export function Testimonials() {
+  return (
+    <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-12 md:mb-16">
+        <Reveal>
+          <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+            <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Client Stories
+          </div>
+          <WordsReveal
+            text="Trusted by families and businesses across Kerala."
+            className="font-display text-3xl sm:text-4xl md:text-6xl max-w-3xl leading-[1.05] tracking-[-0.02em]"
+          />
+        </Reveal>
+        <Reveal delay={0.15} className="md:max-w-sm">
+          <div className="flex items-center gap-2">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-4 h-4 fill-brand text-brand" />
+            ))}
+            <span className="text-sm font-medium text-ink ml-1">4.9 / 5</span>
+          </div>
+          <p className="text-sm text-muted-foreground mt-3">
+            Real reviews from homeowners and commercial clients we've served since 2014.
+          </p>
+        </Reveal>
+      </div>
+
+      <Stagger className="grid md:grid-cols-3 gap-4 md:gap-6">
+        {reviews.map((r) => (
+          <motion.figure
+            key={r.name}
+            variants={item}
+            className="group bg-background border border-black/5 p-7 md:p-9 flex flex-col hover:border-brand/40 transition-colors relative overflow-hidden"
+          >
+            <Quote className="absolute top-6 right-6 w-8 h-8 text-brand/15 group-hover:text-brand/30 transition-colors" />
+            <div className="flex gap-0.5">
+              {[...Array(r.rating)].map((_, i) => (
+                <Star key={i} className="w-3.5 h-3.5 fill-brand text-brand" />
+              ))}
+            </div>
+            <blockquote className="mt-5 text-[15px] leading-relaxed text-foreground/90 flex-1">
+              "{r.text}"
+            </blockquote>
+            <figcaption className="mt-6 pt-6 border-t border-black/5">
+              <div className="font-display text-lg text-ink">{r.name}</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
+                Verified Google Review · {r.when}
+              </div>
+            </figcaption>
+            <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
+          </motion.figure>
+        ))}
+      </Stagger>
+    </section>
+  );
+}
