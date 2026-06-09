@@ -90,10 +90,10 @@ function Home() {
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
-              { src: hero, alt: "Modern Kerala architecture" },
+              { src: villa, alt: "Hillside villa exterior at twilight" },
+              { src: living, alt: "Modern minimalist living room" },
+              { src: kitchen, alt: "Marble kitchen interior" },
               { src: heroWarm.url, alt: "Warm minimalist interior" },
-              { src: villa, alt: "Hillside villa exterior" },
-              { src: living, alt: "Curated living room" },
             ]}
           />
         </motion.div>
