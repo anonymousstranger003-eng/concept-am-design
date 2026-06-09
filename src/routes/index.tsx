@@ -9,12 +9,56 @@ import loft from "@/assets/loft-interior.jpeg";
 import dining from "@/assets/dining-table.jpeg";
 import kitchen from "@/assets/kitchen.jpeg";
 import office from "@/assets/office.jpeg";
-import founder from "@/assets/founder.jpg";
+import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
+import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
+import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import { Reveal, Stagger, SlideIn, Marquee, WordsReveal, ImageReveal, Parallax, Magnetic, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
+import { HeroSlider } from "@/components/site/HeroSlider";
+import { Testimonials } from "@/components/site/Testimonials";
 import { services, stats } from "@/lib/site-data";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  component: Home,
+  head: () => ({
+    meta: [
+      { title: "AM Concepts Architects & Interiors | Best Architects in Kerala 2026" },
+      { name: "description", content: "Award-winning architecture and interior design studio in Kerala. AM Concepts — led by Manoj S Sunder & Ar. Aswini Manoj — designs timeless homes, villas, offices and eco-conscious spaces across Calicut, Kasaragod and India. Book a free 2026 consultation." },
+      { name: "keywords", content: "architects in Kerala, interior designers Kerala 2026, best architecture firm Calicut, Kasaragod architects, luxury villa design Kerala, modern home design India, sustainable architecture Kerala, AM Concepts Architects" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { property: "og:title", content: "AM Concepts Architects & Interiors | Kerala's Trusted Design Studio" },
+      { property: "og:description", content: "Timeless architecture, bespoke interiors and turnkey execution across Kerala. Founded by Manoj S Sunder & Ar. Aswini Manoj." },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: heroWarm.url },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: heroWarm.url },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ArchitecturalService",
+          name: "AM Concepts Architects & Interiors",
+          image: heroWarm.url,
+          founder: [
+            { "@type": "Person", name: "Manoj S Sunder", jobTitle: "Founder & Managing Director" },
+            { "@type": "Person", name: "Ar. Aswini Manoj", jobTitle: "Principal Architect & Co-Founder" },
+          ],
+          areaServed: "Kerala, India",
+          telephone: "+91 95394 58218",
+          address: [
+            { "@type": "PostalAddress", streetAddress: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station", addressLocality: "Kozhikode", addressRegion: "Kerala", postalCode: "673020", addressCountry: "IN" },
+            { "@type": "PostalAddress", streetAddress: "Ali & Son's Complex, 1/136, Chemnad", addressLocality: "Kasaragod", addressRegion: "Kerala", postalCode: "671317", addressCountry: "IN" },
+          ],
+          aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "127" },
+          sameAs: ["https://wa.me/919539458218"],
+        }),
+      },
+    ],
+  }),
+});
 
 const portfolioPreview = [
   { title: "Hillside Villa", category: "Residential · Calicut", img: villa },
@@ -36,8 +80,14 @@ function Home() {
       {/* HERO */}
       <section ref={heroRef} className="relative h-[92svh] min-h-[560px] md:h-[100svh] md:min-h-[640px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
-          <img src={hero} alt="Modern architecture" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/75" />
+          <HeroSlider
+            images={[
+              { src: hero, alt: "Modern Kerala architecture" },
+              { src: heroWarm.url, alt: "Warm minimalist interior" },
+              { src: villa, alt: "Hillside villa exterior" },
+              { src: living, alt: "Curated living room" },
+            ]}
+          />
         </motion.div>
 
         <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pb-16 md:pb-28">
@@ -267,50 +317,75 @@ function Home() {
         </div>
       </section>
 
-      {/* FOUNDER */}
+      {/* FOUNDERS */}
       <section className="bg-secondary/50 border-y border-black/5">
-        <div className="container-x mx-auto max-w-7xl py-20 md:py-40 grid md:grid-cols-12 gap-10 md:gap-12 items-center">
-          <SlideIn from="left" className="md:col-span-5">
-            <Parallax range={30}>
-              <ImageReveal
-                src={founder}
-                alt="Manoj AM, Founder"
-                from="left"
-                className="aspect-[4/5]"
-              />
-            </Parallax>
-            <div className="relative -mt-16 mx-4 glass p-5 z-10">
-              <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
-              <div className="font-display text-xl md:text-2xl mt-1 whitespace-pre-line">Manoj S Sunder{"\n"}Ar Aswini Manoj</div>
-            </div>
-          </SlideIn>
-          <div className="md:col-span-7 md:pl-10">
-            <SlideIn from="right">
+        <div className="container-x mx-auto max-w-7xl py-20 md:py-32">
+          <div className="max-w-3xl">
+            <Reveal>
               <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
-                <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Philosophy
+                <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Founders
               </div>
               <WordsReveal
-                text={`"Design should feel inevitable — like it could not have been any other way."`}
-                className="font-display italic text-2xl sm:text-3xl md:text-5xl leading-[1.15] max-w-xl tracking-[-0.015em]"
+                text="A husband-and-wife studio shaping homes with conviction and craft."
+                className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] tracking-[-0.02em]"
               />
-            </SlideIn>
-            <Stagger className="grid sm:grid-cols-2 gap-4 md:gap-6 mt-10 md:mt-12">
-              {[
-                { Icon: Compass, t: "Site-led design", d: "Every project starts with the land, light and life around it." },
-                { Icon: Leaf, t: "Eco-conscious", d: "Climate-responsive buildings using regional, low-impact materials." },
-                { Icon: Sparkles, t: "Crafted detail", d: "Joinery, materiality and lighting resolved to the millimetre." },
-                { Icon: ShieldCheck, t: "Integrity", d: "Transparent fees, honest timelines, full documentation." },
-              ].map(({ Icon, t, d }) => (
-                <motion.div key={t} variants={item} className="p-5 md:p-6 bg-background border border-black/5 group hover:border-brand/40 transition-colors">
-                  <Icon className="w-5 h-5 text-brand transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110" />
-                  <div className="font-display text-lg md:text-xl mt-3 md:mt-4">{t}</div>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{d}</p>
-                </motion.div>
-              ))}
-            </Stagger>
+              <p className="mt-6 text-muted-foreground leading-relaxed max-w-2xl">
+                AM Concepts is led by <strong className="text-ink">Manoj S Sunder</strong> and <strong className="text-ink">Ar. Aswini Manoj</strong> — a multidisciplinary duo balancing engineering rigour with design sensitivity. Their shared vision: architecture that is honest to its site, restrained in detail, and built to age beautifully.
+              </p>
+            </Reveal>
           </div>
+
+          <div className="grid md:grid-cols-2 gap-6 md:gap-10 mt-12 md:mt-20">
+            {[
+              { src: founderManoj.url, name: "Manoj S Sunder", role: "Founder & Managing Director", bio: "An engineer-builder at heart, Manoj leads execution, planning and client relationships — ensuring every detail drawn is detail built." },
+              { src: founderAswini.url, name: "Ar. Aswini Manoj", role: "Principal Architect & Co-Founder", bio: "Aswini drives the studio's design language — site-led architecture, material honesty, and interiors that feel calm, considered and personal." },
+            ].map((f, idx) => (
+              <SlideIn key={f.name} from={idx === 0 ? "left" : "right"} delay={idx * 0.1}>
+                <div className="group bg-background border border-black/5 overflow-hidden">
+                  <div className="overflow-hidden aspect-[4/5]">
+                    <Parallax range={20}>
+                      <img src={f.src} alt={f.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+                    </Parallax>
+                  </div>
+                  <div className="p-6 md:p-8">
+                    <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
+                    <div className="font-display text-2xl md:text-3xl mt-2 text-ink">{f.name}</div>
+                    <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{f.bio}</p>
+                  </div>
+                </div>
+              </SlideIn>
+            ))}
+          </div>
+
+          <Reveal delay={0.2} className="mt-16 md:mt-20">
+            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
+              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Our Vision
+            </div>
+            <WordsReveal
+              text={`"Design should feel inevitable — calm, considered, built to outlast trend."`}
+              className="font-display italic text-2xl sm:text-3xl md:text-5xl leading-[1.15] max-w-4xl tracking-[-0.015em]"
+            />
+          </Reveal>
+
+          <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-10 md:mt-14">
+            {[
+              { Icon: Compass, t: "Site-led design", d: "Every project starts with land, light and life around it." },
+              { Icon: Leaf, t: "Eco-conscious", d: "Climate-responsive buildings using regional, low-impact materials." },
+              { Icon: Sparkles, t: "Crafted detail", d: "Joinery, materiality and lighting resolved to the millimetre." },
+              { Icon: ShieldCheck, t: "Integrity", d: "Transparent fees, honest timelines, full documentation." },
+            ].map(({ Icon, t, d }) => (
+              <motion.div key={t} variants={item} className="p-5 md:p-6 bg-background border border-black/5 group hover:border-brand/40 transition-colors">
+                <Icon className="w-5 h-5 text-brand transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110" />
+                <div className="font-display text-lg md:text-xl mt-3 md:mt-4">{t}</div>
+                <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{d}</p>
+              </motion.div>
+            ))}
+          </Stagger>
         </div>
       </section>
+
+      {/* TESTIMONIALS */}
+      <Testimonials />
 
       {/* OFFICES */}
       <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
