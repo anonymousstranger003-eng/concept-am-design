@@ -7,10 +7,10 @@ export const services = [
   { title: "Interior Design", desc: "Curated interior spaces balancing aesthetics, practicality, and material harmony." },
   { title: "Renovation & Space Planning", desc: "Reimagining existing spaces with smarter flow and storage." },
   { title: "Architectural Drawings", desc: "Precise CAD documentation, MEP and working drawings." },
-  { title: "Design Consultation", desc: "Strategic guidance from concept through site execution." },
-  { title: "Building Planning", desc: "Approvals, permits and regulatory compliance handled end-to-end." },
-  { title: "3D Visualization", desc: "Photoreal renders so you experience the space before it's built." },
-  { title: "Site Visit & Planning", desc: "On-site assessment, surveying and feasibility studies." },
+  { title: "Sustainable Design", desc: "Climate-responsive and eco-conscious architecture focused on long-term value." },
+  { title: "Landscape Desgining", desc: "Gardens, courtyards, terraces, and outdoor environments integrated with architecture." },
+  { title: "3D Visualization & VR Experience", desc: "Immersive 3D visualizations and 360-degree virtual reality experiences that help clients explore and experience spaces before execution." },
+  { title: "Architectural Consultancy", desc: "End -to-end architecture guidance, execution support, and project coordination with attention to detail." },
 ];
 
 export const stats = [
