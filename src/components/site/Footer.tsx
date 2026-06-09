@@ -52,11 +52,11 @@ export function Footer() {
           <div className="space-y-5 text-sm">
             <div>
               <div className="text-white font-medium">Corporate Head Office</div>
-              <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> Calicut, Kerala, India</div>
+              <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020</div>
             </div>
             <div>
               <div className="text-white font-medium">Branch Office</div>
-              <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> Kasaragod, Kerala, India</div>
+              <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> Ali & Son's Complex, 1/136, Chemnad , Kerala 671317</div>
             </div>
             <div className="flex items-center gap-2 text-white/60"><Phone className="w-4 h-4" /> +91 95394 58218</div>
             <div className="flex items-center gap-2 text-white/60"><Mail className="w-4 h-4" /> hello@amconcept.in</div>
@@ -66,7 +66,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
           <div>© {new Date().getFullYear()} AM Concepts & Architects. All rights reserved.</div>
-          <div className="font-display tracking-wide">Designed with intent.</div>
+          <div className="font-display tracking-wide">                     Designed  by Mediators Labs                                                                                                                 </div>
         </div>
       </div>
     </footer>

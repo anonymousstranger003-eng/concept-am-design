@@ -28,7 +28,7 @@ function About() {
       <PageHeader
         kicker="About the studio"
         title="A Kerala studio designing buildings that feel honest, calm and built to last."
-        sub="AM Concepts & Architects has been quietly shaping homes, workplaces and public buildings across Kerala since 2014 — led by founder Manoj AM."
+        sub="AM Concepts & Architects has been quietly shaping homes, workplaces and public buildings across Kerala since 2020 — led by founder Manoj S Sunder & Ar Aswini Manoj."
       />
 
       <section className="container-x mx-auto max-w-7xl pb-28 grid md:grid-cols-12 gap-10">
@@ -68,11 +68,11 @@ function About() {
           <div className="md:col-span-7">
             <Reveal>
               <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">Founder</div>
-              <h2 className="font-display text-5xl md:text-6xl leading-[1.05]">Manoj AM</h2>
+              <h2 className="font-display text-5xl md:text-6xl leading-[1.05] whitespace-pre-line">Manoj S Sunder{"\n"}Ar Aswini Manoj</h2>
               <div className="mt-2 text-muted-foreground">Founder & Managing Director</div>
               <p className="mt-8 text-lg text-muted-foreground leading-relaxed max-w-xl">
                 With over a decade of design and execution experience across Kerala,
-                Manuji leads the studio with a quiet conviction — that good
+                AM Conleads the studio with a quiet conviction — that good
                 architecture should serve, not perform. Under his direction, AM
                 Concept has grown into a multidisciplinary practice working on
                 residential, commercial and eco-conscious projects.
@@ -80,7 +80,7 @@ function About() {
             </Reveal>
             <Stagger className="grid sm:grid-cols-2 gap-6 mt-12">
               {[
-                { Icon: Award, t: "11+ years", d: "Designing across Kerala" },
+                { Icon: Award, t: "15+ years", d: "Designing across Kerala" },
                 { Icon: Building2, t: "150+ projects", d: "Residential & commercial" },
                 { Icon: Users, t: "Multidisciplinary", d: "Architecture, interiors, engineering" },
                 { Icon: Leaf, t: "Eco-committed", d: "Climate-responsive design" },
