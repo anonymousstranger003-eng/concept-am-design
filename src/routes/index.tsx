@@ -2,21 +2,28 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react";
-import hero from "@/assets/hero-architecture.jpg";
-import villa from "@/assets/exterior-villa.jpeg";
-import living from "@/assets/living-room.jpeg";
-import loft from "@/assets/loft-interior.jpeg";
-import dining from "@/assets/dining-table.jpeg";
-import kitchen from "@/assets/kitchen.jpeg";
-import office from "@/assets/office.jpeg";
+
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
+import villaAsset from "@/assets/villa-hillside.webp.asset.json";
+import livingAsset from "@/assets/living-modern.jpg.asset.json";
+import kitchenAsset from "@/assets/kitchen-marble.jpg.asset.json";
+import diningAsset from "@/assets/dining-walnut.webp.asset.json";
+import loftAsset from "@/assets/loft-brick.webp.asset.json";
+import officeAsset from "@/assets/office-boardroom.webp.asset.json";
 import { Reveal, Stagger, SlideIn, Marquee, WordsReveal, ImageReveal, Parallax, Magnetic, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { Testimonials } from "@/components/site/Testimonials";
 import { services, stats } from "@/lib/site-data";
+
+const villa = villaAsset.url;
+const living = livingAsset.url;
+const kitchen = kitchenAsset.url;
+const dining = diningAsset.url;
+const loft = loftAsset.url;
+const office = officeAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -82,10 +89,10 @@ function Home() {
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
-              { src: hero, alt: "Modern Kerala architecture" },
+              { src: villa, alt: "Hillside villa exterior at twilight" },
+              { src: living, alt: "Modern minimalist living room" },
+              { src: kitchen, alt: "Marble kitchen interior" },
               { src: heroWarm.url, alt: "Warm minimalist interior" },
-              { src: villa, alt: "Hillside villa exterior" },
-              { src: living, alt: "Curated living room" },
             ]}
           />
         </motion.div>
