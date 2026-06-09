@@ -1,10 +1,10 @@
 export const services = [
-  { title: "Commercial Designing", desc: "Workspaces and retail interiors that work as hard as your brand." },
-  { title: "Residential Architecture", desc: "Homes designed around how you actually live, move and host." },
-  { title: "Interior Designing", desc: "Considered material palettes, lighting and detailing throughout." },
-  { title: "Exterior Designing", desc: "Facades, landscapes and elevations with lasting curb presence." },
-  { title: "Eco-Friendly Construction", desc: "Climate-responsive, low-impact buildings using regional materials." },
-  { title: "Landscape Designing", desc: "Gardens, courtyards and outdoor rooms that breathe with the home." },
+  { title: "Architectural Planning", desc: "Concept development, spatial planning , and detailed architectural floor plans tailored to each project" },
+  { title: "Residential Architecture", desc: "Custom homes, villas and living spaces desgigned around comfort, lifestyle, and timeless design." },
+  { title: "Commercial Architecture", desc: "Office spaces, retail environments, and hospitality projects crafted for functionality and exeperience." },
+  { title: "Building Permit & Approvals", desc: "Building permit drawings, municipality submissions, approvals procedures, and statutory documentation." },
+  { title: "Completion Certificate Services", desc: "Assistance with completion drawings, documentation, and certification process" },
+  { title: "Interior Design", desc: "Curated interior spaces balancing aesthetics, practicality, and material harmony." },
   { title: "Renovation & Space Planning", desc: "Reimagining existing spaces with smarter flow and storage." },
   { title: "Architectural Drawings", desc: "Precise CAD documentation, MEP and working drawings." },
   { title: "Design Consultation", desc: "Strategic guidance from concept through site execution." },
@@ -14,11 +14,11 @@ export const services = [
 ];
 
 export const stats = [
-  { value: 11, suffix: "+", label: "Years of Experience" },
+  { value: 15, suffix: "+", label: "Years of Experience" },
   { value: 150, suffix: "+", label: "Completed Projects" },
   { value: 95, suffix: "%", label: "Client Satisfaction" },
-  { value: 80, suffix: "+", label: "Residential Projects" },
-  { value: 45, suffix: "+", label: "Commercial Projects" },
+  { value: 100, suffix: "+", label: "Residential Projects" },
+  { value: 50, suffix: "+", label: "Commercial Projects" },
 ];
 
 export const faqs = [

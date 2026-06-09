@@ -48,7 +48,7 @@ function Home() {
             className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-8"
           >
             <span className="w-6 md:w-8 h-px bg-white/50" />
-            Est. 2014 · Kerala, India
+            EST. 2020 · KERALA, INDIA
           </motion.div>
 
           <h1 className="font-display text-white text-[2.5rem] sm:text-5xl md:text-7xl xl:text-[7.5rem] leading-[0.95] max-w-5xl tracking-[-0.02em]">
@@ -76,11 +76,10 @@ function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.95, duration: 0.9 }}
-            className="mt-6 md:mt-8 max-w-xl text-white/80 text-sm md:text-lg leading-relaxed"
+            className="mt-6 md:mt-8 max-w-xl text-white/80 text-sm md:text-lg leading-relaxed whitespace-pre-line"
           >
-            AM Concepts & Architects — a Kerala-based studio founded by
-            Manoj AM, designing residential, commercial and eco-conscious
-            spaces with honesty, restraint and craft.
+            Designing Spaces That Define Modern Living.{"\n\n\n"}
+            At AM Concepts Architects & Interiors, we create timeless architecture and bespoke interiors that seamlessly combine elegance, functionality, and exceptional craftsmanship.
           </motion.p>
 
           <motion.div
@@ -91,7 +90,7 @@ function Home() {
           >
             <Magnetic>
               <Link to="/contact" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-                Book Consultation
+                BOOK  FREE CONSULTATION
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </Magnetic>
@@ -119,7 +118,7 @@ function Home() {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 flex-col gap-4 text-white/40 text-[10px] uppercase tracking-[0.3em] writing-vertical"
         >
-          <span>11+ yrs</span>
+          <span>15+ yrs</span>
           <span className="w-px h-10 bg-white/30 mx-auto" />
           <span>150+ projects</span>
         </motion.div>
@@ -176,7 +175,7 @@ function Home() {
               <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />What we do
             </div>
             <WordsReveal
-              text="Twelve disciplines, one design language."
+              text=" OUR EXPERTISE."
               className="font-display text-3xl sm:text-4xl md:text-6xl max-w-2xl leading-[1.05] tracking-[-0.02em]"
             />
           </Reveal>
@@ -279,7 +278,7 @@ function Home() {
             </Parallax>
             <div className="relative -mt-16 mx-4 glass p-5 z-10">
               <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground">Founder & Managing Director</div>
-              <div className="font-display text-xl md:text-2xl mt-1">Manoj AM</div>
+              <div className="font-display text-xl md:text-2xl mt-1 whitespace-pre-line">Manoj S Sunder{"\n"}Ar Aswini Manoj</div>
             </div>
           </SlideIn>
           <div className="md:col-span-7 md:pl-10">
@@ -323,8 +322,8 @@ function Home() {
         </Reveal>
         <Stagger className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10 md:mt-14">
           {[
-            { city: "Calicut", role: "Corporate Head Office", map: "https://www.google.com/maps?q=Calicut,Kerala&output=embed" },
-            { city: "Kasaragod", role: "Branch Office", map: "https://www.google.com/maps?q=Kasaragod,Kerala&output=embed" },
+            { city: "Calicut", role: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020", map: "https://www.google.com/maps?q=Calicut,Kerala&output=embed" },
+            { city: "Kasaragod", role: "Ali & Son's Complex, 1/136, Chemnad , Kerala 671317", map: "https://www.google.com/maps?q=Kasaragod,Kerala&output=embed" },
           ].map((o) => (
             <motion.div key={o.city} variants={item} className="group bg-background border border-black/5 overflow-hidden">
               <div className="aspect-[16/10] overflow-hidden bg-secondary">
