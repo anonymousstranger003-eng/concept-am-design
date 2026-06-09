@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react";
 import hero from "@/assets/hero-architecture.jpg";
-import villaOld from "@/assets/exterior-villa.jpeg";
+
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
