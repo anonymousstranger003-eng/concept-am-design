@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react";
-import hero from "@/assets/hero-architecture.jpg";
 
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
