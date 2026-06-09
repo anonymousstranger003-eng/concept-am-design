@@ -175,11 +175,14 @@ function Home() {
               <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />What we do
             </div>
             <WordsReveal
-              text=" OUR EXPERTISE."
+              text="Our Expertise,"
               className="font-display text-3xl sm:text-4xl md:text-6xl max-w-2xl leading-[1.05] tracking-[-0.02em]"
             />
           </Reveal>
-          <Reveal delay={0.15}>
+          <Reveal delay={0.15} className="md:max-w-md">
+            <p className="text-sm text-muted-foreground mb-6">
+              From Concept to completion, AM Concepts Architecture delivers architecture and interior solutions that balance functionality, aesthetics and timeless designs.
+            </p>
             <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand group">
               All services <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
