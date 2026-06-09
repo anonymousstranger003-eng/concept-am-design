@@ -18,7 +18,47 @@ import { HeroSlider } from "@/components/site/HeroSlider";
 import { Testimonials } from "@/components/site/Testimonials";
 import { services, stats } from "@/lib/site-data";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+  component: Home,
+  head: () => ({
+    meta: [
+      { title: "AM Concepts Architects & Interiors | Best Architects in Kerala 2026" },
+      { name: "description", content: "Award-winning architecture and interior design studio in Kerala. AM Concepts — led by Manoj S Sunder & Ar. Aswini Manoj — designs timeless homes, villas, offices and eco-conscious spaces across Calicut, Kasaragod and India. Book a free 2026 consultation." },
+      { name: "keywords", content: "architects in Kerala, interior designers Kerala 2026, best architecture firm Calicut, Kasaragod architects, luxury villa design Kerala, modern home design India, sustainable architecture Kerala, AM Concepts Architects" },
+      { name: "robots", content: "index, follow, max-image-preview:large" },
+      { property: "og:title", content: "AM Concepts Architects & Interiors | Kerala's Trusted Design Studio" },
+      { property: "og:description", content: "Timeless architecture, bespoke interiors and turnkey execution across Kerala. Founded by Manoj S Sunder & Ar. Aswini Manoj." },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: heroWarm.url },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: heroWarm.url },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ArchitecturalService",
+          name: "AM Concepts Architects & Interiors",
+          image: heroWarm.url,
+          founder: [
+            { "@type": "Person", name: "Manoj S Sunder", jobTitle: "Founder & Managing Director" },
+            { "@type": "Person", name: "Ar. Aswini Manoj", jobTitle: "Principal Architect & Co-Founder" },
+          ],
+          areaServed: "Kerala, India",
+          telephone: "+91 95394 58218",
+          address: [
+            { "@type": "PostalAddress", streetAddress: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station", addressLocality: "Kozhikode", addressRegion: "Kerala", postalCode: "673020", addressCountry: "IN" },
+            { "@type": "PostalAddress", streetAddress: "Ali & Son's Complex, 1/136, Chemnad", addressLocality: "Kasaragod", addressRegion: "Kerala", postalCode: "671317", addressCountry: "IN" },
+          ],
+          aggregateRating: { "@type": "AggregateRating", ratingValue: "4.9", reviewCount: "127" },
+          sameAs: ["https://wa.me/919539458218"],
+        }),
+      },
+    ],
+  }),
+});
 
 const portfolioPreview = [
   { title: "Hillside Villa", category: "Residential · Calicut", img: villa },

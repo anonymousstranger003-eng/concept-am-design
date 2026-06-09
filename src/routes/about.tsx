@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Reveal, Stagger, item } from "@/components/site/Reveal";
+import { Reveal, Stagger, SlideIn, item } from "@/components/site/Reveal";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Award, Leaf, Users, Building2 } from "lucide-react";
-import founder from "@/assets/founder.jpg";
+import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
+import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import blueprints from "@/assets/blueprints.jpg";
 import villa from "@/assets/exterior-villa.jpeg";
 
