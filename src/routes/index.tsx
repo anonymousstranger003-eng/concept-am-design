@@ -9,9 +9,13 @@ import loft from "@/assets/loft-interior.jpeg";
 import dining from "@/assets/dining-table.jpeg";
 import kitchen from "@/assets/kitchen.jpeg";
 import office from "@/assets/office.jpeg";
-import founder from "@/assets/founder.jpg";
+import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
+import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
+import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import { Reveal, Stagger, SlideIn, Marquee, WordsReveal, ImageReveal, Parallax, Magnetic, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
+import { HeroSlider } from "@/components/site/HeroSlider";
+import { Testimonials } from "@/components/site/Testimonials";
 import { services, stats } from "@/lib/site-data";
 
 export const Route = createFileRoute("/")({ component: Home });
