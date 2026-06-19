@@ -85,7 +85,7 @@ function Home() {
   return (
     <div className="overflow-clip">
       {/* HERO */}
-      <section ref={heroRef} className="relative h-[92svh] min-h-[560px] md:h-[100svh] md:min-h-[640px] w-full overflow-hidden">
+      <section ref={heroRef} className="relative h-[92svh] min-h-[600px] md:h-[100svh] md:min-h-[680px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
@@ -97,18 +97,18 @@ function Home() {
           />
         </motion.div>
 
-        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pb-16 md:pb-28">
+        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pt-32 md:pt-40 pb-20 md:pb-32">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-8"
+            className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-6"
           >
             <span className="w-6 md:w-8 h-px bg-white/50" />
             EST. 2020 · KERALA, INDIA
           </motion.div>
 
-          <h1 className="font-display text-white text-[2.5rem] sm:text-5xl md:text-7xl xl:text-[7.5rem] leading-[0.95] max-w-5xl tracking-[-0.02em]">
+          <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-6xl xl:text-8xl leading-[1] max-w-5xl tracking-[-0.02em]">
             <span className="block overflow-hidden">
               <motion.span
                 initial={{ y: "110%" }} animate={{ y: 0 }}
@@ -133,11 +133,11 @@ function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.95, duration: 0.9 }}
-            className="mt-6 md:mt-8 max-w-xl text-white/80 text-sm md:text-lg leading-relaxed whitespace-pre-line"
+            className="mt-5 md:mt-7 max-w-xl text-white/85 text-sm md:text-base leading-relaxed"
           >
-            Designing Spaces That Define Modern Living.{"\n\n\n"}
-            At AM Concepts Architects & Interiors, we create timeless architecture and bespoke interiors that seamlessly combine elegance, functionality, and exceptional craftsmanship.
+            At AM Concepts Architects & Interiors, we create timeless architecture and bespoke interiors that combine elegance, functionality, and exceptional craftsmanship.
           </motion.p>
+
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
