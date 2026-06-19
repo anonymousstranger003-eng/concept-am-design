@@ -22,28 +22,16 @@ export const stats = [
 ];
 
 export const faqs = [
-  { q: "What services does AM Concept offer?", a: "We deliver end-to-end architecture, interior design, exterior design, landscape, 3D visualisation, structural drawings and turnkey construction across residential and commercial projects." },
-  { q: "Where are you based?", a: "Our corporate head office is in Calicut, Kerala with a branch office in Kasaragod. We take on projects across Kerala and selected sites pan-India." },
-  { q: "How long does a typical residential project take?", a: "From concept to handover, a standalone villa typically takes 10–18 months depending on scale, finishes and site conditions." },
-  { q: "Do you handle approvals and permits?", a: "Yes. Our building planning team manages municipal approvals, environmental clearances and statutory compliance." },
-  { q: "What is your design fee structure?", a: "Fees are quoted per project — usually a percentage of project cost for full architectural service or a fixed fee for interiors and consultations." },
-  { q: "Can you work with my existing architect or contractor?", a: "Absolutely. We frequently collaborate as interior or design consultants on projects where the architect is already engaged." },
-  { q: "Do you provide 3D walkthroughs?", a: "Every design moves through photoreal 3D visualisation before construction so you can experience materials, lighting and proportions ahead of time." },
-  { q: "Are your designs eco-friendly?", a: "Sustainability is a core commitment — passive cooling, regional materials, rainwater harvesting and low-VOC finishes are part of our default toolkit." },
-  { q: "Do you offer turnkey execution?", a: "Yes. We can take a project from sketch to keys including civil, MEP, joinery, furniture and styling." },
-  { q: "What sizes of projects do you take on?", o: "", a: "From compact apartment interiors to large commercial campuses — we have delivered between 600 sq.ft and 60,000+ sq.ft." },
-  { q: "How involved will I be during design?", a: "Highly. We work in structured review cycles — concept, schematic, detailed design and execution — with clear sign-offs at each stage." },
-  { q: "Do you redesign existing spaces?", a: "Renovation and space planning is one of our most requested services, including structural reworks and adaptive reuse." },
-  { q: "Can you design within a tight budget?", a: "Yes. We design to brief and budget, prioritising material intelligence over expensive specification." },
-  { q: "Do you handle vastu requirements?", a: "We respect vastu principles where required and align them with sound architectural planning." },
-  { q: "What software and drawings do you deliver?", a: "AutoCAD working drawings, Revit BIM models, photoreal renders in V-Ray/Lumion and detailed BOQs." },
-  { q: "Do you provide structural and MEP consultancy?", a: "In-house structural design, with empanelled MEP, HVAC and lighting consultants for specialised scope." },
-  { q: "How do payments work?", a: "Fees are milestone-based — concept sign-off, drawings, execution stages — outlined in a written engagement letter." },
-  { q: "Can you ship furniture and accessories nationwide?", a: "Yes. Our interiors arm sources and ships custom joinery, lighting and accessories across India." },
-  { q: "Do you do landscape and outdoor design?", a: "Landscape, hardscape, pools and outdoor lighting are designed integrated with the architecture, not as an afterthought." },
-  { q: "How do I start a project with AM Concept?", a: "Book a consultation via the contact page or WhatsApp. We'll respond within one working day to schedule a discovery call." },
-  { q: "Is there a minimum project size?", a: "No strict minimum — we evaluate every brief on fit, timeline and design opportunity." },
-  { q: "Do you publish your work?", a: "Selected projects are shared on Instagram, Behance and architectural journals. Full portfolio available on request." },
+  { q: "What services does AM Concepts provide?", a: "We provide complete architectural, interior design, space planning, renovation, turnkey execution, and project management services for residential and commercial projects." },
+  { q: "Do you handle both architecture and interiors?", a: "Yes. We offer integrated architectural and interior design solutions, ensuring a seamless design language from exterior to interior spaces." },
+  { q: "Where is AM Concepts located?", a: "Our studio is based in Calicut and Kasaragod, Kerala, and we undertake projects across Kerala and selected locations outside the state." },
+  { q: "How many years of experience do you have?", a: "Our team has over 15 years of professional experience in architecture and interior design, with expertise in residential, commercial, hospitality, and customized projects." },
+  { q: "What is the process of working with your team?", a: "Our process generally includes: Initial consultation · Site visit and requirement discussion · Concept design · Material selection · Detailed drawings · Estimation and budgeting · Execution and supervision · Final handover." },
+  { q: "Do you provide 3D designs and visualizations?", a: "Yes. We provide realistic 360° visualisations, Virtual Reality walkthroughs and design presentations to help clients understand the final outcome before execution begins." },
+  { q: "Can you work within my budget?", a: "Absolutely. We carefully plan designs and material selections according to the client's budget without compromising functionality and aesthetics." },
+  { q: "Do you undertake turnkey interior projects?", a: "Yes. We provide complete turnkey interior solutions including design, carpentry, false ceiling, electrical, lighting, furnishing, décor, and site coordination." },
+  { q: "How long does a typical project take?", a: "Project timelines vary depending on project size and scope. Residential interiors usually take 45–90 days, while larger commercial projects may require additional time." },
+  { q: "Will I receive detailed drawings and specifications?", a: "Yes. We provide detailed working drawings, material specifications, and execution details for smooth project implementation." },
 ];
 
 export const portfolio = [

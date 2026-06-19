@@ -6,24 +6,18 @@ import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
-import villaAsset from "@/assets/villa-hillside.webp.asset.json";
-import livingAsset from "@/assets/living-modern.jpg.asset.json";
-import kitchenAsset from "@/assets/kitchen-marble.jpg.asset.json";
-import diningAsset from "@/assets/dining-walnut.webp.asset.json";
-import loftAsset from "@/assets/loft-brick.webp.asset.json";
-import officeAsset from "@/assets/office-boardroom.webp.asset.json";
+import plan1 from "@/assets/plan-exterior-1.jpg.asset.json";
+import plan2 from "@/assets/plan-exterior-2.jpg.asset.json";
+import plan3 from "@/assets/plan-exterior-3.jpg.asset.json";
+import plan4 from "@/assets/plan-exterior-4.jpg.asset.json";
+import plan5 from "@/assets/plan-exterior-5.jpg.asset.json";
+import plan6 from "@/assets/plan-exterior-6.jpg.asset.json";
+import interiorLuxe from "@/assets/interior-living-luxe.png.asset.json";
 import { Reveal, Stagger, SlideIn, Marquee, WordsReveal, ImageReveal, Parallax, Magnetic, item, itemLeft, itemRight } from "@/components/site/Reveal";
 import { Counter } from "@/components/site/Counter";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { Testimonials } from "@/components/site/Testimonials";
 import { services, stats } from "@/lib/site-data";
-
-const villa = villaAsset.url;
-const living = livingAsset.url;
-const kitchen = kitchenAsset.url;
-const dining = diningAsset.url;
-const loft = loftAsset.url;
-const office = officeAsset.url;
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -68,12 +62,12 @@ export const Route = createFileRoute("/")({
 });
 
 const portfolioPreview = [
-  { title: "Hillside Villa", category: "Residential · Calicut", img: villa },
-  { title: "Linear Living", category: "Interior · Kochi", img: living },
-  { title: "Brick Loft", category: "Residential · Wayanad", img: loft },
-  { title: "Walnut Dining", category: "Interior · Kasaragod", img: dining },
-  { title: "Marble Kitchen", category: "Interior · Calicut", img: kitchen },
-  { title: "Corporate Office", category: "Commercial · Kannur", img: office },
+  { title: "Hillside Residence", category: "Plan & Exterior · Calicut", img: plan1.url },
+  { title: "Modern Twin Block", category: "Plan & Exterior · Kasaragod", img: plan2.url },
+  { title: "Kerala Contemporary", category: "Plan & Exterior · Wayanad", img: plan3.url },
+  { title: "Gable Roof Villa", category: "Plan & Exterior · Kannur", img: plan4.url },
+  { title: "Luxe Living Interior", category: "Interior Design · Calicut", img: interiorLuxe.url },
+  { title: "Courtyard Residence", category: "Plan & Exterior · Malappuram", img: plan5.url },
 ];
 
 function Home() {
@@ -85,19 +79,20 @@ function Home() {
   return (
     <div className="overflow-clip">
       {/* HERO */}
-      <section ref={heroRef} className="relative h-[92svh] min-h-[600px] md:h-[100svh] md:min-h-[680px] w-full overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[640px] h-[92svh] md:h-[100svh] md:min-h-[720px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
-              { src: villa, alt: "Hillside villa exterior at twilight" },
-              { src: living, alt: "Modern minimalist living room" },
-              { src: kitchen, alt: "Marble kitchen interior" },
-              { src: heroWarm.url, alt: "Warm minimalist interior" },
+              { src: plan1.url, alt: "Kerala contemporary residence plan & exterior" },
+              { src: plan2.url, alt: "Modern twin block residence" },
+              { src: interiorLuxe.url, alt: "Luxe living room interior" },
+              { src: plan4.url, alt: "Gable roof villa exterior" },
+              { src: plan6.url, alt: "Two-storey contemporary residence" },
             ]}
           />
         </motion.div>
 
-        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-end pt-32 md:pt-40 pb-20 md:pb-32">
+        <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-center pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -108,7 +103,7 @@ function Home() {
             EST. 2020 · KERALA, INDIA
           </motion.div>
 
-          <h1 className="font-display text-white text-[2rem] sm:text-4xl md:text-6xl xl:text-8xl leading-[1] max-w-5xl tracking-[-0.02em]">
+          <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
             <span className="block overflow-hidden">
               <motion.span
                 initial={{ y: "110%" }} animate={{ y: 0 }}
