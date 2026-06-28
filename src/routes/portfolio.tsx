@@ -10,6 +10,12 @@ import plan4 from "@/assets/plan-exterior-4.jpg.asset.json";
 import plan5 from "@/assets/plan-exterior-5.jpg.asset.json";
 import plan6 from "@/assets/plan-exterior-6.jpg.asset.json";
 import interiorLuxe from "@/assets/interior-living-luxe.png.asset.json";
+import intBedroom from "@/assets/interior-bedroom.jpg.asset.json";
+import intKitchen from "@/assets/interior-kitchen.jpg.asset.json";
+import intDining from "@/assets/interior-dining.jpg.asset.json";
+import intStudy from "@/assets/interior-study.jpg.asset.json";
+import intBath from "@/assets/interior-bath.jpg.asset.json";
+import intFoyer from "@/assets/interior-foyer.jpg.asset.json";
 
 export const Route = createFileRoute("/portfolio")({
   component: Portfolio,
@@ -34,6 +40,12 @@ const planExteriorProjects = [
 
 const interiorProjects = [
   { title: "Luxe Living Room", location: "Calicut", img: interiorLuxe.url },
+  { title: "Warm Wood Bedroom", location: "Kannur", img: intBedroom.url },
+  { title: "Modular Marble Kitchen", location: "Kasaragod", img: intKitchen.url },
+  { title: "Walnut Dining Hall", location: "Calicut", img: intDining.url },
+  { title: "Reading Study Room", location: "Wayanad", img: intStudy.url },
+  { title: "Marble Master Bath", location: "Kozhikode", img: intBath.url },
+  { title: "Foyer & Staircase", location: "Malappuram", img: intFoyer.url },
 ];
 
 const vrProjects = [
@@ -42,6 +54,9 @@ const vrProjects = [
   { title: "Mr. Giri Nilambur Residence", location: "360° Virtual Tour", img: plan3.url, href: "https://www.coohom.com/pub/tool/panorama/show?obsPlanId=3FO3MTIBJE13&locale=en_US&utm_source=light720_share&utm_medium=linkcopy&utm_content=3FO3MTIBJE13" },
   { title: "Mr. Sunil Residence", location: "360° Virtual Tour", img: plan4.url, href: "https://www.coohom.com/pub/tool/panorama/show?obsPlanId=3FO3H0NQKIVO&locale=en_US&utm_source=light720_share&utm_medium=linkcopy&utm_content=3FO3H0NQKIVO" },
   { title: "Mr. Mustafa Residence", location: "360° Virtual Tour", img: plan5.url, href: "https://www.coohom.com/pub/tool/panorama/show?obsPlanId=3FO3IDHK6845&utm_source=pano_share&uri=%2Fpub%2Ftool%2Fbim%2Fcloud%3Fdesignid%3D3FO3IDHK6845%26redirecturl%3D%2Fpub%2Fsaas%2Fworkbench%26em%3D0%26locale%3Den_IN&utm_content=3FO3IDHK6845&utm_medium=linkcopy" },
+  { title: "Luxe Living Room Walkthrough", location: "360° Virtual Tour · Available on request", img: interiorLuxe.url, href: "https://wa.me/919539458218?text=I%27d%20like%20access%20to%20the%20Luxe%20Living%20360%20tour" },
+  { title: "Modular Kitchen 360°", location: "360° Virtual Tour · Available on request", img: intKitchen.url, href: "https://wa.me/919539458218?text=I%27d%20like%20access%20to%20the%20Modular%20Kitchen%20360%20tour" },
+  { title: "Master Bedroom 360°", location: "360° Virtual Tour · Available on request", img: intBedroom.url, href: "https://wa.me/919539458218?text=I%27d%20like%20access%20to%20the%20Master%20Bedroom%20360%20tour" },
 ];
 
 const filters: Category[] = ["Plan & Exterior", "Interior Design", "360° Virtual Experience"];

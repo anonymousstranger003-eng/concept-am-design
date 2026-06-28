@@ -1,16 +1,29 @@
+import plan1 from "@/assets/plan-exterior-1.jpg.asset.json";
+import plan2 from "@/assets/plan-exterior-2.jpg.asset.json";
+import plan3 from "@/assets/plan-exterior-3.jpg.asset.json";
+import plan5 from "@/assets/plan-exterior-5.jpg.asset.json";
+import plan6 from "@/assets/plan-exterior-6.jpg.asset.json";
+import interiorLuxe from "@/assets/interior-living-luxe.png.asset.json";
+import bedroom from "@/assets/interior-bedroom.jpg.asset.json";
+import kitchen from "@/assets/interior-kitchen.jpg.asset.json";
+import dining from "@/assets/interior-dining.jpg.asset.json";
+import study from "@/assets/interior-study.jpg.asset.json";
+import bath from "@/assets/interior-bath.jpg.asset.json";
+import foyer from "@/assets/interior-foyer.jpg.asset.json";
+
 export const services = [
-  { title: "Architectural Planning", desc: "Concept development, spatial planning , and detailed architectural floor plans tailored to each project" },
-  { title: "Residential Architecture", desc: "Custom homes, villas and living spaces desgigned around comfort, lifestyle, and timeless design." },
-  { title: "Commercial Architecture", desc: "Office spaces, retail environments, and hospitality projects crafted for functionality and exeperience." },
-  { title: "Building Permit & Approvals", desc: "Building permit drawings, municipality submissions, approvals procedures, and statutory documentation." },
-  { title: "Completion Certificate Services", desc: "Assistance with completion drawings, documentation, and certification process" },
-  { title: "Interior Design", desc: "Curated interior spaces balancing aesthetics, practicality, and material harmony." },
-  { title: "Renovation & Space Planning", desc: "Reimagining existing spaces with smarter flow and storage." },
-  { title: "Architectural Drawings", desc: "Precise CAD documentation, MEP and working drawings." },
-  { title: "Sustainable Design", desc: "Climate-responsive and eco-conscious architecture focused on long-term value." },
-  { title: "Landscape Desgining", desc: "Gardens, courtyards, terraces, and outdoor environments integrated with architecture." },
-  { title: "3D Visualization & VR Experience", desc: "Immersive 3D visualizations and 360-degree virtual reality experiences that help clients explore and experience spaces before execution." },
-  { title: "Architectural Consultancy", desc: "End -to-end architecture guidance, execution support, and project coordination with attention to detail." },
+  { title: "Architectural Planning", desc: "Concept development, spatial planning , and detailed architectural floor plans tailored to each project", img: plan1.url },
+  { title: "Residential Architecture", desc: "Custom homes, villas and living spaces desgigned around comfort, lifestyle, and timeless design.", img: plan2.url },
+  { title: "Commercial Architecture", desc: "Office spaces, retail environments, and hospitality projects crafted for functionality and exeperience.", img: plan6.url },
+  { title: "Building Permit & Approvals", desc: "Building permit drawings, municipality submissions, approvals procedures, and statutory documentation.", img: plan3.url },
+  { title: "Completion Certificate Services", desc: "Assistance with completion drawings, documentation, and certification process", img: plan5.url },
+  { title: "Interior Design", desc: "Curated interior spaces balancing aesthetics, practicality, and material harmony.", img: interiorLuxe.url },
+  { title: "Renovation & Space Planning", desc: "Reimagining existing spaces with smarter flow and storage.", img: foyer.url },
+  { title: "Architectural Drawings", desc: "Precise CAD documentation, MEP and working drawings.", img: study.url },
+  { title: "Sustainable Design", desc: "Climate-responsive and eco-conscious architecture focused on long-term value.", img: bedroom.url },
+  { title: "Landscape Desgining", desc: "Gardens, courtyards, terraces, and outdoor environments integrated with architecture.", img: dining.url },
+  { title: "3D Visualization & VR Experience", desc: "Immersive 3D visualizations and 360-degree virtual reality experiences that help clients explore and experience spaces before execution.", img: kitchen.url },
+  { title: "Architectural Consultancy", desc: "End -to-end architecture guidance, execution support, and project coordination with attention to detail.", img: bath.url },
 ];
 
 export const stats = [

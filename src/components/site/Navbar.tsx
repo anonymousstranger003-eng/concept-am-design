@@ -42,11 +42,11 @@ export function Navbar() {
             <img src={logo} alt="AM Concept logo" className="w-full h-full object-cover" />
           </div>
           <div className="leading-tight">
-            <div className="font-display text-[15px] font-semibold tracking-tight text-ink">
-              AM Concepts & Architects
+            <div className="font-display text-[17px] font-semibold tracking-tight text-ink">
+              AM Concepts
             </div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-              Architecture · Interiors · Engineering
+            <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mt-0.5">
+              Architecture and Interiors
             </div>
           </div>
         </Link>

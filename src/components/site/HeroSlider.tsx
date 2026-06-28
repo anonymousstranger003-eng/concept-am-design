@@ -1,29 +1,50 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export function HeroSlider({ images, interval = 5500 }: { images: { src: string; alt: string }[]; interval?: number }) {
+export function HeroSlider({
+  images,
+  interval = 5000,
+}: {
+  images: { src: string; alt: string }[];
+  interval?: number;
+}) {
   const [i, setI] = useState(0);
+
+  // Preload all hero images upfront so transitions feel instant on desktop.
+  useEffect(() => {
+    images.forEach((im) => {
+      const img = new Image();
+      img.src = im.src;
+    });
+  }, [images]);
+
   useEffect(() => {
     const t = setInterval(() => setI((p) => (p + 1) % images.length), interval);
     return () => clearInterval(t);
   }, [images.length, interval]);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden bg-ink">
       <AnimatePresence mode="sync">
         <motion.img
           key={i}
           src={images[i].src}
           alt={images[i].alt}
-          initial={{ opacity: 0, scale: 1.12 }}
-          animate={{ opacity: 1, scale: 1.04 }}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={i === 0 ? "high" : "auto"}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1.02 }}
           exit={{ opacity: 0 }}
-          transition={{ opacity: { duration: 1.4, ease: [0.22, 1, 0.36, 1] }, scale: { duration: 8, ease: "linear" } }}
-          className="absolute inset-0 w-full h-full object-cover"
+          transition={{
+            opacity: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+            scale: { duration: 6, ease: "linear" },
+          }}
+          className="absolute inset-0 w-full h-full object-cover will-change-transform"
         />
       </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/80" />
-      {/* Slide indicators */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/30 to-black/85" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
       <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-20 flex gap-2">
         {images.map((_, idx) => (
           <button
@@ -33,10 +54,14 @@ export function HeroSlider({ images, interval = 5500 }: { images: { src: string;
             className="h-px w-8 md:w-12 bg-white/30 relative overflow-hidden"
           >
             <motion.span
+              key={`${idx}-${i}`}
               className="absolute inset-0 bg-white origin-left"
-              initial={{ scaleX: 0 }}
+              initial={{ scaleX: idx < i ? 1 : 0 }}
               animate={{ scaleX: idx === i ? 1 : idx < i ? 1 : 0 }}
-              transition={{ duration: idx === i ? interval / 1000 : 0.3, ease: "linear" }}
+              transition={{
+                duration: idx === i ? interval / 1000 : 0.4,
+                ease: "linear",
+              }}
             />
           </button>
         ))}
