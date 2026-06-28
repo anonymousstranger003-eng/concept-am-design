@@ -70,6 +70,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
+import { PageLoader } from "@/components/site/PageLoader";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -120,6 +121,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <PageLoader />
       <Navbar />
       <main>
         <Outlet />
