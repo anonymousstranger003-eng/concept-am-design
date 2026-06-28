@@ -153,11 +153,12 @@ export function ImageReveal({
           src={src}
           alt={alt}
           loading="lazy"
-          initial={{ scale: 1.25 }}
+          decoding="async"
+          initial={{ scale: 1.15 }}
           whileInView={{ scale: 1 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-          className={`w-full h-full object-cover ${imgClassName ?? ""}`}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          className={`w-full h-full object-cover will-change-transform ${imgClassName ?? ""}`}
         />
       </motion.div>
     </div>
