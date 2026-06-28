@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react";
 
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
+import heroCover1 from "@/assets/hero-cover-1.jpg.asset.json";
+import heroCover2 from "@/assets/hero-cover-2.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import plan1 from "@/assets/plan-exterior-1.jpg.asset.json";
@@ -83,12 +85,10 @@ function Home() {
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
-              { src: plan1.url, alt: "Kerala contemporary residence plan & exterior" },
-              { src: plan2.url, alt: "Modern twin block residence" },
-              { src: interiorLuxe.url, alt: "Luxe living room interior" },
-              { src: plan4.url, alt: "Gable roof villa exterior" },
-              { src: plan6.url, alt: "Two-storey contemporary residence" },
+              { src: heroCover1.url, alt: "Modern Kerala villa exterior at golden hour" },
+              { src: heroCover2.url, alt: "Luxury double-height contemporary living room interior" },
             ]}
+            interval={5000}
           />
         </motion.div>
 
