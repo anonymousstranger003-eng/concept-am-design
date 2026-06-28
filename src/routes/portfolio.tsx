@@ -10,6 +10,12 @@ import plan4 from "@/assets/plan-exterior-4.jpg.asset.json";
 import plan5 from "@/assets/plan-exterior-5.jpg.asset.json";
 import plan6 from "@/assets/plan-exterior-6.jpg.asset.json";
 import interiorLuxe from "@/assets/interior-living-luxe.png.asset.json";
+import intBedroom from "@/assets/interior-bedroom.jpg.asset.json";
+import intKitchen from "@/assets/interior-kitchen.jpg.asset.json";
+import intDining from "@/assets/interior-dining.jpg.asset.json";
+import intStudy from "@/assets/interior-study.jpg.asset.json";
+import intBath from "@/assets/interior-bath.jpg.asset.json";
+import intFoyer from "@/assets/interior-foyer.jpg.asset.json";
 
 export const Route = createFileRoute("/portfolio")({
   component: Portfolio,
@@ -34,6 +40,12 @@ const planExteriorProjects = [
 
 const interiorProjects = [
   { title: "Luxe Living Room", location: "Calicut", img: interiorLuxe.url },
+  { title: "Warm Wood Bedroom", location: "Kannur", img: intBedroom.url },
+  { title: "Modular Marble Kitchen", location: "Kasaragod", img: intKitchen.url },
+  { title: "Walnut Dining Hall", location: "Calicut", img: intDining.url },
+  { title: "Reading Study Room", location: "Wayanad", img: intStudy.url },
+  { title: "Marble Master Bath", location: "Kozhikode", img: intBath.url },
+  { title: "Foyer & Staircase", location: "Malappuram", img: intFoyer.url },
 ];
 
 const vrProjects = [
