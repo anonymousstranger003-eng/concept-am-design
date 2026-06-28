@@ -241,23 +241,33 @@ function Home() {
           </Reveal>
         </div>
 
-        <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-black/5 border border-black/5">
+        <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {services.slice(0, 6).map((s, i) => (
-            <motion.div
+            <motion.article
               key={s.title}
               variants={i % 2 === 0 ? itemLeft : itemRight}
-              className="group bg-background p-7 md:p-10 hover:bg-ink hover:text-white transition-colors duration-500 relative overflow-hidden"
+              className="group bg-background border border-black/5 overflow-hidden flex flex-col"
             >
-              <div className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground group-hover:text-white/50">
-                0{i + 1} / Service
+              <div className="relative overflow-hidden aspect-[4/3]">
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+                <div className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.3em] text-white/85">
+                  0{i + 1} / Service
+                </div>
+                <ArrowUpRight className="absolute top-4 right-4 w-5 h-5 text-white/80 transition-transform group-hover:rotate-12 group-hover:translate-x-0.5" />
               </div>
-              <h3 className="font-display text-xl md:text-3xl mt-5 md:mt-6 leading-tight group-hover:text-white">
-                {s.title}
-              </h3>
-              <p className="text-sm text-muted-foreground mt-3 leading-relaxed group-hover:text-white/70">{s.desc}</p>
-              <ArrowUpRight className="absolute top-7 right-7 md:top-8 md:right-8 w-5 h-5 text-foreground/30 group-hover:text-brand transition-transform group-hover:rotate-12" />
-              <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
-            </motion.div>
+              <div className="p-6 md:p-7 relative">
+                <h3 className="font-display text-xl md:text-2xl leading-tight">{s.title}</h3>
+                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{s.desc}</p>
+                <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
+              </div>
+            </motion.article>
           ))}
         </Stagger>
       </section>
