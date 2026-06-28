@@ -54,6 +54,9 @@ const vrProjects = [
   { title: "Mr. Giri Nilambur Residence", location: "360° Virtual Tour", img: plan3.url, href: "https://www.coohom.com/pub/tool/panorama/show?obsPlanId=3FO3MTIBJE13&locale=en_US&utm_source=light720_share&utm_medium=linkcopy&utm_content=3FO3MTIBJE13" },
   { title: "Mr. Sunil Residence", location: "360° Virtual Tour", img: plan4.url, href: "https://www.coohom.com/pub/tool/panorama/show?obsPlanId=3FO3H0NQKIVO&locale=en_US&utm_source=light720_share&utm_medium=linkcopy&utm_content=3FO3H0NQKIVO" },
   { title: "Mr. Mustafa Residence", location: "360° Virtual Tour", img: plan5.url, href: "https://www.coohom.com/pub/tool/panorama/show?obsPlanId=3FO3IDHK6845&utm_source=pano_share&uri=%2Fpub%2Ftool%2Fbim%2Fcloud%3Fdesignid%3D3FO3IDHK6845%26redirecturl%3D%2Fpub%2Fsaas%2Fworkbench%26em%3D0%26locale%3Den_IN&utm_content=3FO3IDHK6845&utm_medium=linkcopy" },
+  { title: "Luxe Living Room Walkthrough", location: "360° Virtual Tour · Available on request", img: interiorLuxe.url, href: "https://wa.me/919539458218?text=I%27d%20like%20access%20to%20the%20Luxe%20Living%20360%20tour" },
+  { title: "Modular Kitchen 360°", location: "360° Virtual Tour · Available on request", img: intKitchen.url, href: "https://wa.me/919539458218?text=I%27d%20like%20access%20to%20the%20Modular%20Kitchen%20360%20tour" },
+  { title: "Master Bedroom 360°", location: "360° Virtual Tour · Available on request", img: intBedroom.url, href: "https://wa.me/919539458218?text=I%27d%20like%20access%20to%20the%20Master%20Bedroom%20360%20tour" },
 ];
 
 const filters: Category[] = ["Plan & Exterior", "Interior Design", "360° Virtual Experience"];
