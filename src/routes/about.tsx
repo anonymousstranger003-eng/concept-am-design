@@ -4,8 +4,9 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, Award, Leaf, Users, Building2 } from "lucide-react";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
-import blueprints from "@/assets/blueprints.jpg";
-import villa from "@/assets/exterior-villa.jpeg";
+import aboutBlueprints from "@/assets/about-blueprints.jpg.asset.json";
+import aboutLounge from "@/assets/about-lounge.jpg.asset.json";
+
 
 export const Route = createFileRoute("/about")({ component: About });
 
@@ -34,7 +35,7 @@ function About() {
 
       <section className="container-x mx-auto max-w-7xl pb-28 grid md:grid-cols-12 gap-10">
         <Reveal className="md:col-span-7">
-          <img src={blueprints} alt="Working drawings" className="w-full aspect-[4/3] object-cover" loading="lazy" />
+          <img src={aboutLounge.url} alt="AM Concepts outdoor lounge with stone walls and warm timber" className="w-full aspect-[4/3] object-cover" loading="lazy" />
         </Reveal>
         <div className="md:col-span-5 md:pt-10 space-y-8">
           <Reveal>
@@ -83,13 +84,13 @@ function About() {
                 <img src={f.src} alt={f.name} loading="lazy" className="w-full aspect-[4/5] object-cover" />
                 <div className="mt-6">
                   <div className="text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
-                  <h3 className="font-display text-3xl md:text-4xl mt-2">{f.name}</h3>
+                  <h3 className={`font-display text-3xl md:text-4xl mt-2 ${idx === 0 ? "italic tracking-tight" : ""}`}>{f.name}</h3>
                   {f.quote && (
                     <blockquote className="mt-4 border-l-2 border-brand pl-4 italic text-foreground/85 leading-relaxed">
                       "{f.quote}"
                     </blockquote>
                   )}
-                  <p className="mt-4 text-muted-foreground leading-relaxed">{f.bio}</p>
+                  <p className={`mt-4 text-muted-foreground leading-relaxed ${idx === 0 ? "first-line:italic first-line:text-foreground/90" : ""}`}>{f.bio}</p>
                   {f.pillars.length > 0 && (
                     <dl className="mt-6 grid gap-3">
                       {f.pillars.map((p) => (
@@ -150,7 +151,7 @@ function About() {
 
       <section className="container-x mx-auto max-w-7xl pb-28">
         <Reveal>
-          <img src={villa} alt="Hillside villa" className="w-full aspect-[16/8] object-cover" loading="lazy" />
+          <img src={aboutBlueprints.url} alt="Architectural blueprints and construction drawings by AM Concepts" className="w-full aspect-[16/8] object-cover" loading="lazy" />
         </Reveal>
       </section>
     </div>
