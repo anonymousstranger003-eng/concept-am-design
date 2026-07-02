@@ -87,10 +87,12 @@ function Home() {
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
+              { src: heroCover3.url, alt: "Elegant staircase and modern chandelier — signature AM Concepts interior" },
+              { src: heroCover4.url, alt: "Modern coastal living room with floor-to-ceiling glazing" },
               { src: heroCover1.url, alt: "Modern Kerala villa exterior at golden hour" },
               { src: heroCover2.url, alt: "Luxury double-height contemporary living room interior" },
             ]}
-            interval={5000}
+            interval={4200}
           />
         </motion.div>
 
