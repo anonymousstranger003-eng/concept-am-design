@@ -145,8 +145,8 @@ export function ImageReveal({
       <motion.div
         initial={{ clipPath: clip.hidden }}
         whileInView={{ clipPath: clip.visible }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 1.2, ease: [0.77, 0, 0.18, 1] }}
+        viewport={{ once: true, amount: 0.05, margin: "0px 0px -10% 0px" }}
+        transition={{ duration: 1.1, ease: [0.77, 0, 0.18, 1] }}
         className="w-full h-full"
       >
         <motion.img
@@ -154,9 +154,9 @@ export function ImageReveal({
           alt={alt}
           loading="lazy"
           decoding="async"
-          initial={{ scale: 1.15 }}
+          initial={{ scale: 1.12 }}
           whileInView={{ scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.05, margin: "0px 0px -10% 0px" }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
           className={`w-full h-full object-cover will-change-transform ${imgClassName ?? ""}`}
         />
