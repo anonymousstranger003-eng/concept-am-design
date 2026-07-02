@@ -84,13 +84,13 @@ function About() {
                 <img src={f.src} alt={f.name} loading="lazy" className="w-full aspect-[4/5] object-cover" />
                 <div className="mt-6">
                   <div className="text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
-                  <h3 className="font-display text-3xl md:text-4xl mt-2">{f.name}</h3>
+                  <h3 className={`font-display text-3xl md:text-4xl mt-2 ${idx === 0 ? "italic tracking-tight" : ""}`}>{f.name}</h3>
                   {f.quote && (
                     <blockquote className="mt-4 border-l-2 border-brand pl-4 italic text-foreground/85 leading-relaxed">
                       "{f.quote}"
                     </blockquote>
                   )}
-                  <p className="mt-4 text-muted-foreground leading-relaxed">{f.bio}</p>
+                  <p className={`mt-4 text-muted-foreground leading-relaxed ${idx === 0 ? "first-line:italic first-line:text-foreground/90" : ""}`}>{f.bio}</p>
                   {f.pillars.length > 0 && (
                     <dl className="mt-6 grid gap-3">
                       {f.pillars.map((p) => (
