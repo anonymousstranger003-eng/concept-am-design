@@ -35,7 +35,7 @@ function About() {
 
       <section className="container-x mx-auto max-w-7xl pb-28 grid md:grid-cols-12 gap-10">
         <Reveal className="md:col-span-7">
-          <img src={blueprints} alt="Working drawings" className="w-full aspect-[4/3] object-cover" loading="lazy" />
+          <img src={aboutLounge.url} alt="AM Concepts outdoor lounge with stone walls and warm timber" className="w-full aspect-[4/3] object-cover" loading="lazy" />
         </Reveal>
         <div className="md:col-span-5 md:pt-10 space-y-8">
           <Reveal>
