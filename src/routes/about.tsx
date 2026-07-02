@@ -6,7 +6,7 @@ import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import aboutBlueprints from "@/assets/about-blueprints.jpg.asset.json";
 import aboutLounge from "@/assets/about-lounge.jpg.asset.json";
-import villa from "@/assets/exterior-villa.jpeg";
+
 
 export const Route = createFileRoute("/about")({ component: About });
 
