@@ -151,7 +151,7 @@ function About() {
 
       <section className="container-x mx-auto max-w-7xl pb-28">
         <Reveal>
-          <img src={villa} alt="Hillside villa" className="w-full aspect-[16/8] object-cover" loading="lazy" />
+          <img src={aboutBlueprints.url} alt="Architectural blueprints and construction drawings by AM Concepts" className="w-full aspect-[16/8] object-cover" loading="lazy" />
         </Reveal>
       </section>
     </div>
