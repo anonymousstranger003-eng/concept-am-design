@@ -46,7 +46,7 @@ export function Navbar() {
               AM Concepts
             </div>
             <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mt-0.5">
-              Architecture and Interiors
+              Architects &amp; Interiors
             </div>
           </div>
         </Link>
