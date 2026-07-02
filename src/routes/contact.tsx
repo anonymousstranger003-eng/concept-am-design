@@ -62,7 +62,7 @@ function Contact() {
             <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-4">Direct</div>
             <ul className="space-y-3">
               <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-brand" /> +91 95394 58218</li>
-              <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-brand" /> hello@amconcept.in</li>
+              <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-brand" /> amconcepts.architects20@gmail.com</li>
               <li className="flex items-center gap-3"><MessageCircle className="w-4 h-4 text-brand" /> <a href="https://wa.me/919539458218" className="hover:text-brand">WhatsApp us</a></li>
             </ul>
           </Reveal>

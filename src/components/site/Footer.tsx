@@ -59,7 +59,7 @@ export function Footer() {
               <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> Ali & Son's Complex, 1/136, Chemnad , Kerala 671317</div>
             </div>
             <div className="flex items-center gap-2 text-white/60"><Phone className="w-4 h-4" /> +91 95394 58218</div>
-            <div className="flex items-center gap-2 text-white/60"><Mail className="w-4 h-4" /> hello@amconcept.in</div>
+            <div className="flex items-center gap-2 text-white/60"><Mail className="w-4 h-4" /> amconcepts.architects20@gmail.com</div>
           </div>
         </div>
       </div>
