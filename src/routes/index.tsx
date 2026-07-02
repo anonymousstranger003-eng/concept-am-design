@@ -6,6 +6,8 @@ import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
 import heroCover1 from "@/assets/hero-cover-1.jpg.asset.json";
 import heroCover2 from "@/assets/hero-cover-2.jpg.asset.json";
+import heroCover3 from "@/assets/hero-cover-3.jpg.asset.json";
+import heroCover4 from "@/assets/hero-cover-4.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import plan1 from "@/assets/plan-exterior-1.jpg.asset.json";
