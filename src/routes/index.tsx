@@ -4,10 +4,9 @@ import { useRef } from "react";
 import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react";
 
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
-import heroCover1 from "@/assets/hero-cover-1.jpg.asset.json";
-import heroCover2 from "@/assets/hero-cover-2.jpg.asset.json";
-import heroCover3 from "@/assets/hero-cover-3.jpg.asset.json";
-import heroCover4 from "@/assets/hero-cover-4.jpg.asset.json";
+import coverGreenSofa from "@/assets/cover-green-sofa.jpg.asset.json";
+import coverGallery from "@/assets/cover-gallery.jpg.asset.json";
+import coverMinimal from "@/assets/cover-minimal.jpg.asset.json";
 import founderManoj from "@/assets/founder-manoj.jpg.asset.json";
 import founderAswini from "@/assets/founder-aswini.jpg.asset.json";
 import plan1 from "@/assets/plan-exterior-1.jpg.asset.json";
@@ -87,12 +86,11 @@ function Home() {
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
             images={[
-              { src: heroCover3.url, alt: "Elegant staircase and modern chandelier — signature AM Concepts interior" },
-              { src: heroCover4.url, alt: "Modern coastal living room with floor-to-ceiling glazing" },
-              { src: heroCover1.url, alt: "Modern Kerala villa exterior at golden hour" },
-              { src: heroCover2.url, alt: "Luxury double-height contemporary living room interior" },
+              { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
+              { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
+              { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
             ]}
-            interval={4200}
+            interval={5000}
           />
         </motion.div>
 
