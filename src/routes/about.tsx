@@ -48,7 +48,7 @@ function About() {
           <Reveal delay={0.1}>
             <h3 className="font-display text-3xl">Our vision</h3>
             <p className="mt-3 text-muted-foreground leading-relaxed">
-              To be Kerala's most trusted architecture and engineering studio — known
+              To be Kerala's most trusted architecture and interior studio&nbsp; known
               for restraint, craft and a deeply personal client relationship.
             </p>
           </Reveal>

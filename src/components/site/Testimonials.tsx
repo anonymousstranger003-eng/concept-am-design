@@ -44,7 +44,7 @@ export function Testimonials() {
             <span className="text-sm font-medium text-ink ml-1">4.9 / 5</span>
           </div>
           <p className="text-sm text-muted-foreground mt-3">
-            Real reviews from homeowners and commercial clients we've served since 2014.
+            Real reviews from homeowners and commercial clients we've served since 2020.
           </p>
         </Reveal>
       </div>
