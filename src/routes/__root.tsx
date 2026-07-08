@@ -80,7 +80,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "AM Concepts & Architects — Architecture, Interiors & Engineering, Kerala" },
       { name: "description", content: "AM Concepts & Architects — a Kerala-based studio led by Manoj AM, delivering premium architecture, interior design and engineering across India." },
       { name: "author", content: "AM Concepts & Architects" },
-      { property: "og:title", content: "AM Concepts & Architects — Architecture, Interiors & Engineering, Kerala" },
+      { property: "og:title", content: "AM Concepts & Architects — Architecture & Interiors, Kerala" },
       { property: "og:description", content: "AM Concepts & Architects — a Kerala-based studio led by Manoj AM, delivering premium architecture, interior design and engineering across India." },
       { property: "og:type", content: "website" },
       { name: "twitter:title", content: "AM Concepts & Architects — Architecture, Interiors & Engineering, Kerala" },
