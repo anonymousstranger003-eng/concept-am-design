@@ -33,18 +33,19 @@ export function HeroSlider({
           loading={i === 0 ? "eager" : "lazy"}
           decoding="async"
           fetchPriority={i === 0 ? "high" : "auto"}
-          initial={{ opacity: 0, scale: 1.08 }}
-          animate={{ opacity: 0.85, scale: 1.02 }}
+          sizes="100vw"
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 0.9, scale: 1.01 }}
           exit={{ opacity: 0 }}
           transition={{
-            opacity: { duration: 0.45, ease: [0.22, 1, 0.36, 1] },
-            scale: { duration: 5.5, ease: "linear" },
+            opacity: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+            scale: { duration: 6, ease: "linear" },
           }}
           className="absolute inset-0 w-full h-full object-cover will-change-transform"
         />
       </AnimatePresence>
-      <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/45 to-black/90" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/10 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/85" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/15 to-transparent" />
       <div className="absolute bottom-6 right-6 md:bottom-10 md:right-10 z-20 flex gap-2">
         {images.map((_, idx) => (
           <button

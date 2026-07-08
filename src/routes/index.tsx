@@ -37,7 +37,10 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: heroWarm.url },
     ],
-    links: [{ rel: "canonical", href: "/" }],
+    links: [
+      { rel: "canonical", href: "/" },
+      { rel: "preload", as: "image", href: coverGreenSofa.url, fetchpriority: "high" },
+    ],
     scripts: [
       {
         type: "application/ld+json",
