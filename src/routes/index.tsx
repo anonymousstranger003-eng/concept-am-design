@@ -414,8 +414,8 @@ function Home() {
         </Reveal>
         <Stagger className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10 md:mt-14">
           {[
-            { city: "Calicut", role: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020", map: "https://www.google.com/maps?q=Calicut,Kerala&output=embed" },
-            { city: "Kasaragod", role: "Ali & Son's Complex, 1/136, Chemnad , Kerala 671317", map: "https://www.google.com/maps?q=Kasaragod,Kerala&output=embed" },
+            { city: "Calicut", role: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020", map: "https://www.google.com/maps?q=11.284812,75.7939884&hl=en&z=17&output=embed" },
+            { city: "Kasaragod", role: "Ali & Son's Complex, 1/136, Chemnad, Kerala 671317", map: "https://www.google.com/maps?q=12.493856,75.0020172&hl=en&z=17&output=embed" },
           ].map((o) => (
             <motion.div key={o.city} variants={item} className="group bg-background border border-black/5 overflow-hidden">
               <div className="aspect-[16/10] overflow-hidden bg-secondary">
