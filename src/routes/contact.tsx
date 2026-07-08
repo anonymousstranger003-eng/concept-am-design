@@ -29,7 +29,26 @@ function Contact() {
         <div className="md:col-span-7">
           <Reveal>
             <form
-              onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.currentTarget);
+                const name = String(fd.get("name") || "").trim();
+                const email = String(fd.get("email") || "").trim();
+                const phone = String(fd.get("phone") || "").trim();
+                const location = String(fd.get("location") || "").trim();
+                const projectType = String(fd.get("projectType") || "").trim();
+                const message = String(fd.get("message") || "").trim();
+                const text =
+                  `*New Enquiry — AM Concepts*%0A` +
+                  `Name: ${name}%0A` +
+                  `Email: ${email}%0A` +
+                  `Phone: ${phone}%0A` +
+                  `Location: ${location}%0A` +
+                  `Project Type: ${projectType}%0A` +
+                  `Message: ${message}`;
+                window.open(`https://wa.me/919539458218?text=${text}`, "_blank", "noopener");
+                setSent(true);
+              }}
               className="bg-background border border-black/10 p-8 md:p-12 space-y-6"
             >
               <div className="grid sm:grid-cols-2 gap-6">
@@ -40,7 +59,7 @@ function Contact() {
               </div>
               <div>
                 <label className="block text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-2">Project Type</label>
-                <select className="w-full bg-transparent border-b border-black/20 py-3 focus:outline-none focus:border-brand transition-colors">
+                <select name="projectType" className="w-full bg-transparent border-b border-black/20 py-3 focus:outline-none focus:border-brand transition-colors">
                   {["Residential Architecture", "Commercial Design", "Interior Design", "Renovation", "Landscape", "Consultation"].map((p) => (
                     <option key={p}>{p}</option>
                   ))}
@@ -48,11 +67,12 @@ function Contact() {
               </div>
               <div>
                 <label className="block text-[10px] uppercase tracking-[0.25em] text-muted-foreground mb-2">Tell us about the project</label>
-                <textarea rows={5} className="w-full bg-transparent border-b border-black/20 py-3 focus:outline-none focus:border-brand transition-colors resize-none" placeholder="Site, brief, timelines, anything we should know..." />
+                <textarea name="message" rows={5} className="w-full bg-transparent border-b border-black/20 py-3 focus:outline-none focus:border-brand transition-colors resize-none" placeholder="Site, brief, timelines, anything we should know..." />
               </div>
               <button type="submit" className="inline-flex items-center gap-2 px-7 py-4 bg-ink text-white text-xs uppercase tracking-[0.2em] rounded-full hover:bg-brand transition-colors">
-                {sent ? "Thanks — we'll be in touch" : "Send Inquiry"} <ArrowUpRight className="w-4 h-4" />
+                {sent ? "Opened WhatsApp — send to complete" : "Send Enquiry via WhatsApp"} <ArrowUpRight className="w-4 h-4" />
               </button>
+              <p className="text-[11px] text-muted-foreground">Your enquiry opens in WhatsApp and is delivered directly to our team at +91 95394 58218.</p>
             </form>
           </Reveal>
         </div>
@@ -85,8 +105,8 @@ function Contact() {
         </Reveal>
         <Stagger className="grid md:grid-cols-2 gap-6 mt-10">
           {[
-            { city: "Calicut", role: "Corporate Head Office", addr: "Calicut, Kerala, India", map: "https://www.google.com/maps?q=Calicut,Kerala&output=embed" },
-            { city: "Kasaragod", role: "Branch Office", addr: "Kasaragod, Kerala, India", map: "https://www.google.com/maps?q=Kasaragod,Kerala&output=embed" },
+            { city: "Calicut", role: "Corporate Head Office", addr: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020", map: "https://www.google.com/maps?q=11.284812,75.7939884&hl=en&z=17&output=embed" },
+            { city: "Kasaragod", role: "Branch Office", addr: "Ali & Son's Complex, 1/136, Chemnad, Kerala 671317", map: "https://www.google.com/maps?q=12.493856,75.0020172&hl=en&z=17&output=embed" },
           ].map((o) => (
             <motion.div key={o.city} variants={item} className="bg-background border border-black/10 overflow-hidden">
               <div className="aspect-[16/10] bg-secondary">
