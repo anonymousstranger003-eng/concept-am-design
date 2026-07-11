@@ -2,26 +2,30 @@ import { Quote, Star } from "lucide-react";
 import { Reveal, Stagger, item, WordsReveal } from "@/components/site/Reveal";
 import { motion } from "framer-motion";
 
-const reviews = [
+const reviews: { name: string; rating: number; when: string; text: string; photo?: string }[] = [
   {
     name: "Anoop Nalupurappattil",
     rating: 5,
     when: "2 months ago",
     text: "It is a very beautiful house — we liked it a lot. AM Concepts Architects and Interiors built exactly what we wanted. All the guests who came to the house warming gave great comments. We got the same house we dreamed of. Thank you AM Concepts team.",
+    // photo: "https://your-cdn/anoop.jpg",
   },
   {
     name: "Sudheesh Krishnan, Kanhangad",
     rating: 4,
     when: "8 months ago",
     text: "I am really happy with the interior work done by AM Concepts. The team understood my requirements and delivered exactly what I wanted. The quality of work is excellent and the designs are modern yet timeless. Highly recommended.",
+    // photo: "https://your-cdn/sudheesh.jpg",
   },
   {
     name: "Archana Sandesh",
     rating: 5,
     when: "2 years ago",
     text: "AM Concepts are undoubtedly one of the finest interior design firms I have come across. Their remarkable talent lies in listening to our ideas and skilfully transforming them into stunning designs. Truly impressed and thoroughly satisfied.",
+    // photo: "https://your-cdn/archana.jpg",
   },
 ];
+
 
 export function Testimonials() {
   return (
@@ -65,12 +69,31 @@ export function Testimonials() {
             <blockquote className="mt-5 text-[15px] leading-relaxed text-foreground/90 flex-1">
               "{r.text}"
             </blockquote>
-            <figcaption className="mt-6 pt-6 border-t border-black/5">
-              <div className="font-display text-lg text-ink">{r.name}</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
-                Verified Google Review · {r.when}
+            <figcaption className="mt-6 pt-6 border-t border-black/5 flex items-center gap-3">
+              {r.photo ? (
+                <img
+                  src={r.photo}
+                  alt={r.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="w-11 h-11 rounded-full object-cover border border-black/10 shrink-0"
+                />
+              ) : (
+                <div
+                  aria-hidden
+                  className="w-11 h-11 rounded-full bg-secondary border border-black/10 shrink-0 grid place-items-center font-display text-sm text-ink/70"
+                >
+                  {r.name.trim().charAt(0)}
+                </div>
+              )}
+              <div className="min-w-0">
+                <div className="font-display text-lg text-ink truncate">{r.name}</div>
+                <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
+                  Verified Google Review · {r.when}
+                </div>
               </div>
             </figcaption>
+
             <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
           </motion.figure>
         ))}
