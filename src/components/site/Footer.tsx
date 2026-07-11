@@ -9,16 +9,18 @@ export function Footer() {
         <div className="md:col-span-5">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 bg-white">
-              <img src={logo} alt="AM Concepts & Architects" className="w-full h-full object-cover" />
+              <img src={logo} alt="AM Concepts" className="w-full h-full object-cover" />
             </div>
             <div className="leading-tight">
-              <div className="font-display text-white text-lg">AM Concepts & Architects</div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">Architecture · Interiors · Engineering</div>
+              <div className="font-display text-white text-lg">AM Concepts</div>
+              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">ARCHITECTS & INTERIORS&nbsp;</div>
+
             </div>
           </div>
           <p className="mt-6 max-w-md text-sm leading-relaxed text-white/60">
             A professional architecture and interior design firm, led by founder
-            Manoj AM, delivering high-quality design with honesty and integrity.
+            Manoj S, delivering high-quality design with honesty and integrity.
+
             Crafting spaces with character across Kerala and beyond.
           </p>
           <div className="mt-6 flex items-center gap-3">
@@ -65,7 +67,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
-          <div>© {new Date().getFullYear()} AM Concepts & Architects. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} AM Concepts. All rights reserved.</div>
           <div className="font-display tracking-wide">                     Designed  by Mediators Labs                                                                                                                 </div>
         </div>
       </div>
