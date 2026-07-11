@@ -13,7 +13,7 @@ import foyer from "@/assets/interior-foyer.jpg.asset.json";
 
 export const services = [
   { title: "Architectural Planning", desc: "Concept development, spatial planning , and detailed architectural floor plans tailored to each project", img: plan1.url },
-  { title: "Residential Architecture", desc: "Custom homes, villas and living spaces desgigned around comfort, lifestyle, and timeless design.", img: plan2.url },
+  { title: "Residential Architecture", desc: "Custom homes, villas and living spaces designed round comfort, lifestyle, and timeless design.", img: plan2.url },
   { title: "Commercial Architecture", desc: "Office spaces, retail environments, and hospitality projects crafted for functionality and exeperience.", img: plan6.url },
   { title: "Building Permit & Approvals", desc: "Building permit drawings, municipality submissions, approvals procedures, and statutory documentation.", img: plan3.url },
   { title: "Completion Certificate Services", desc: "Assistance with completion drawings, documentation, and certification process", img: plan5.url },
