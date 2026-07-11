@@ -131,10 +131,10 @@ export function WordsReveal({
   );
 }
 
-/** Clip-path reveal for images — cinematic curtain entrance. */
+/** Clip-path reveal for images — cinematic curtain entrance with reliable fallback. */
 export function ImageReveal({
-  src, alt, className, imgClassName, from = "bottom",
-}: { src: string; alt: string; className?: string; imgClassName?: string; from?: "bottom" | "left" | "right" }) {
+  src, alt, className, imgClassName, from = "bottom", eager = false,
+}: { src: string; alt: string; className?: string; imgClassName?: string; from?: "bottom" | "left" | "right"; eager?: boolean }) {
   const clip = {
     bottom: { hidden: "inset(0 0 100% 0)", visible: "inset(0 0 0% 0)" },
     left:   { hidden: "inset(0 100% 0 0)", visible: "inset(0 0% 0 0)" },
@@ -142,28 +142,30 @@ export function ImageReveal({
   }[from];
   return (
     <div className={`relative overflow-hidden ${className ?? ""}`}>
+      {/* Base image — always rendered so it never stays hidden if the observer misses */}
+      <img
+        src={src}
+        alt={alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+        className={`absolute inset-0 w-full h-full object-cover ${imgClassName ?? ""}`}
+      />
+      {/* Overlay curtain that wipes away on scroll */}
       <motion.div
-        initial={{ clipPath: clip.hidden }}
-        whileInView={{ clipPath: clip.visible }}
-        viewport={{ once: true, amount: 0.05, margin: "0px 0px -10% 0px" }}
-        transition={{ duration: 1.1, ease: [0.77, 0, 0.18, 1] }}
-        className="w-full h-full"
-      >
-        <motion.img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          initial={{ scale: 1.12 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, amount: 0.05, margin: "0px 0px -10% 0px" }}
-          transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          className={`w-full h-full object-cover will-change-transform ${imgClassName ?? ""}`}
-        />
-      </motion.div>
+        aria-hidden
+        initial={{ clipPath: clip.visible === "inset(0 0 0% 0)" ? "inset(0 0 0 0)" : clip.visible }}
+        whileInView={{ clipPath: "inset(100% 0 0 0)" }}
+        viewport={{ once: true, amount: 0.01, margin: "0px 0px 5% 0px" }}
+        transition={{ duration: 1, ease: [0.77, 0, 0.18, 1], delay: 0.05 }}
+        className="absolute inset-0 bg-secondary"
+        style={{
+          clipPath: from === "left" ? "inset(0 0 0 0)" : from === "right" ? "inset(0 0 0 0)" : "inset(0 0 0 0)",
+        }}
+      />
     </div>
   );
 }
+
 
 /** Subtle scroll-driven parallax wrapper. */
 export function Parallax({
