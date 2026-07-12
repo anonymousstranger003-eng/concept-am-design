@@ -24,11 +24,11 @@ export function Footer() {
             Crafting spaces with character across Kerala and beyond.
           </p>
           <div className="mt-6 flex items-center gap-3">
-            {[
-              { Icon: Instagram, href: "https://instagram.com" },
-              { Icon: Facebook, href: "https://facebook.com" },
+              {[
+              { Icon: Instagram, href: "https://www.instagram.com/am_concepts_architects?utm_source=qr" },
+              { Icon: Facebook, href: "https://www.facebook.com/share/1EjoTL5Ueh/?mibextid=wwXIfr" },
               { Icon: Linkedin, href: "https://linkedin.com" },
-              { Icon: Youtube, href: "https://youtube.com" },
+              { Icon: Youtube, href: "https://youtube.com/@amconceptsarchitects?si=x6iK5KQd9sNDdj63" },
               { Icon: MessageCircle, href: "https://wa.me/919539458218" },
             ].map(({ Icon, href }) => (
               <a key={href} href={href} aria-label={href} className="w-9 h-9 rounded-full border border-white/15 grid place-items-center hover:bg-brand hover:border-brand transition-colors">
@@ -60,8 +60,8 @@ export function Footer() {
               <div className="text-white font-medium">Branch Office</div>
               <div className="flex items-start gap-2 mt-1 text-white/60"><MapPin className="w-4 h-4 mt-0.5 shrink-0" /> Ali & Son's Complex, 1/136, Chemnad , Kerala 671317</div>
             </div>
-            <div className="flex items-center gap-2 text-white/60"><Phone className="w-4 h-4" /> +91 95394 58218</div>
-            <div className="flex items-center gap-2 text-white/60"><Mail className="w-4 h-4" /> amconcepts.architects20@gmail.com</div>
+            <div className="flex items-center gap-2 text-white/60"><Phone className="w-4 h-4" /><span>+91 95394 58218</span></div>
+            <div className="flex items-center gap-2 text-white/60"><Mail className="w-4 h-4" /><span>amconcepts.architects20@gmail.com</span></div>
           </div>
         </div>
       </div>

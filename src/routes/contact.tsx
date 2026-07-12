@@ -90,8 +90,13 @@ function Contact() {
           <Reveal delay={0.1}>
             <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground mb-4">Follow</div>
             <div className="flex gap-3">
-              {[Instagram, Facebook, Linkedin, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full border border-black/15 grid place-items-center hover:bg-ink hover:text-white transition-colors"><Icon className="w-4 h-4" /></a>
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/am_concepts_architects?utm_source=qr" },
+                { Icon: Facebook, href: "https://www.facebook.com/share/1EjoTL5Ueh/?mibextid=wwXIfr" },
+                { Icon: Linkedin, href: "https://linkedin.com" },
+                { Icon: Youtube, href: "https://youtube.com/@amconceptsarchitects?si=x6iK5KQd9sNDdj63" },
+              ].map(({ Icon, href }, i) => (
+                <a key={i} href={href} aria-label={href} className="w-10 h-10 rounded-full border border-black/15 grid place-items-center hover:bg-ink hover:text-white transition-colors"><Icon className="w-4 h-4" /></a>
               ))}
             </div>
           </Reveal>
