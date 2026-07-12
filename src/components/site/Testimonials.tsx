@@ -69,25 +69,25 @@ export function Testimonials() {
             <blockquote className="mt-5 text-[15px] leading-relaxed text-foreground/90 flex-1">
               "{r.text}"
             </blockquote>
-            <figcaption className="mt-6 pt-6 border-t border-black/5 flex items-center gap-4">
+            <figcaption className="mt-6 pt-6 border-t border-black/5 flex items-center gap-5">
               {r.photo ? (
                 <img
                   src={r.photo}
                   alt={r.name}
                   loading="lazy"
                   decoding="async"
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border border-black/10 shrink-0"
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border border-black/10 shrink-0"
                 />
               ) : (
                 <div
                   aria-hidden
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-secondary border border-black/10 shrink-0 grid place-items-center font-display text-lg md:text-xl text-ink/70"
+                  className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-secondary border border-black/10 shrink-0 grid place-items-center font-display text-xl md:text-2xl text-ink/70"
                 >
                   {r.name.trim().charAt(0)}
                 </div>
               )}
               <div className="min-w-0">
-                <div className="font-display text-lg md:text-xl text-ink truncate">{r.name}</div>
+                <div className="font-display text-xl md:text-2xl text-ink truncate">{r.name}</div>
                 <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">
                   Verified Google Review · {r.when}
                 </div>
