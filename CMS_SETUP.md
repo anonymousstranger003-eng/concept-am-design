@@ -17,7 +17,7 @@ You already provided:
 ### Run the database migration
 
 1. Open your Supabase dashboard → **SQL Editor** → **New query**.
-2. Open `supabase/migrations/0001_cms_foundation.sql` in this project.
+2. Open `db/schema.sql` in this project.
 3. Copy the entire file, paste into the SQL editor, click **Run**.
 
 That creates: `admins`, `site_settings`, `content_blocks`, `form_submissions`,
@@ -136,7 +136,7 @@ the `media` bucket.
 ## 6. Files created / modified in Phase 1
 
 **Created**
-- `supabase/migrations/0001_cms_foundation.sql`
+- `db/schema.sql`
 - `src/lib/config.functions.ts`
 - `src/lib/admin-bootstrap.functions.ts`
 - `src/lib/supabase.ts`
