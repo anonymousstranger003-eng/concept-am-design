@@ -71,8 +71,11 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { PageLoader } from "@/components/site/PageLoader";
+import { SupabaseProvider } from "@/components/admin/SupabaseProvider";
+import { getPublicConfig } from "@/lib/config.functions";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  loader: () => getPublicConfig(),
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -118,16 +121,27 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const cfg = Route.useLoaderData();
+  const pathname = useRouter().state.location.pathname;
+  const isAdmin = pathname.startsWith("/admin");
 
   return (
     <QueryClientProvider client={queryClient}>
-      <PageLoader />
-      <Navbar />
-      <main>
-        <Outlet />
-      </main>
-      <Footer />
-      <WhatsAppButton />
+      <SupabaseProvider url={cfg.supabaseUrl} anonKey={cfg.supabaseAnonKey}>
+        {isAdmin ? (
+          <Outlet />
+        ) : (
+          <>
+            <PageLoader />
+            <Navbar />
+            <main>
+              <Outlet />
+            </main>
+            <Footer />
+            <WhatsAppButton />
+          </>
+        )}
+      </SupabaseProvider>
     </QueryClientProvider>
   );
 }
