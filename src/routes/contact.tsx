@@ -3,10 +3,14 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Reveal, Stagger, item } from "@/components/site/Reveal";
 import { Mail, Phone, MapPin, MessageCircle, Instagram, Facebook, Linkedin, Youtube, ArrowUpRight } from "lucide-react";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { useSupabase } from "@/components/admin/SupabaseProvider";
 
 export const Route = createFileRoute("/contact")({ component: Contact });
 
 function Contact() {
+  const s = useSiteSettings();
+  const { client } = useSupabase();
   const [sent, setSent] = useState(false);
   return (
     <div>
