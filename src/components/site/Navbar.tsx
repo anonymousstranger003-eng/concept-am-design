@@ -77,10 +77,10 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center gap-3">
           <div className="flex items-center gap-2 text-foreground/60">
-            <a href="https://www.instagram.com/am_concepts_architects?utm_source=qr" aria-label="Instagram" className="hover:text-brand transition-colors"><Instagram className="w-4 h-4" /></a>
-            <a href="https://www.facebook.com/share/1EjoTL5Ueh/?mibextid=wwXIfr" aria-label="Facebook" className="hover:text-brand transition-colors"><Facebook className="w-4 h-4" /></a>
-            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:text-brand transition-colors"><Linkedin className="w-4 h-4" /></a>
-            <a href="https://youtube.com/@amconceptsarchitects?si=x6iK5KQd9sNDdj63" aria-label="YouTube" className="hover:text-brand transition-colors"><Youtube className="w-4 h-4" /></a>
+            {s.instagram && <a href={s.instagram} aria-label="Instagram" className="hover:text-brand transition-colors"><Instagram className="w-4 h-4" /></a>}
+            {s.facebook && <a href={s.facebook} aria-label="Facebook" className="hover:text-brand transition-colors"><Facebook className="w-4 h-4" /></a>}
+            {s.linkedin && <a href={s.linkedin} aria-label="LinkedIn" className="hover:text-brand transition-colors"><Linkedin className="w-4 h-4" /></a>}
+            {s.youtube && <a href={s.youtube} aria-label="YouTube" className="hover:text-brand transition-colors"><Youtube className="w-4 h-4" /></a>}
           </div>
           <Link
             to="/contact"
