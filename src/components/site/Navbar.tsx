@@ -15,6 +15,7 @@ const links = [
 ];
 
 export function Navbar() {
+  const s = useSiteSettings();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
