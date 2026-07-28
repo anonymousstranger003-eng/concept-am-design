@@ -33,24 +33,31 @@ function Contact() {
         <div className="md:col-span-7">
           <Reveal>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 const fd = new FormData(e.currentTarget);
-                const name = String(fd.get("name") || "").trim();
-                const email = String(fd.get("email") || "").trim();
-                const phone = String(fd.get("phone") || "").trim();
-                const location = String(fd.get("location") || "").trim();
-                const projectType = String(fd.get("projectType") || "").trim();
-                const message = String(fd.get("message") || "").trim();
+                const payload = {
+                  name: String(fd.get("name") || "").trim(),
+                  email: String(fd.get("email") || "").trim(),
+                  phone: String(fd.get("phone") || "").trim(),
+                  location: String(fd.get("location") || "").trim(),
+                  projectType: String(fd.get("projectType") || "").trim(),
+                  message: String(fd.get("message") || "").trim(),
+                };
+                // Fire-and-forget persist to CMS (admin sees it in /admin/submissions).
+                if (client) {
+                  client.from("form_submissions").insert({ form_type: "contact", payload }).then(() => {});
+                }
                 const text =
-                  `*New Enquiry — AM Concepts*%0A` +
-                  `Name: ${name}%0A` +
-                  `Email: ${email}%0A` +
-                  `Phone: ${phone}%0A` +
-                  `Location: ${location}%0A` +
-                  `Project Type: ${projectType}%0A` +
-                  `Message: ${message}`;
-                window.open(`https://wa.me/919539458218?text=${text}`, "_blank", "noopener");
+                  `*New Enquiry — ${s.siteName ?? "AM Concepts"}*%0A` +
+                  `Name: ${payload.name}%0A` +
+                  `Email: ${payload.email}%0A` +
+                  `Phone: ${payload.phone}%0A` +
+                  `Location: ${payload.location}%0A` +
+                  `Project Type: ${payload.projectType}%0A` +
+                  `Message: ${payload.message}`;
+                const wa = s.whatsapp || "919539458218";
+                window.open(`https://wa.me/${wa}?text=${text}`, "_blank", "noopener");
                 setSent(true);
               }}
               className="bg-background border border-black/10 p-8 md:p-12 space-y-6"
