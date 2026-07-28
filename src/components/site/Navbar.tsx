@@ -3,6 +3,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 const links = [
   { to: "/", label: "Home" },
@@ -14,6 +15,7 @@ const links = [
 ];
 
 export function Navbar() {
+  const s = useSiteSettings();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
@@ -39,14 +41,14 @@ export function Navbar() {
       <nav className="container-x mx-auto max-w-7xl flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-3 group">
           <div className="relative w-11 h-11 rounded-full overflow-hidden ring-1 ring-black/10 bg-white">
-            <img src={logo} alt="AM Concept logo" className="w-full h-full object-cover" />
+            <img src={logo} alt={`${s.siteName} logo`} className="w-full h-full object-cover" />
           </div>
           <div className="leading-tight">
             <div className="font-display text-[17px] font-semibold tracking-tight text-ink">
-              AM Concepts
+              {s.siteName}
             </div>
             <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mt-0.5">
-              Architects &amp; Interiors
+              {s.tagline}
             </div>
           </div>
         </Link>
@@ -75,10 +77,10 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center gap-3">
           <div className="flex items-center gap-2 text-foreground/60">
-            <a href="https://www.instagram.com/am_concepts_architects?utm_source=qr" aria-label="Instagram" className="hover:text-brand transition-colors"><Instagram className="w-4 h-4" /></a>
-            <a href="https://www.facebook.com/share/1EjoTL5Ueh/?mibextid=wwXIfr" aria-label="Facebook" className="hover:text-brand transition-colors"><Facebook className="w-4 h-4" /></a>
-            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:text-brand transition-colors"><Linkedin className="w-4 h-4" /></a>
-            <a href="https://youtube.com/@amconceptsarchitects?si=x6iK5KQd9sNDdj63" aria-label="YouTube" className="hover:text-brand transition-colors"><Youtube className="w-4 h-4" /></a>
+            {s.instagram && <a href={s.instagram} aria-label="Instagram" className="hover:text-brand transition-colors"><Instagram className="w-4 h-4" /></a>}
+            {s.facebook && <a href={s.facebook} aria-label="Facebook" className="hover:text-brand transition-colors"><Facebook className="w-4 h-4" /></a>}
+            {s.linkedin && <a href={s.linkedin} aria-label="LinkedIn" className="hover:text-brand transition-colors"><Linkedin className="w-4 h-4" /></a>}
+            {s.youtube && <a href={s.youtube} aria-label="YouTube" className="hover:text-brand transition-colors"><Youtube className="w-4 h-4" /></a>}
           </div>
           <Link
             to="/contact"
