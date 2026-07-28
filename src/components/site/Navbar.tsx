@@ -41,14 +41,14 @@ export function Navbar() {
       <nav className="container-x mx-auto max-w-7xl flex items-center justify-between h-20">
         <Link to="/" className="flex items-center gap-3 group">
           <div className="relative w-11 h-11 rounded-full overflow-hidden ring-1 ring-black/10 bg-white">
-            <img src={logo} alt="AM Concept logo" className="w-full h-full object-cover" />
+            <img src={logo} alt={`${s.siteName} logo`} className="w-full h-full object-cover" />
           </div>
           <div className="leading-tight">
             <div className="font-display text-[17px] font-semibold tracking-tight text-ink">
-              AM Concepts
+              {s.siteName}
             </div>
             <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mt-0.5">
-              Architects &amp; Interiors
+              {s.tagline}
             </div>
           </div>
         </Link>
