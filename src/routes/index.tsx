@@ -82,12 +82,10 @@ function Home() {
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const services = useContent<typeof staticServices>("services", staticServices as unknown as typeof staticServices) as typeof staticServices extends { items: infer _ } ? typeof staticServices : typeof staticServices;
   const servicesData = useContent<{ items?: typeof staticServices } | typeof staticServices>("services", { items: staticServices });
   const servicesList = Array.isArray(servicesData) ? servicesData : (servicesData?.items ?? staticServices);
   const statsData = useContent<{ items?: typeof staticStats } | typeof staticStats>("stats", { items: staticStats });
   const statsList = Array.isArray(statsData) ? statsData : (statsData?.items ?? staticStats);
-  void services;
 
   return (
     <div className="overflow-clip">
