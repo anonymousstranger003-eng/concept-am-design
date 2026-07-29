@@ -31,6 +31,7 @@ const reviews: { name: string; rating: number; when: string; text: string; photo
 export function Testimonials() {
   const data = useContent<{ items?: typeof reviews }>("testimonials", { items: reviews });
   const list = data?.items && data.items.length ? data.items : reviews;
+  return (
     <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-12 md:mb-16">
         <Reveal>
