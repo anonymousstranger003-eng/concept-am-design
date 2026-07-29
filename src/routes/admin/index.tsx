@@ -19,10 +19,10 @@ function DashboardPage() {
 function Dashboard() {
   const { session } = useSupabase();
   const cards = [
+    { to: "/admin/content", label: "Page Content", desc: "Hero, About, Services, FAQ, Testimonials & more", icon: FileText },
     { to: "/admin/settings", label: "Site Settings", desc: "Contact info, socials, branding", icon: Settings },
     { to: "/admin/media", label: "Media Library", desc: "Upload & manage images", icon: ImageIcon },
     { to: "/admin/submissions", label: "Form Submissions", desc: "Contact form messages", icon: MessageSquare },
-    { to: "/admin/content", label: "Page Content", desc: "Hero, About, Services — coming next", icon: FileText, disabled: true },
   ];
   return (
     <div>
@@ -37,17 +37,13 @@ function Dashboard() {
       <div className="grid sm:grid-cols-2 gap-4 mt-8">
         {cards.map((c) => {
           const Icon = c.icon;
-          const inner = (
-            <div className={`p-6 rounded-xl border border-zinc-200 bg-white hover:border-zinc-900 transition-colors ${c.disabled ? "opacity-50" : ""}`}>
-              <Icon className="w-5 h-5 text-zinc-900" />
-              <div className="mt-4 font-medium">{c.label}</div>
-              <div className="text-sm text-zinc-500 mt-1">{c.desc}</div>
-            </div>
-          );
-          if (c.disabled) return <div key={c.to}>{inner}</div>;
           return (
             <Link key={c.to} to={c.to}>
-              {inner}
+              <div className="p-6 rounded-xl border border-zinc-200 bg-white hover:border-zinc-900 transition-colors">
+                <Icon className="w-5 h-5 text-zinc-900" />
+                <div className="mt-4 font-medium">{c.label}</div>
+                <div className="text-sm text-zinc-500 mt-1">{c.desc}</div>
+              </div>
             </Link>
           );
         })}
