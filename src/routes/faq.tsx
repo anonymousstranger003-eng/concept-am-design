@@ -3,12 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
-import { faqs } from "@/lib/site-data";
+import { faqs as staticFaqs } from "@/lib/site-data";
+import { useContent } from "@/hooks/useContent";
 
 export const Route = createFileRoute("/faq")({ component: FAQ });
 
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const data = useContent<{ items?: typeof staticFaqs }>("faqs", { items: staticFaqs });
+  const faqs = data?.items ?? staticFaqs;
   return (
     <div>
       <section className="container-x mx-auto max-w-7xl pt-40 pb-16">

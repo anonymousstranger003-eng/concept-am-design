@@ -13,12 +13,12 @@ import {
 } from "lucide-react";
 import { useSupabase } from "@/components/admin/SupabaseProvider";
 
-const nav = [
+const nav: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean; disabled?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { to: "/admin/content", label: "Page Content", icon: FileText },
   { to: "/admin/settings", label: "Site Settings", icon: Settings },
   { to: "/admin/media", label: "Media Library", icon: ImageIcon },
   { to: "/admin/submissions", label: "Submissions", icon: MessageSquare },
-  { to: "/admin/content", label: "Content (soon)", icon: FileText, disabled: true },
 ];
 
 export function AdminShell({ children }: { children: ReactNode }) {

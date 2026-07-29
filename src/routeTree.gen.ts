@@ -17,12 +17,14 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminResetRouteImport } from './routes/admin/reset'
 import { Route as AdminSettingsRouteImport } from './routes/admin/settings'
 import { Route as AdminSetupRouteImport } from './routes/admin/setup'
 import { Route as AdminSubmissionsRouteImport } from './routes/admin/submissions'
+import { Route as AdminContentKeyRouteImport } from './routes/admin/content.$key'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +66,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -94,6 +101,11 @@ const AdminSubmissionsRoute = AdminSubmissionsRouteImport.update({
   path: '/submissions',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminContentKeyRoute = AdminContentKeyRouteImport.update({
+  id: '/$key',
+  path: '/$key',
+  getParentRoute: () => AdminContentRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
+  '/admin/content': typeof AdminContentRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/reset': typeof AdminResetRoute
@@ -110,6 +123,7 @@ export interface FileRoutesByFullPath {
   '/admin/setup': typeof AdminSetupRoute
   '/admin/submissions': typeof AdminSubmissionsRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/content/$key': typeof AdminContentKeyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,6 +132,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
+  '/admin/content': typeof AdminContentRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/reset': typeof AdminResetRoute
@@ -125,6 +140,7 @@ export interface FileRoutesByTo {
   '/admin/setup': typeof AdminSetupRoute
   '/admin/submissions': typeof AdminSubmissionsRoute
   '/admin': typeof AdminIndexRoute
+  '/admin/content/$key': typeof AdminContentKeyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -135,6 +151,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
+  '/admin/content': typeof AdminContentRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/reset': typeof AdminResetRoute
@@ -142,6 +159,7 @@ export interface FileRoutesById {
   '/admin/setup': typeof AdminSetupRoute
   '/admin/submissions': typeof AdminSubmissionsRoute
   '/admin/': typeof AdminIndexRoute
+  '/admin/content/$key': typeof AdminContentKeyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -153,6 +171,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portfolio'
     | '/services'
+    | '/admin/content'
     | '/admin/login'
     | '/admin/media'
     | '/admin/reset'
@@ -160,6 +179,7 @@ export interface FileRouteTypes {
     | '/admin/setup'
     | '/admin/submissions'
     | '/admin/'
+    | '/admin/content/$key'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -168,6 +188,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portfolio'
     | '/services'
+    | '/admin/content'
     | '/admin/login'
     | '/admin/media'
     | '/admin/reset'
@@ -175,6 +196,7 @@ export interface FileRouteTypes {
     | '/admin/setup'
     | '/admin/submissions'
     | '/admin'
+    | '/admin/content/$key'
   id:
     | '__root__'
     | '/'
@@ -184,6 +206,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portfolio'
     | '/services'
+    | '/admin/content'
     | '/admin/login'
     | '/admin/media'
     | '/admin/reset'
@@ -191,6 +214,7 @@ export interface FileRouteTypes {
     | '/admin/setup'
     | '/admin/submissions'
     | '/admin/'
+    | '/admin/content/$key'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -261,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -303,10 +334,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSubmissionsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/admin/content/$key': {
+      id: '/admin/content/$key'
+      path: '/$key'
+      fullPath: '/admin/content/$key'
+      preLoaderRoute: typeof AdminContentKeyRouteImport
+      parentRoute: typeof AdminContentRoute
+    }
   }
 }
 
+interface AdminContentRouteChildren {
+  AdminContentKeyRoute: typeof AdminContentKeyRoute
+}
+
+const AdminContentRouteChildren: AdminContentRouteChildren = {
+  AdminContentKeyRoute: AdminContentKeyRoute,
+}
+
+const AdminContentRouteWithChildren = AdminContentRoute._addFileChildren(
+  AdminContentRouteChildren,
+)
+
 interface AdminRouteRouteChildren {
+  AdminContentRoute: typeof AdminContentRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminResetRoute: typeof AdminResetRoute
@@ -317,6 +368,7 @@ interface AdminRouteRouteChildren {
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminContentRoute: AdminContentRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminResetRoute: AdminResetRoute,
