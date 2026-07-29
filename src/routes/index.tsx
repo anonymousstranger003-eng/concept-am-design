@@ -215,7 +215,7 @@ function Home() {
       {/* STATS */}
       <section className="border-y border-black/5 bg-secondary/60">
         <div className="container-x mx-auto max-w-7xl py-14 md:py-20 grid grid-cols-2 md:grid-cols-5 gap-y-10">
-          {stats.map((s, i) => (
+          {statsList.map((s, i) => (
             <Reveal key={s.label} delay={i * 0.08} className="text-center md:border-r last:border-r-0 border-black/10">
               <div className="font-display text-4xl md:text-6xl text-ink">
                 <Counter to={s.value} suffix={s.suffix} />
@@ -254,7 +254,7 @@ function Home() {
         </div>
 
         <Stagger className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {services.slice(0, 6).map((s, i) => (
+          {servicesList.slice(0, 6).map((s, i) => (
             <motion.article
               key={s.title}
               variants={i % 2 === 0 ? itemLeft : itemRight}
