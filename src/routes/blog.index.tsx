@@ -4,7 +4,7 @@ import { useSection } from "@/hooks/useContent";
 import type { BlogPost } from "@/lib/cms-defaults";
 import { ArrowUpRight } from "lucide-react";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   component: BlogIndex,
   head: () => ({
     meta: [
