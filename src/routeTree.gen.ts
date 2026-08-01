@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteRouteImport } from './routes/admin/route'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
@@ -49,6 +50,11 @@ const ContactRoute = ContactRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortfolioRoute = PortfolioRouteImport.update({
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/gallery': typeof GalleryRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/admin/content': typeof AdminContentRouteWithChildren
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/gallery': typeof GalleryRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/admin/content': typeof AdminContentRouteWithChildren
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
+  '/gallery': typeof GalleryRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
   '/admin/content': typeof AdminContentRouteWithChildren
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/faq'
+    | '/gallery'
     | '/portfolio'
     | '/services'
     | '/admin/content'
@@ -186,6 +196,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/faq'
+    | '/gallery'
     | '/portfolio'
     | '/services'
     | '/admin/content'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/faq'
+    | '/gallery'
     | '/portfolio'
     | '/services'
     | '/admin/content'
@@ -223,6 +235,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
+  GalleryRoute: typeof GalleryRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicesRoute: typeof ServicesRoute
 }
@@ -262,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portfolio': {
@@ -388,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
+  GalleryRoute: GalleryRoute,
   PortfolioRoute: PortfolioRoute,
   ServicesRoute: ServicesRoute,
 }
