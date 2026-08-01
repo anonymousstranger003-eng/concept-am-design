@@ -1,4 +1,5 @@
-import { ArrowDown, ArrowUp, Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { ArrowDown, ArrowUp, GripVertical, Plus, Trash2 } from "lucide-react";
 import type { Field } from "@/lib/cms-schemas";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { ImagePicker } from "@/components/admin/ImagePicker";
@@ -17,6 +18,13 @@ function defaultItem(fields: Field[]): AnyRecord {
   return o;
 }
 
+function move<T>(arr: T[], from: number, to: number): T[] {
+  const next = arr.slice();
+  const [moved] = next.splice(from, 1);
+  next.splice(to, 0, moved);
+  return next;
+}
+
 export function FieldRenderer({
   field,
   value,
@@ -28,6 +36,9 @@ export function FieldRenderer({
   onChange: (v: unknown) => void;
   depth?: number;
 }) {
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+  const [overIndex, setOverIndex] = useState<number | null>(null);
+
   const label = (
     <label className="block text-xs uppercase tracking-wider text-zinc-500 mb-1.5">
       {field.label}
@@ -59,6 +70,7 @@ export function FieldRenderer({
           onChange={(e) => onChange(Number(e.target.value))}
           className="w-full h-10 px-3 rounded-md border border-zinc-300 text-sm bg-white focus:outline-none focus:border-zinc-900"
         />
+        {field.hint && <p className="text-[11px] text-zinc-500 mt-1">{field.hint}</p>}
       </div>
     );
   }
@@ -73,6 +85,7 @@ export function FieldRenderer({
           onChange={(e) => onChange(e.target.value)}
           className="w-full px-3 py-2 rounded-md border border-zinc-300 text-sm bg-white focus:outline-none focus:border-zinc-900"
         />
+        {field.hint && <p className="text-[11px] text-zinc-500 mt-1">{field.hint}</p>}
       </div>
     );
   }
@@ -82,6 +95,7 @@ export function FieldRenderer({
       <div>
         {label}
         <RichTextEditor value={(value as string) ?? ""} onChange={onChange} />
+        {field.hint && <p className="text-[11px] text-zinc-500 mt-1">{field.hint}</p>}
       </div>
     );
   }
@@ -102,7 +116,10 @@ export function FieldRenderer({
     return (
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="text-xs uppercase tracking-wider text-zinc-500">{field.label}</label>
+          <div>
+            <label className="text-xs uppercase tracking-wider text-zinc-500">{field.label}</label>
+            <p className="text-[11px] text-zinc-400">Drag the handle to reorder.</p>
+          </div>
           <button
             type="button"
             onClick={() => update([...items, defaultItem(itemFields)])}
@@ -119,24 +136,56 @@ export function FieldRenderer({
           )}
           {items.map((it, idx) => {
             const rec = (it ?? {}) as AnyRecord;
+            const title =
+              (rec["title"] as string) ||
+              (rec["name"] as string) ||
+              (rec["label"] as string) ||
+              (rec["q"] as string) ||
+              (rec["path"] as string) ||
+              "";
             return (
               <div
                 key={idx}
-                className={`border border-zinc-200 rounded-lg p-4 bg-white ${depth > 0 ? "" : "shadow-sm"}`}
+                onDragOver={(e) => {
+                  if (dragIndex === null) return;
+                  e.preventDefault();
+                  setOverIndex(idx);
+                }}
+                onDrop={(e) => {
+                  if (dragIndex === null) return;
+                  e.preventDefault();
+                  update(move(items, dragIndex, idx));
+                  setDragIndex(null);
+                  setOverIndex(null);
+                }}
+                className={`border rounded-lg p-4 bg-white transition-colors ${
+                  overIndex === idx && dragIndex !== null ? "border-zinc-900" : "border-zinc-200"
+                } ${dragIndex === idx ? "opacity-50" : ""} ${depth > 0 ? "" : "shadow-sm"}`}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <div className="text-[11px] uppercase tracking-wider text-zinc-500">
-                    {field.itemLabel ?? "Item"} #{idx + 1}
+                <div className="flex items-center justify-between mb-3 gap-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span
+                      draggable
+                      onDragStart={() => setDragIndex(idx)}
+                      onDragEnd={() => {
+                        setDragIndex(null);
+                        setOverIndex(null);
+                      }}
+                      className="cursor-grab active:cursor-grabbing p-1 -ml-1 text-zinc-400 hover:text-zinc-900"
+                      title="Drag to reorder"
+                    >
+                      <GripVertical className="w-4 h-4" />
+                    </span>
+                    <div className="text-[11px] uppercase tracking-wider text-zinc-500 truncate">
+                      {field.itemLabel ?? "Item"} #{idx + 1}
+                      {title ? ` · ${title}` : ""}
+                    </div>
                   </div>
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 shrink-0">
                     <button
                       type="button"
                       disabled={idx === 0}
-                      onClick={() => {
-                        const next = items.slice();
-                        [next[idx - 1], next[idx]] = [next[idx], next[idx - 1]];
-                        update(next);
-                      }}
+                      onClick={() => update(move(items, idx, idx - 1))}
                       className="p-1.5 rounded hover:bg-zinc-100 disabled:opacity-30"
                     >
                       <ArrowUp className="w-3.5 h-3.5" />
@@ -144,11 +193,7 @@ export function FieldRenderer({
                     <button
                       type="button"
                       disabled={idx === items.length - 1}
-                      onClick={() => {
-                        const next = items.slice();
-                        [next[idx + 1], next[idx]] = [next[idx], next[idx + 1]];
-                        update(next);
-                      }}
+                      onClick={() => update(move(items, idx, idx + 1))}
                       className="p-1.5 rounded hover:bg-zinc-100 disabled:opacity-30"
                     >
                       <ArrowDown className="w-3.5 h-3.5" />
