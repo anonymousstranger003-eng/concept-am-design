@@ -4,18 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Instagram, Facebook, Linkedin, Youtube } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
-
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
-  { to: "/portfolio", label: "Portfolio" },
-  { to: "/faq", label: "FAQ" },
-  { to: "/contact", label: "Contact" },
-];
+import { useSection } from "@/hooks/useContent";
+import type { NavContent } from "@/lib/cms-defaults";
 
 export function Navbar() {
   const s = useSiteSettings();
+  const nav = useSection<NavContent>("navigation");
+  const links = (nav.items ?? []).map((l) => ({ to: l.href as "/", label: l.label }));
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
