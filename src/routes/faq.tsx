@@ -4,14 +4,15 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Reveal } from "@/components/site/Reveal";
 import { faqs as staticFaqs } from "@/lib/site-data";
-import { useContent } from "@/hooks/useContent";
+import { useSection } from "@/hooks/useContent";
+import { RichText } from "@/components/site/RichText";
 
 export const Route = createFileRoute("/faq")({ component: FAQ });
 
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
-  const data = useContent<{ items?: typeof staticFaqs }>("faqs", { items: staticFaqs });
-  const faqs = data?.items ?? staticFaqs;
+  const data = useSection<{ items: typeof staticFaqs }>("faqs");
+  const faqs = data.items ?? staticFaqs;
   return (
     <div>
       <section className="container-x mx-auto max-w-7xl pt-40 pb-16">
@@ -53,7 +54,7 @@ function FAQ() {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="pl-12 pb-6 pr-10 text-muted-foreground leading-relaxed">{f.a}</p>
+                        <div className="pl-12 pb-6 pr-10 text-muted-foreground leading-relaxed"><RichText html={f.a} /></div>
                       </motion.div>
                     )}
                   </AnimatePresence>

@@ -23,6 +23,7 @@ export type Section = {
   key: string;
   label: string;
   description: string;
+  previewPath?: string;
   fields: Field[];
 };
 
@@ -31,9 +32,15 @@ export const SECTIONS: Section[] = [
     key: "home_hero",
     label: "Home — Hero",
     description: "The cover slideshow, headline and subheadline on the homepage.",
+    previewPath: "/",
     fields: [
       { key: "eyebrow", label: "Eyebrow (small caps text)", type: "text" },
-      { key: "heading", label: "Headline", type: "textarea" },
+      {
+        key: "heading",
+        label: "Headline",
+        type: "textarea",
+        hint: "One line per row. Wrap words in *asterisks* for italics, **double** for the red accent.",
+      },
       { key: "subheading", label: "Subheadline", type: "textarea" },
       { key: "primaryCtaLabel", label: "Primary button label", type: "text" },
       { key: "primaryCtaHref", label: "Primary button link", type: "url" },
@@ -55,6 +62,7 @@ export const SECTIONS: Section[] = [
     key: "services",
     label: "Services",
     description: "The service cards shown on the homepage and services page.",
+    previewPath: "/services",
     fields: [
       {
         key: "items",
@@ -73,6 +81,7 @@ export const SECTIONS: Section[] = [
     key: "stats",
     label: "Stats / Numbers",
     description: "The animated counters shown across the site.",
+    previewPath: "/",
     fields: [
       {
         key: "items",
@@ -91,6 +100,7 @@ export const SECTIONS: Section[] = [
     key: "faqs",
     label: "FAQ",
     description: "Frequently asked questions on the FAQ page.",
+    previewPath: "/faq",
     fields: [
       {
         key: "items",
@@ -108,6 +118,7 @@ export const SECTIONS: Section[] = [
     key: "testimonials",
     label: "Testimonials",
     description: "Client reviews shown on the homepage.",
+    previewPath: "/",
     fields: [
       { key: "heading", label: "Section heading", type: "text" },
       {
@@ -121,6 +132,7 @@ export const SECTIONS: Section[] = [
           { key: "quote", label: "Quote", type: "textarea" },
           { key: "photo", label: "Photo (optional)", type: "image" },
           { key: "rating", label: "Rating (1–5)", type: "number" },
+          { key: "when", label: "When (e.g. 2 months ago)", type: "text" },
         ],
       },
     ],
@@ -128,13 +140,15 @@ export const SECTIONS: Section[] = [
   {
     key: "about",
     label: "About Page",
-    description: "The About page copy: mission, vision, story.",
+    description: "The About page copy: mission, vision, philosophy, story.",
+    previewPath: "/about",
     fields: [
       { key: "eyebrow", label: "Eyebrow", type: "text" },
       { key: "heading", label: "Heading", type: "text" },
       { key: "intro", label: "Intro paragraph", type: "richtext" },
       { key: "mission", label: "Mission", type: "richtext" },
       { key: "vision", label: "Vision", type: "richtext" },
+      { key: "philosophy", label: "Design philosophy", type: "richtext" },
       { key: "image1", label: "About image 1", type: "image" },
       { key: "image2", label: "About image 2", type: "image" },
     ],
@@ -142,7 +156,8 @@ export const SECTIONS: Section[] = [
   {
     key: "team",
     label: "Team / Founders",
-    description: "Founder & team member profiles.",
+    description: "Founder & team member profiles (homepage and About page).",
+    previewPath: "/about",
     fields: [
       {
         key: "items",
@@ -153,6 +168,7 @@ export const SECTIONS: Section[] = [
           { key: "name", label: "Name", type: "text" },
           { key: "role", label: "Role", type: "text" },
           { key: "photo", label: "Photo", type: "image" },
+          { key: "quote", label: "Pull quote (optional)", type: "textarea" },
           { key: "bio", label: "Bio", type: "richtext" },
         ],
       },
@@ -161,7 +177,8 @@ export const SECTIONS: Section[] = [
   {
     key: "portfolio",
     label: "Portfolio / Projects",
-    description: "Project entries for the portfolio page.",
+    description: "Project entries for the portfolio page and homepage grid.",
+    previewPath: "/portfolio",
     fields: [
       {
         key: "items",
@@ -170,7 +187,12 @@ export const SECTIONS: Section[] = [
         itemLabel: "Project",
         itemFields: [
           { key: "title", label: "Title", type: "text" },
-          { key: "category", label: "Category", type: "text" },
+          {
+            key: "category",
+            label: "Category",
+            type: "text",
+            hint: "Use exactly: Plan & Exterior · Interior Design · 360° Virtual Experience",
+          },
           { key: "location", label: "Location", type: "text" },
           { key: "img", label: "Cover image", type: "image" },
           { key: "description", label: "Description", type: "richtext" },
@@ -182,7 +204,8 @@ export const SECTIONS: Section[] = [
   {
     key: "gallery",
     label: "Gallery",
-    description: "Standalone image gallery.",
+    description: "Standalone image gallery page.",
+    previewPath: "/gallery",
     fields: [
       { key: "heading", label: "Heading", type: "text" },
       {
@@ -200,7 +223,8 @@ export const SECTIONS: Section[] = [
   {
     key: "blog",
     label: "Blog",
-    description: "Blog articles.",
+    description: "Blog articles shown at /blog.",
+    previewPath: "/blog",
     fields: [
       {
         key: "items",
@@ -223,6 +247,7 @@ export const SECTIONS: Section[] = [
     key: "navigation",
     label: "Navigation",
     description: "Header navigation links.",
+    previewPath: "/",
     fields: [
       {
         key: "items",
@@ -240,6 +265,7 @@ export const SECTIONS: Section[] = [
     key: "footer",
     label: "Footer",
     description: "Footer copy, links and credits.",
+    previewPath: "/",
     fields: [
       { key: "tagline", label: "Tagline", type: "textarea" },
       { key: "credits", label: "Credits line", type: "text" },
@@ -268,6 +294,7 @@ export const SECTIONS: Section[] = [
     key: "seo",
     label: "SEO — Per Page",
     description: "Per-page SEO overrides (title / description / OG image).",
+    previewPath: "/",
     fields: [
       {
         key: "pages",
@@ -285,4 +312,6 @@ export const SECTIONS: Section[] = [
   },
 ];
 
-export const SECTION_BY_KEY = Object.fromEntries(SECTIONS.map((s) => [s.key, s]));
+export const SECTION_BY_KEY: Record<string, Section> = Object.fromEntries(
+  SECTIONS.map((s) => [s.key, s]),
+);

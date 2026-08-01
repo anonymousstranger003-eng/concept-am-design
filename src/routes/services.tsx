@@ -2,11 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Reveal, Stagger, item } from "@/components/site/Reveal";
 import { ArrowUpRight } from "lucide-react";
-import { services } from "@/lib/site-data";
+import { useSection } from "@/hooks/useContent";
+import type { ServiceItem } from "@/lib/cms-defaults";
 
 export const Route = createFileRoute("/services")({ component: Services });
 
 function Services() {
+  const data = useSection<{ items: ServiceItem[] }>("services");
+  const services = data.items ?? [];
   return (
     <div>
       <section className="container-x mx-auto max-w-7xl pt-40 pb-20">

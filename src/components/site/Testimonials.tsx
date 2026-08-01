@@ -1,36 +1,14 @@
 import { Quote, Star } from "lucide-react";
 import { Reveal, Stagger, item, WordsReveal } from "@/components/site/Reveal";
 import { motion } from "framer-motion";
-import { useContent } from "@/hooks/useContent";
+import { useSection } from "@/hooks/useContent";
+import type { TestimonialItem } from "@/lib/cms-defaults";
 
-const reviews: { name: string; rating: number; when: string; text: string; photo?: string }[] = [
-  {
-    name: "Anoop Nalupurappattil",
-    rating: 5,
-    when: "2 months ago",
-    text: "It is a very beautiful house — we liked it a lot. AM Concepts Architects and Interiors built exactly what we wanted. All the guests who came to the house warming gave great comments. We got the same house we dreamed of. Thank you AM Concepts team.",
-    // photo: "https://your-cdn/anoop.jpg",
-  },
-  {
-    name: "Sudheesh Krishnan, Kanhangad",
-    rating: 4,
-    when: "8 months ago",
-    text: "I am really happy with the interior work done by AM Concepts. The team understood my requirements and delivered exactly what I wanted. The quality of work is excellent and the designs are modern yet timeless. Highly recommended.",
-    // photo: "https://your-cdn/sudheesh.jpg",
-  },
-  {
-    name: "Archana Sandesh",
-    rating: 5,
-    when: "2 years ago",
-    text: "AM Concepts are undoubtedly one of the finest interior design firms I have come across. Their remarkable talent lies in listening to our ideas and skilfully transforming them into stunning designs. Truly impressed and thoroughly satisfied.",
-    // photo: "https://your-cdn/archana.jpg",
-  },
-];
 
 
 export function Testimonials() {
-  const data = useContent<{ items?: typeof reviews }>("testimonials", { items: reviews });
-  const list = data?.items && data.items.length ? data.items : reviews;
+  const data = useSection<{ heading: string; items: TestimonialItem[] }>("testimonials");
+  const list = data.items ?? [];
   return (
     <section className="container-x mx-auto max-w-7xl py-20 md:py-40">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 md:gap-8 mb-12 md:mb-16">
@@ -39,7 +17,7 @@ export function Testimonials() {
             <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Client Stories
           </div>
           <WordsReveal
-            text="Trusted by families and businesses across Kerala."
+            text={data.heading}
             className="font-display text-3xl sm:text-4xl md:text-6xl max-w-3xl leading-[1.05] tracking-[-0.02em]"
           />
         </Reveal>
@@ -57,7 +35,7 @@ export function Testimonials() {
       </div>
 
       <Stagger className="grid md:grid-cols-3 gap-4 md:gap-6">
-        {reviews.map((r) => (
+        {list.map((r) => (
           <motion.figure
             key={r.name}
             variants={item}
@@ -65,12 +43,12 @@ export function Testimonials() {
           >
             <Quote className="absolute top-6 right-6 w-8 h-8 text-brand/15 group-hover:text-brand/30 transition-colors" />
             <div className="flex gap-0.5">
-              {[...Array(r.rating)].map((_, i) => (
+              {[...Array(r.rating ?? 5)].map((_, i) => (
                 <Star key={i} className="w-3.5 h-3.5 fill-brand text-brand" />
               ))}
             </div>
             <blockquote className="mt-5 text-[15px] leading-relaxed text-foreground/90 flex-1">
-              "{r.text}"
+              "{r.quote}"
             </blockquote>
             <figcaption className="mt-6 pt-6 border-t border-black/5 flex items-center gap-5">
               {r.photo ? (
@@ -92,7 +70,7 @@ export function Testimonials() {
               <div className="min-w-0">
                 <div className="font-display text-xl md:text-2xl text-ink truncate">{r.name}</div>
                 <div className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground mt-1">
-                  Verified Google Review · {r.when}
+                  {r.role ? `${r.role} · ` : ""}{r.when ?? "Verified Google Review"}
                 </div>
               </div>
             </figcaption>

@@ -125,3 +125,16 @@
   @media (min-width: 768px) { .container-x { padding-inline: 2.5rem; } }
   @media (min-width: 1280px) { .container-x { padding-inline: 5rem; } }
 }
+
+@layer utilities {
+  .rich-text > * + * { margin-top: 0.9em; }
+  .rich-text h2 { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.2; margin-top: 1.6em; }
+  .rich-text h3 { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.25; margin-top: 1.4em; }
+  .rich-text strong { font-weight: 600; color: var(--color-ink); }
+  .rich-text em { font-style: italic; }
+  .rich-text a { color: var(--color-brand); text-decoration: underline; text-underline-offset: 3px; }
+  .rich-text ul { list-style: disc; padding-inline-start: 1.25rem; }
+  .rich-text ol { list-style: decimal; padding-inline-start: 1.25rem; }
+  .rich-text li + li { margin-top: 0.35em; }
+  .rich-text blockquote { border-inline-start: 2px solid var(--color-brand); padding-inline-start: 1rem; font-style: italic; }
+}

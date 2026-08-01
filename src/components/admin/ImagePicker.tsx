@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useSupabase } from "@/components/admin/SupabaseProvider";
-import { Upload, X } from "lucide-react";
+import { Upload, X, Images } from "lucide-react";
+import { MediaBrowserModal } from "@/components/admin/MediaLibrary";
 
 export function ImagePicker({
   value,
@@ -13,17 +14,24 @@ export function ImagePicker({
   const ref = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [browsing, setBrowsing] = useState(false);
 
   const upload = async (file: File) => {
     if (!client) return;
     setUploading(true);
     setErr(null);
-    const ext = file.name.split(".").pop() || "bin";
-    const key = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const ext = (file.name.split(".").pop() || "bin").toLowerCase();
+    const base = file.name
+      .replace(/\.[^.]+$/, "")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+      .slice(0, 40);
+    const key = `${base || "image"}-${Date.now().toString(36)}.${ext}`;
     const { error } = await client.storage.from("media").upload(key, file, {
-      cacheControl: "3600",
+      cacheControl: "31536000",
       upsert: false,
-      contentType: file.type,
+      contentType: file.type || undefined,
     });
     if (error) {
       setErr(error.message);
@@ -49,10 +57,10 @@ export function ImagePicker({
             type="text"
             value={value ?? ""}
             onChange={(e) => onChange(e.target.value)}
-            placeholder="Paste image URL or upload…"
+            placeholder="Paste image URL, upload, or pick from library…"
             className="w-full h-9 px-3 rounded-md border border-zinc-300 text-sm bg-white"
           />
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               type="button"
               onClick={() => ref.current?.click()}
@@ -61,6 +69,13 @@ export function ImagePicker({
             >
               <Upload className="w-3.5 h-3.5" />
               {uploading ? "Uploading…" : "Upload"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setBrowsing(true)}
+              className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-zinc-300 text-xs hover:bg-zinc-50"
+            >
+              <Images className="w-3.5 h-3.5" /> Library
             </button>
             {value && (
               <button
@@ -81,10 +96,11 @@ export function ImagePicker({
         hidden
         accept="image/*"
         onChange={(e) => {
-          if (e.target.files?.[0]) upload(e.target.files[0]);
+          if (e.target.files?.[0]) void upload(e.target.files[0]);
           e.target.value = "";
         }}
       />
+      <MediaBrowserModal open={browsing} onClose={() => setBrowsing(false)} onSelect={onChange} />
     </div>
   );
 }

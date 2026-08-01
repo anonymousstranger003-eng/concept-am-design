@@ -71,6 +71,7 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { PageLoader } from "@/components/site/PageLoader";
+import { SeoOverrides } from "@/components/site/SeoOverrides";
 import { SupabaseProvider } from "@/components/admin/SupabaseProvider";
 import { getPublicConfig } from "@/lib/config.functions";
 
@@ -132,6 +133,7 @@ function RootComponent() {
           <Outlet />
         ) : (
           <>
+            <SeoOverrides />
             <PageLoader />
             <Navbar />
             <main>
