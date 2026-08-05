@@ -92,6 +92,11 @@ function LoginPage() {
               Forgot password?
             </button>
           </div>
+          {configError && (
+            <div className="rounded-md bg-amber-50 border border-amber-200 p-3 text-sm text-amber-800">
+              {configError}
+            </div>
+          )}
           {error && (
             <div className="rounded-md bg-red-50 border border-red-200 p-3 text-sm text-red-700">
               {error}
@@ -99,11 +104,12 @@ function LoginPage() {
           )}
           <button
             type="submit"
-            disabled={submitting || !client}
+            disabled={submitting || (ready && !client)}
             className="w-full h-11 rounded-md bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 disabled:opacity-50 transition-colors"
           >
-            {submitting ? "Signing in…" : "Sign in"}
+            {submitting ? "Signing in…" : !ready ? "Connecting…" : "Sign in"}
           </button>
+
         </form>
 
         <div className="mt-6 pt-6 border-t border-zinc-100 text-xs text-zinc-500 text-center">
