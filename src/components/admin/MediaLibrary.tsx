@@ -88,8 +88,24 @@ export function useMediaLibrary() {
     await refresh();
   };
 
-  return { items, loading, uploading, error, refresh, upload, remove, rename };
+  /** Overwrites an existing file in place, keeping every URL already used on the site. */
+  const replace = async (name: string, file: File) => {
+    if (!client) return;
+    setUploading(true);
+    setError(null);
+    const { error: err } = await client.storage.from("media").upload(name, file, {
+      cacheControl: "31536000",
+      upsert: true,
+      contentType: file.type || undefined,
+    });
+    if (err) setError(err.message);
+    setUploading(false);
+    await refresh();
+  };
+
+  return { items, loading, uploading, error, refresh, upload, remove, rename, replace };
 }
+
 
 export function MediaGrid({
   onSelect,
