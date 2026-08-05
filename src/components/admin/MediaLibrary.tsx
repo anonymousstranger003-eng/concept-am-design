@@ -88,8 +88,24 @@ export function useMediaLibrary() {
     await refresh();
   };
 
-  return { items, loading, uploading, error, refresh, upload, remove, rename };
+  /** Overwrites an existing file in place, keeping every URL already used on the site. */
+  const replace = async (name: string, file: File) => {
+    if (!client) return;
+    setUploading(true);
+    setError(null);
+    const { error: err } = await client.storage.from("media").upload(name, file, {
+      cacheControl: "31536000",
+      upsert: true,
+      contentType: file.type || undefined,
+    });
+    if (err) setError(err.message);
+    setUploading(false);
+    await refresh();
+  };
+
+  return { items, loading, uploading, error, refresh, upload, remove, rename, replace };
 }
+
 
 export function MediaGrid({
   onSelect,
@@ -98,15 +114,27 @@ export function MediaGrid({
   onSelect?: (url: string) => void;
   compact?: boolean;
 }) {
-  const { items, loading, uploading, error, refresh, upload, remove, rename } = useMediaLibrary();
+  const { items, loading, uploading, error, refresh, upload, remove, rename, replace } = useMediaLibrary();
   const [copied, setCopied] = useState<string | null>(null);
   const [drag, setDrag] = useState(false);
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<"newest" | "name" | "size">("newest");
 
   const copy = async (url: string) => {
     await navigator.clipboard.writeText(url);
     setCopied(url);
     setTimeout(() => setCopied(null), 1500);
   };
+
+  const visible = items
+    .filter((it) => (query ? it.name.toLowerCase().includes(query.toLowerCase()) : true))
+    .slice()
+    .sort((a, b) => {
+      if (sort === "name") return a.name.localeCompare(b.name);
+      if (sort === "size") return (b.size ?? 0) - (a.size ?? 0);
+      return 0; // storage list is already newest-first
+    });
+
 
   return (
     <div>
@@ -142,15 +170,32 @@ export function MediaGrid({
         {uploading && <div className="mt-2 text-xs text-zinc-500">Uploading…</div>}
       </div>
 
-      <div className="flex items-center justify-between mt-4">
-        <div className="text-xs text-zinc-500">{items.length} file(s)</div>
+      <div className="flex items-center gap-2 flex-wrap mt-4">
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search files…"
+          className="h-9 px-3 rounded-md border border-zinc-300 text-sm flex-1 min-w-[160px] bg-white"
+        />
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value as "newest" | "name" | "size")}
+          className="h-9 px-2 rounded-md border border-zinc-300 text-sm bg-white"
+        >
+          <option value="newest">Newest</option>
+          <option value="name">Name A–Z</option>
+          <option value="size">Largest</option>
+        </select>
         <button
           type="button"
           onClick={() => void refresh()}
-          className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-zinc-300 text-xs hover:bg-zinc-50"
+          className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md border border-zinc-300 text-xs hover:bg-zinc-50"
         >
           <RefreshCw className="w-3.5 h-3.5" /> Refresh
         </button>
+      </div>
+      <div className="text-xs text-zinc-500 mt-2">
+        {visible.length} of {items.length} file(s)
       </div>
 
       {error && (
@@ -159,12 +204,19 @@ export function MediaGrid({
 
       <div className="mt-4">
         {loading ? (
-          <div className="text-sm text-zinc-500">Loading…</div>
-        ) : items.length === 0 ? (
-          <div className="text-sm text-zinc-500">No files yet — upload your first image above.</div>
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="aspect-square rounded-lg bg-zinc-100 animate-pulse" />
+            ))}
+          </div>
+        ) : visible.length === 0 ? (
+          <div className="text-sm text-zinc-500">
+            {items.length === 0 ? "No files yet — upload your first image above." : "No files match your search."}
+          </div>
         ) : (
           <div className={`grid gap-3 ${compact ? "grid-cols-3 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"}`}>
-            {items.map((it) => (
+            {visible.map((it) => (
+
               <div key={it.name} className="border border-zinc-200 rounded-lg overflow-hidden bg-white">
                 <button
                   type="button"
@@ -192,6 +244,23 @@ export function MediaGrid({
                       {copied === it.publicUrl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                       {copied === it.publicUrl ? "Copied" : "URL"}
                     </button>
+                    <label
+                      title="Replace file (keeps the same URL)"
+                      className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-zinc-200 hover:bg-zinc-50 cursor-pointer"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      <input
+                        type="file"
+                        hidden
+                        accept="image/*"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) void replace(it.name, f);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
+
                     <button
                       type="button"
                       title="Rename"

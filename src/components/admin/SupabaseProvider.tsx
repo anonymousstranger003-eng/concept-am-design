@@ -7,6 +7,8 @@ type Ctx = {
   session: Session | null;
   ready: boolean;
   isAdmin: boolean;
+  /** Set when no Supabase URL / anon key could be resolved at runtime. */
+  configError: string | null;
   refreshAdmin: () => Promise<void>;
 };
 
@@ -15,8 +17,22 @@ const SupabaseCtx = createContext<Ctx>({
   session: null,
   ready: false,
   isAdmin: false,
+  configError: null,
   refreshAdmin: async () => {},
 });
+
+/** Build-time env fallback (Cloudflare Pages / Vite `VITE_*` variables). */
+function envFallback() {
+  const env = import.meta.env as Record<string, string | undefined>;
+  return {
+    url: env.VITE_SUPABASE_URL ?? env.VITE_APP_SUPABASE_URL ?? "",
+    key:
+      env.VITE_SUPABASE_ANON_KEY ??
+      env.VITE_SUPABASE_PUBLISHABLE_KEY ??
+      env.VITE_APP_SUPABASE_ANON_KEY ??
+      "",
+  };
+}
 
 export function SupabaseProvider({
   url,
@@ -31,6 +47,7 @@ export function SupabaseProvider({
   const [session, setSession] = useState<Session | null>(null);
   const [ready, setReady] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [configError, setConfigError] = useState<string | null>(null);
 
   const checkAdmin = async (c: SupabaseClient, s: Session | null) => {
     if (!s) {
@@ -42,17 +59,31 @@ export function SupabaseProvider({
   };
 
   useEffect(() => {
-    const c = initSupabase(url, anonKey);
-    if (!c) {
+    const fb = envFallback();
+    const resolvedUrl = url || fb.url;
+    const resolvedKey = anonKey || fb.key;
+    if (!resolvedUrl || !resolvedKey) {
+      setConfigError(
+        "Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (or APP_SUPABASE_URL / APP_SUPABASE_ANON_KEY) in your environment and redeploy.",
+      );
       setReady(true);
       return;
     }
-    setClient(c);
-    c.auth.getSession().then(async ({ data }) => {
-      setSession(data.session);
-      await checkAdmin(c, data.session);
+    const c = initSupabase(resolvedUrl, resolvedKey);
+    if (!c) {
+      setConfigError("Supabase client could not be created with the provided URL and key.");
       setReady(true);
-    });
+      return;
+    }
+    setConfigError(null);
+    setClient(c);
+    c.auth
+      .getSession()
+      .then(async ({ data }) => {
+        setSession(data.session);
+        await checkAdmin(c, data.session);
+      })
+      .finally(() => setReady(true));
     const { data: sub } = c.auth.onAuthStateChange(async (_evt, s) => {
       setSession(s);
       await checkAdmin(c, s);
@@ -67,6 +98,7 @@ export function SupabaseProvider({
         session,
         ready,
         isAdmin,
+        configError,
         refreshAdmin: async () => {
           if (client) await checkAdmin(client, session);
         },

@@ -21,7 +21,12 @@ import { Counter } from "@/components/site/Counter";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { Testimonials } from "@/components/site/Testimonials";
 import { services as staticServices, stats as staticStats } from "@/lib/site-data";
-import { useContent } from "@/hooks/useContent";
+import { useContent, useSection } from "@/hooks/useContent";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
+import { RichText, toPlainText } from "@/components/site/RichText";
+import type { HeroContent, PortfolioItem, TeamMember } from "@/lib/cms-defaults";
+
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -68,7 +73,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const portfolioPreview = [
+const portfolioFallback = [
   { title: "Hillside Residence", category: "Plan & Exterior · Calicut", img: plan1.url },
   { title: "Modern Twin Block", category: "Plan & Exterior · Kasaragod", img: plan2.url },
   { title: "Kerala Contemporary", category: "Plan & Exterior · Wayanad", img: plan3.url },
@@ -76,6 +81,45 @@ const portfolioPreview = [
   { title: "Luxe Living Interior", category: "Interior Design · Calicut", img: interiorLuxe.url },
   { title: "Courtyard Residence", category: "Plan & Exterior · Malappuram", img: plan5.url },
 ];
+
+/**
+ * Renders an editable hero heading. Authors can use *italic* and **accent**
+ * inside the CMS field, and a newline to break the line.
+ */
+function HeroHeading({ heading }: { heading: string }) {
+  const lines = heading.split("\n").filter(Boolean);
+  return (
+    <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
+      {lines.map((line, li) => (
+        <span key={li} className="block overflow-hidden">
+          <motion.span
+            initial={{ y: "110%" }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.5 + li * 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block"
+          >
+            {line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, pi) => {
+              if (part.startsWith("**") && part.endsWith("**"))
+                return (
+                  <span key={pi} className="text-brand">
+                    {part.slice(2, -2)}
+                  </span>
+                );
+              if (part.startsWith("*") && part.endsWith("*"))
+                return (
+                  <em key={pi} className="italic text-white/85">
+                    {part.slice(1, -1)}
+                  </em>
+                );
+              return <span key={pi}>{part}</span>;
+            })}
+          </motion.span>
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -86,6 +130,20 @@ function Home() {
   const servicesList = Array.isArray(servicesData) ? servicesData : (servicesData?.items ?? staticServices);
   const statsData = useContent<{ items?: typeof staticStats } | typeof staticStats>("stats", { items: staticStats });
   const statsList = Array.isArray(statsData) ? statsData : (statsData?.items ?? staticStats);
+  const hero = useSection<HeroContent>("home_hero");
+  const settings = useSiteSettings();
+
+  const team = useSection<{ items: TeamMember[] }>("team");
+  const portfolio = useSection<{ items: PortfolioItem[] }>("portfolio");
+  const portfolioPreview =
+    portfolio.items && portfolio.items.length > 0
+      ? portfolio.items.slice(0, 6).map((p) => ({
+          title: p.title,
+          category: [p.category, p.location].filter(Boolean).join(" · "),
+          img: p.img,
+        }))
+      : portfolioFallback;
+
 
   return (
     <div className="overflow-clip">
@@ -93,11 +151,15 @@ function Home() {
       <section ref={heroRef} className="relative min-h-[640px] h-[92svh] md:h-[100svh] md:min-h-[720px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
-            images={[
-              { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
-              { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
-              { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
-            ]}
+            images={
+              hero.slides && hero.slides.length > 0
+                ? hero.slides
+                : [
+                    { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
+                    { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
+                    { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
+                  ]
+            }
             interval={5000}
           />
         </motion.div>
@@ -110,29 +172,10 @@ function Home() {
             className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-6"
           >
             <span className="w-6 md:w-8 h-px bg-white/50" />
-            EST. 2020 · KERALA, INDIA
+            {hero.eyebrow}
           </motion.div>
 
-          <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "110%" }} animate={{ y: 0 }}
-                transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block"
-              >
-                Architecture that <em className="italic text-white/85">listens</em>.
-              </motion.span>
-            </span>
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "110%" }} animate={{ y: 0 }}
-                transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block"
-              >
-                Interiors that <span className="text-brand">last</span>.
-              </motion.span>
-            </span>
-          </h1>
+          <HeroHeading heading={hero.heading} />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -140,7 +183,7 @@ function Home() {
             transition={{ delay: 0.95, duration: 0.9 }}
             className="mt-5 md:mt-7 max-w-xl text-white/85 text-sm md:text-base leading-relaxed"
           >
-            At AM Concepts Architects & Interiors, we create timeless architecture and bespoke interiors that combine elegance, functionality, and exceptional craftsmanship.
+            {toPlainText(hero.subheading)}
           </motion.p>
 
 
@@ -151,19 +194,20 @@ function Home() {
             className="mt-8 md:mt-10 flex flex-wrap items-center gap-3"
           >
             <Magnetic>
-              <Link to="/contact" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-                BOOK  FREE CONSULTATION
+              <a href={hero.primaryCtaHref || "/contact"} className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+                {hero.primaryCtaLabel}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              </a>
             </Magnetic>
             <Magnetic>
-              <Link to="/portfolio" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
-                View Projects
+              <a href={hero.secondaryCtaHref || "/portfolio"} className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
+                {hero.secondaryCtaLabel}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              </a>
             </Magnetic>
           </motion.div>
         </div>
+
 
         {/* Floating side label */}
         <motion.div
@@ -358,26 +402,24 @@ function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-10 mt-12 md:mt-20">
-            {[
-              { src: founderManoj.url, name: "Manoj S Sunder", role: "Founder & Managing Director", bio: "An engineer-builder at heart, Manoj leads execution, planning and client relationships — ensuring every detail drawn is detail built." },
-              { src: founderAswini.url, name: "Ar. Aswini Manoj", role: "Principal Architect & Co-Founder", bio: "Aswini drives the studio's design language — site-led architecture, material honesty, and interiors that feel calm, considered and personal." },
-            ].map((f, idx) => (
+            {(team.items ?? []).map((f, idx) => (
               <SlideIn key={f.name} from={idx === 0 ? "left" : "right"} delay={idx * 0.1}>
                 <div className="group bg-background border border-black/5 overflow-hidden">
                   <div className="overflow-hidden aspect-[4/5]">
                     <Parallax range={20}>
-                      <img src={f.src} alt={f.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+                      <img src={f.photo || founderManoj.url} alt={f.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
                     </Parallax>
                   </div>
                   <div className="p-6 md:p-8">
                     <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
                     <div className="font-display text-2xl md:text-3xl mt-2 text-ink">{f.name}</div>
-                    <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{f.bio}</p>
+                    <RichText html={f.bio} className="text-sm text-muted-foreground mt-4 leading-relaxed" />
                   </div>
                 </div>
               </SlideIn>
             ))}
           </div>
+
 
           <Reveal delay={0.2} className="mt-16 md:mt-20">
             <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
@@ -422,9 +464,18 @@ function Home() {
         </Reveal>
         <Stagger className="grid md:grid-cols-2 gap-5 md:gap-6 mt-10 md:mt-14">
           {[
-            { city: "Calicut", role: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020", map: "https://www.google.com/maps?q=11.284812,75.7939884&hl=en&z=17&output=embed" },
-            { city: "Kasaragod", role: "Ali & Son's Complex, 1/136, Chemnad, Kerala 671317", map: "https://www.google.com/maps?q=12.493856,75.0020172&hl=en&z=17&output=embed" },
+            {
+              city: "Calicut",
+              role: settings.addressCalicut ?? "",
+              map: settings.mapCalicut || "https://www.google.com/maps?q=11.284812,75.7939884&hl=en&z=17&output=embed",
+            },
+            {
+              city: "Kasaragod",
+              role: settings.addressKasaragod ?? "",
+              map: settings.mapKasaragod || "https://www.google.com/maps?q=12.493856,75.0020172&hl=en&z=17&output=embed",
+            },
           ].map((o) => (
+
             <motion.div key={o.city} variants={item} className="group bg-background border border-black/5 overflow-hidden">
               <div className="aspect-[16/10] overflow-hidden bg-secondary">
                 <iframe src={o.map} title={o.city} loading="lazy" className="w-full h-full grayscale-[40%] group-hover:grayscale-0 transition-all duration-700" />
