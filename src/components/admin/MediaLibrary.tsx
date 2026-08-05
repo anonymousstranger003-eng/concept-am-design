@@ -114,7 +114,7 @@ export function MediaGrid({
   onSelect?: (url: string) => void;
   compact?: boolean;
 }) {
-  const { items, loading, uploading, error, refresh, upload, remove, rename } = useMediaLibrary();
+  const { items, loading, uploading, error, refresh, upload, remove, rename, replace } = useMediaLibrary();
   const [copied, setCopied] = useState<string | null>(null);
   const [drag, setDrag] = useState(false);
   const [query, setQuery] = useState("");
