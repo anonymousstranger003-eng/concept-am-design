@@ -128,6 +128,18 @@ function Home() {
   const servicesList = Array.isArray(servicesData) ? servicesData : (servicesData?.items ?? staticServices);
   const statsData = useContent<{ items?: typeof staticStats } | typeof staticStats>("stats", { items: staticStats });
   const statsList = Array.isArray(statsData) ? statsData : (statsData?.items ?? staticStats);
+  const hero = useSection<HeroContent>("home_hero");
+  const team = useSection<{ items: TeamMember[] }>("team");
+  const portfolio = useSection<{ items: PortfolioItem[] }>("portfolio");
+  const portfolioPreview =
+    portfolio.items && portfolio.items.length > 0
+      ? portfolio.items.slice(0, 6).map((p) => ({
+          title: p.title,
+          category: [p.category, p.location].filter(Boolean).join(" · "),
+          img: p.img,
+        }))
+      : portfolioFallback;
+
 
   return (
     <div className="overflow-clip">
