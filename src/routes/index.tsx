@@ -21,7 +21,10 @@ import { Counter } from "@/components/site/Counter";
 import { HeroSlider } from "@/components/site/HeroSlider";
 import { Testimonials } from "@/components/site/Testimonials";
 import { services as staticServices, stats as staticStats } from "@/lib/site-data";
-import { useContent } from "@/hooks/useContent";
+import { useContent, useSection } from "@/hooks/useContent";
+import { RichText, toPlainText } from "@/components/site/RichText";
+import type { HeroContent, PortfolioItem, TeamMember } from "@/lib/cms-defaults";
+
 
 export const Route = createFileRoute("/")({
   component: Home,
