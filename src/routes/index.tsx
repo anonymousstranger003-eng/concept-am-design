@@ -147,11 +147,15 @@ function Home() {
       <section ref={heroRef} className="relative min-h-[640px] h-[92svh] md:h-[100svh] md:min-h-[720px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
           <HeroSlider
-            images={[
-              { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
-              { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
-              { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
-            ]}
+            images={
+              hero.slides && hero.slides.length > 0
+                ? hero.slides
+                : [
+                    { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
+                    { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
+                    { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
+                  ]
+            }
             interval={5000}
           />
         </motion.div>
@@ -164,29 +168,10 @@ function Home() {
             className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-6"
           >
             <span className="w-6 md:w-8 h-px bg-white/50" />
-            EST. 2020 · KERALA, INDIA
+            {hero.eyebrow}
           </motion.div>
 
-          <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "110%" }} animate={{ y: 0 }}
-                transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block"
-              >
-                Architecture that <em className="italic text-white/85">listens</em>.
-              </motion.span>
-            </span>
-            <span className="block overflow-hidden">
-              <motion.span
-                initial={{ y: "110%" }} animate={{ y: 0 }}
-                transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block"
-              >
-                Interiors that <span className="text-brand">last</span>.
-              </motion.span>
-            </span>
-          </h1>
+          <HeroHeading heading={hero.heading} />
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -194,7 +179,7 @@ function Home() {
             transition={{ delay: 0.95, duration: 0.9 }}
             className="mt-5 md:mt-7 max-w-xl text-white/85 text-sm md:text-base leading-relaxed"
           >
-            At AM Concepts Architects & Interiors, we create timeless architecture and bespoke interiors that combine elegance, functionality, and exceptional craftsmanship.
+            {toPlainText(hero.subheading)}
           </motion.p>
 
 
@@ -205,19 +190,20 @@ function Home() {
             className="mt-8 md:mt-10 flex flex-wrap items-center gap-3"
           >
             <Magnetic>
-              <Link to="/contact" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
-                BOOK  FREE CONSULTATION
+              <a href={hero.primaryCtaHref || "/contact"} className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+                {hero.primaryCtaLabel}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              </a>
             </Magnetic>
             <Magnetic>
-              <Link to="/portfolio" className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
-                View Projects
+              <a href={hero.secondaryCtaHref || "/portfolio"} className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
+                {hero.secondaryCtaLabel}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              </a>
             </Magnetic>
           </motion.div>
         </div>
+
 
         {/* Floating side label */}
         <motion.div
