@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AdminShell } from "@/components/admin/AdminShell";
 import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { useSupabase } from "@/components/admin/SupabaseProvider";
-import { Trash2, Download } from "lucide-react";
+import { Trash2, Download, RefreshCw, Mail, MailOpen } from "lucide-react";
 
 export const Route = createFileRoute("/admin/submissions")({ component: SubmissionsPage });
 
