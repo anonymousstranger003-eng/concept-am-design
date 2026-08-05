@@ -101,12 +101,24 @@ export function MediaGrid({
   const { items, loading, uploading, error, refresh, upload, remove, rename } = useMediaLibrary();
   const [copied, setCopied] = useState<string | null>(null);
   const [drag, setDrag] = useState(false);
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState<"newest" | "name" | "size">("newest");
 
   const copy = async (url: string) => {
     await navigator.clipboard.writeText(url);
     setCopied(url);
     setTimeout(() => setCopied(null), 1500);
   };
+
+  const visible = items
+    .filter((it) => (query ? it.name.toLowerCase().includes(query.toLowerCase()) : true))
+    .slice()
+    .sort((a, b) => {
+      if (sort === "name") return a.name.localeCompare(b.name);
+      if (sort === "size") return (b.size ?? 0) - (a.size ?? 0);
+      return 0; // storage list is already newest-first
+    });
+
 
   return (
     <div>
