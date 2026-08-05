@@ -5,7 +5,7 @@ import { useSupabase } from "@/components/admin/SupabaseProvider";
 export const Route = createFileRoute("/admin/login")({ component: LoginPage });
 
 function LoginPage() {
-  const { client, refreshAdmin } = useSupabase();
+  const { client, refreshAdmin, ready, configError } = useSupabase();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
