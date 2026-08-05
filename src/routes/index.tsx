@@ -398,26 +398,24 @@ function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 md:gap-10 mt-12 md:mt-20">
-            {[
-              { src: founderManoj.url, name: "Manoj S Sunder", role: "Founder & Managing Director", bio: "An engineer-builder at heart, Manoj leads execution, planning and client relationships — ensuring every detail drawn is detail built." },
-              { src: founderAswini.url, name: "Ar. Aswini Manoj", role: "Principal Architect & Co-Founder", bio: "Aswini drives the studio's design language — site-led architecture, material honesty, and interiors that feel calm, considered and personal." },
-            ].map((f, idx) => (
+            {(team.items ?? []).map((f, idx) => (
               <SlideIn key={f.name} from={idx === 0 ? "left" : "right"} delay={idx * 0.1}>
                 <div className="group bg-background border border-black/5 overflow-hidden">
                   <div className="overflow-hidden aspect-[4/5]">
                     <Parallax range={20}>
-                      <img src={f.src} alt={f.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+                      <img src={f.photo || founderManoj.url} alt={f.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
                     </Parallax>
                   </div>
                   <div className="p-6 md:p-8">
                     <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
                     <div className="font-display text-2xl md:text-3xl mt-2 text-ink">{f.name}</div>
-                    <p className="text-sm text-muted-foreground mt-4 leading-relaxed">{f.bio}</p>
+                    <RichText html={f.bio} className="text-sm text-muted-foreground mt-4 leading-relaxed" />
                   </div>
                 </div>
               </SlideIn>
             ))}
           </div>
+
 
           <Reveal delay={0.2} className="mt-16 md:mt-20">
             <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
