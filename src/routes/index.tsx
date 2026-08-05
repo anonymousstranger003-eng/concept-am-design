@@ -71,7 +71,7 @@ export const Route = createFileRoute("/")({
   }),
 });
 
-const portfolioPreview = [
+const portfolioFallback = [
   { title: "Hillside Residence", category: "Plan & Exterior · Calicut", img: plan1.url },
   { title: "Modern Twin Block", category: "Plan & Exterior · Kasaragod", img: plan2.url },
   { title: "Kerala Contemporary", category: "Plan & Exterior · Wayanad", img: plan3.url },
@@ -79,6 +79,45 @@ const portfolioPreview = [
   { title: "Luxe Living Interior", category: "Interior Design · Calicut", img: interiorLuxe.url },
   { title: "Courtyard Residence", category: "Plan & Exterior · Malappuram", img: plan5.url },
 ];
+
+/**
+ * Renders an editable hero heading. Authors can use *italic* and **accent**
+ * inside the CMS field, and a newline to break the line.
+ */
+function HeroHeading({ heading }: { heading: string }) {
+  const lines = heading.split("\n").filter(Boolean);
+  return (
+    <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
+      {lines.map((line, li) => (
+        <span key={li} className="block overflow-hidden">
+          <motion.span
+            initial={{ y: "110%" }}
+            animate={{ y: 0 }}
+            transition={{ delay: 0.5 + li * 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-block"
+          >
+            {line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, pi) => {
+              if (part.startsWith("**") && part.endsWith("**"))
+                return (
+                  <span key={pi} className="text-brand">
+                    {part.slice(2, -2)}
+                  </span>
+                );
+              if (part.startsWith("*") && part.endsWith("*"))
+                return (
+                  <em key={pi} className="italic text-white/85">
+                    {part.slice(1, -1)}
+                  </em>
+                );
+              return <span key={pi}>{part}</span>;
+            })}
+          </motion.span>
+        </span>
+      ))}
+    </h1>
+  );
+}
+
 
 function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
