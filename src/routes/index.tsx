@@ -129,6 +129,8 @@ function Home() {
   const statsData = useContent<{ items?: typeof staticStats } | typeof staticStats>("stats", { items: staticStats });
   const statsList = Array.isArray(statsData) ? statsData : (statsData?.items ?? staticStats);
   const hero = useSection<HeroContent>("home_hero");
+  const settings = useSiteSettings();
+
   const team = useSection<{ items: TeamMember[] }>("team");
   const portfolio = useSection<{ items: PortfolioItem[] }>("portfolio");
   const portfolioPreview =
