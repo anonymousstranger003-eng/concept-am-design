@@ -244,6 +244,23 @@ export function MediaGrid({
                       {copied === it.publicUrl ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                       {copied === it.publicUrl ? "Copied" : "URL"}
                     </button>
+                    <label
+                      title="Replace file (keeps the same URL)"
+                      className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-zinc-200 hover:bg-zinc-50 cursor-pointer"
+                    >
+                      <RefreshCw className="w-3.5 h-3.5" />
+                      <input
+                        type="file"
+                        hidden
+                        accept="image/*"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) void replace(it.name, f);
+                          e.target.value = "";
+                        }}
+                      />
+                    </label>
+
                     <button
                       type="button"
                       title="Rename"
