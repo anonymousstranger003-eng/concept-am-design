@@ -154,15 +154,32 @@ export function MediaGrid({
         {uploading && <div className="mt-2 text-xs text-zinc-500">Uploading…</div>}
       </div>
 
-      <div className="flex items-center justify-between mt-4">
-        <div className="text-xs text-zinc-500">{items.length} file(s)</div>
+      <div className="flex items-center gap-2 flex-wrap mt-4">
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search files…"
+          className="h-9 px-3 rounded-md border border-zinc-300 text-sm flex-1 min-w-[160px] bg-white"
+        />
+        <select
+          value={sort}
+          onChange={(e) => setSort(e.target.value as "newest" | "name" | "size")}
+          className="h-9 px-2 rounded-md border border-zinc-300 text-sm bg-white"
+        >
+          <option value="newest">Newest</option>
+          <option value="name">Name A–Z</option>
+          <option value="size">Largest</option>
+        </select>
         <button
           type="button"
           onClick={() => void refresh()}
-          className="inline-flex items-center gap-1.5 h-8 px-3 rounded-md border border-zinc-300 text-xs hover:bg-zinc-50"
+          className="inline-flex items-center gap-1.5 h-9 px-3 rounded-md border border-zinc-300 text-xs hover:bg-zinc-50"
         >
           <RefreshCw className="w-3.5 h-3.5" /> Refresh
         </button>
+      </div>
+      <div className="text-xs text-zinc-500 mt-2">
+        {visible.length} of {items.length} file(s)
       </div>
 
       {error && (
@@ -171,12 +188,19 @@ export function MediaGrid({
 
       <div className="mt-4">
         {loading ? (
-          <div className="text-sm text-zinc-500">Loading…</div>
-        ) : items.length === 0 ? (
-          <div className="text-sm text-zinc-500">No files yet — upload your first image above.</div>
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="aspect-square rounded-lg bg-zinc-100 animate-pulse" />
+            ))}
+          </div>
+        ) : visible.length === 0 ? (
+          <div className="text-sm text-zinc-500">
+            {items.length === 0 ? "No files yet — upload your first image above." : "No files match your search."}
+          </div>
         ) : (
           <div className={`grid gap-3 ${compact ? "grid-cols-3 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3 md:grid-cols-4"}`}>
-            {items.map((it) => (
+            {visible.map((it) => (
+
               <div key={it.name} className="border border-zinc-200 rounded-lg overflow-hidden bg-white">
                 <button
                   type="button"
