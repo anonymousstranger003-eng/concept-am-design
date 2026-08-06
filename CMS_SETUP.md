@@ -95,12 +95,33 @@ Supabase project.
 2. Select the GitHub repo.
 3. Build command: `bun install && bun run build`
 4. Output directory: `.output/public`
-5. Under **Settings → Environment variables (Production)**, add:
+5. Under **Settings → Environment variables & Secrets (Production AND Preview)**, add:
    - `APP_SUPABASE_URL`
    - `APP_SUPABASE_ANON_KEY`
    - `APP_SUPABASE_SERVICE_ROLE`
    - `ADMIN_EMAIL` (optional — only used to pre-fill setup)
-6. Save & deploy.
+6. Save, then **re-run the deployment** (env vars are only picked up by a new build/deploy).
+
+### Can't sign in to `/admin` on Cloudflare?
+
+Almost always missing/incorrect environment variables. Checklist:
+
+1. Open `/admin/login` on the live site. If you see an amber
+   "Supabase is not configured" box, the Worker isn't receiving the values —
+   add them exactly as named above and redeploy.
+2. Variable names are case-sensitive and must be set for the **environment you
+   are visiting** (Production vs Preview are separate lists in Cloudflare).
+3. Add them as plain **Variables** or **Secrets** on the Worker/Pages project —
+   not only in a local `.env` file, which is never committed.
+4. If you prefer build-time injection instead, name them `VITE_SUPABASE_URL`
+   and `VITE_SUPABASE_ANON_KEY` — those are baked into the bundle at build
+   time and also work.
+5. Still failing? Run `db/schema.sql` in Supabase and visit `/admin/setup`
+   once to create the first admin. Signing in with a user that has no row in
+   the `admins` table bounces you straight back to the login page.
+6. Supabase → **Authentication → URL Configuration** must list your Cloudflare
+   domain, otherwise reset/confirm links break.
+
 
 ### Custom domain
 Cloudflare dashboard → your Pages project → **Custom domains → Set up** →
