@@ -9,11 +9,13 @@ type EnvLike = Record<string, string | undefined>;
 async function resolveEnv(): Promise<EnvLike> {
   const sources: EnvLike[] = [];
   try {
-    const mod = (await import("cloudflare:workers")) as { env?: EnvLike };
+    const specifier = "cloudflare:workers";
+    const mod = (await import(/* @vite-ignore */ specifier)) as { env?: EnvLike };
     if (mod?.env) sources.push(mod.env);
   } catch {
     // not running on Cloudflare — ignore
   }
+
   try {
     if (typeof process !== "undefined" && process.env) sources.push(process.env as EnvLike);
   } catch {
