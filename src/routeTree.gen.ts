@@ -18,7 +18,6 @@ import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as AdminContentRouteImport } from './routes/admin/content'
 import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as AdminMediaRouteImport } from './routes/admin/media'
 import { Route as AdminResetRouteImport } from './routes/admin/reset'
@@ -27,6 +26,7 @@ import { Route as AdminSetupRouteImport } from './routes/admin/setup'
 import { Route as AdminSubmissionsRouteImport } from './routes/admin/submissions'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as AdminContentIndexRouteImport } from './routes/admin/content.index'
 import { Route as AdminContentKeyRouteImport } from './routes/admin/content.$key'
 
 const IndexRoute = IndexRouteImport.update({
@@ -74,11 +74,6 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminContentRoute = AdminContentRouteImport.update({
-  id: '/content',
-  path: '/content',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -119,10 +114,15 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminContentIndexRoute = AdminContentIndexRouteImport.update({
+  id: '/content/',
+  path: '/content/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminContentKeyRoute = AdminContentKeyRouteImport.update({
-  id: '/$key',
-  path: '/$key',
-  getParentRoute: () => AdminContentRoute,
+  id: '/content/$key',
+  path: '/content/$key',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -134,7 +134,6 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
-  '/admin/content': typeof AdminContentRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/reset': typeof AdminResetRoute
@@ -145,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/admin/content/$key': typeof AdminContentKeyRoute
+  '/admin/content/': typeof AdminContentIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -154,7 +154,6 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
-  '/admin/content': typeof AdminContentRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/reset': typeof AdminResetRoute
@@ -165,6 +164,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/blog': typeof BlogIndexRoute
   '/admin/content/$key': typeof AdminContentKeyRoute
+  '/admin/content': typeof AdminContentIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -176,7 +176,6 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/portfolio': typeof PortfolioRoute
   '/services': typeof ServicesRoute
-  '/admin/content': typeof AdminContentRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/media': typeof AdminMediaRoute
   '/admin/reset': typeof AdminResetRoute
@@ -187,6 +186,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/admin/content/$key': typeof AdminContentKeyRoute
+  '/admin/content/': typeof AdminContentIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -199,7 +199,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/portfolio'
     | '/services'
-    | '/admin/content'
     | '/admin/login'
     | '/admin/media'
     | '/admin/reset'
@@ -210,6 +209,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/admin/content/$key'
+    | '/admin/content/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -219,7 +219,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/portfolio'
     | '/services'
-    | '/admin/content'
     | '/admin/login'
     | '/admin/media'
     | '/admin/reset'
@@ -230,6 +229,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/blog'
     | '/admin/content/$key'
+    | '/admin/content'
   id:
     | '__root__'
     | '/'
@@ -240,7 +240,6 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/portfolio'
     | '/services'
-    | '/admin/content'
     | '/admin/login'
     | '/admin/media'
     | '/admin/reset'
@@ -251,6 +250,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/blog/'
     | '/admin/content/$key'
+    | '/admin/content/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -331,13 +331,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/admin/content': {
-      id: '/admin/content'
-      path: '/content'
-      fullPath: '/admin/content'
-      preLoaderRoute: typeof AdminContentRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
     '/admin/login': {
       id: '/admin/login'
       path: '/login'
@@ -394,30 +387,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/content/': {
+      id: '/admin/content/'
+      path: '/content'
+      fullPath: '/admin/content/'
+      preLoaderRoute: typeof AdminContentIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/admin/content/$key': {
       id: '/admin/content/$key'
-      path: '/$key'
+      path: '/content/$key'
       fullPath: '/admin/content/$key'
       preLoaderRoute: typeof AdminContentKeyRouteImport
-      parentRoute: typeof AdminContentRoute
+      parentRoute: typeof AdminRouteRoute
     }
   }
 }
 
-interface AdminContentRouteChildren {
-  AdminContentKeyRoute: typeof AdminContentKeyRoute
-}
-
-const AdminContentRouteChildren: AdminContentRouteChildren = {
-  AdminContentKeyRoute: AdminContentKeyRoute,
-}
-
-const AdminContentRouteWithChildren = AdminContentRoute._addFileChildren(
-  AdminContentRouteChildren,
-)
-
 interface AdminRouteRouteChildren {
-  AdminContentRoute: typeof AdminContentRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminMediaRoute: typeof AdminMediaRoute
   AdminResetRoute: typeof AdminResetRoute
@@ -425,10 +412,11 @@ interface AdminRouteRouteChildren {
   AdminSetupRoute: typeof AdminSetupRoute
   AdminSubmissionsRoute: typeof AdminSubmissionsRoute
   AdminIndexRoute: typeof AdminIndexRoute
+  AdminContentKeyRoute: typeof AdminContentKeyRoute
+  AdminContentIndexRoute: typeof AdminContentIndexRoute
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
-  AdminContentRoute: AdminContentRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminMediaRoute: AdminMediaRoute,
   AdminResetRoute: AdminResetRoute,
@@ -436,6 +424,8 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminSetupRoute: AdminSetupRoute,
   AdminSubmissionsRoute: AdminSubmissionsRoute,
   AdminIndexRoute: AdminIndexRoute,
+  AdminContentKeyRoute: AdminContentKeyRoute,
+  AdminContentIndexRoute: AdminContentIndexRoute,
 }
 
 const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
