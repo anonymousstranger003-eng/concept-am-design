@@ -4,7 +4,7 @@ import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { SECTIONS } from "@/lib/cms-schemas";
 import { FileText, ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/admin/content")({ component: ContentIndexPage });
+export const Route = createFileRoute("/admin/content/")({ component: ContentIndexPage });
 
 function ContentIndexPage() {
   return (
