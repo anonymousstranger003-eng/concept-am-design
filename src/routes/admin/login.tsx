@@ -19,8 +19,22 @@ function LoginPage() {
     setSubmitting(true);
     setError(null);
     try {
-      const { error } = await client.auth.signInWithPassword({ email, password });
+      const { data: signIn, error } = await client.auth.signInWithPassword({ email, password });
       if (error) throw error;
+      const uid = signIn.user?.id;
+      if (uid) {
+        const { data: adminRow } = await client
+          .from("admins")
+          .select("id")
+          .eq("user_id", uid)
+          .maybeSingle();
+        if (!adminRow) {
+          await client.auth.signOut();
+          throw new Error(
+            "This account isn't registered as an admin. Run /admin/setup once, or add this user to the 'admins' table in Supabase.",
+          );
+        }
+      }
       await refreshAdmin();
       if (!remember) {
         // Clear on window close: replace persisted session with a session-scoped copy
@@ -31,6 +45,7 @@ function LoginPage() {
         }
       }
       navigate({ to: "/admin" });
+
     } catch (err) {
       setError(err instanceof Error ? err.message : "Login failed.");
     } finally {
