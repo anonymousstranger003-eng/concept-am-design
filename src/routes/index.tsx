@@ -25,6 +25,7 @@ import { useContent, useSection } from "@/hooks/useContent";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 import { RichText, toPlainText } from "@/components/site/RichText";
+import { HERO_DEFAULT } from "@/lib/cms-defaults";
 import type { HeroContent, PortfolioItem, TeamMember } from "@/lib/cms-defaults";
 
 
@@ -157,9 +158,11 @@ function Home() {
     [hero.slides],
   );
   const active = slides[Math.min(slide, slides.length - 1)] ?? slides[0];
-  const slideEyebrow = active?.eyebrow || hero.eyebrow;
-  const slideHeading = active?.heading || hero.heading;
-  const slideSub = toPlainText(active?.subheading || hero.subheading);
+  // Slides authored before per-slide copy existed fall back to the default slide copy, then the main hero copy.
+  const seed = HERO_DEFAULT.slides[Math.min(slide, HERO_DEFAULT.slides.length - 1)];
+  const slideEyebrow = active?.eyebrow || seed?.eyebrow || hero.eyebrow;
+  const slideHeading = active?.heading || seed?.heading || hero.heading;
+  const slideSub = toPlainText(active?.subheading || seed?.subheading || hero.subheading);
   const firstSlide = slide === 0;
   const base = firstSlide ? 0.4 : 0.05;
 
