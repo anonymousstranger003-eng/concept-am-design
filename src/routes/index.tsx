@@ -25,7 +25,6 @@ import { useContent, useSection } from "@/hooks/useContent";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 import { RichText, toPlainText } from "@/components/site/RichText";
-import { HERO_DEFAULT } from "@/lib/cms-defaults";
 import type { HeroContent, PortfolioItem, TeamMember } from "@/lib/cms-defaults";
 
 
