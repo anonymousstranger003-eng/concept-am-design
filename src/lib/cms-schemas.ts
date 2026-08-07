@@ -54,6 +54,14 @@ export const SECTIONS: Section[] = [
         itemFields: [
           { key: "src", label: "Image", type: "image" },
           { key: "alt", label: "Alt text", type: "text" },
+          { key: "eyebrow", label: "Slide eyebrow (optional)", type: "text" },
+          {
+            key: "heading",
+            label: "Slide headline (optional)",
+            type: "textarea",
+            hint: "Leave blank to reuse the main headline. *italics*, **red accent**.",
+          },
+          { key: "subheading", label: "Slide subheadline (optional)", type: "textarea" },
         ],
       },
     ],
