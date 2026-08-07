@@ -33,7 +33,7 @@ export type HeroContent = {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
-  slides: { src: string; alt: string }[];
+  slides: { src: string; alt: string; eyebrow?: string; heading?: string; subheading?: string }[];
 };
 
 export type ServiceItem = { title: string; desc: string; img: string };
@@ -99,9 +99,27 @@ export const HERO_DEFAULT: HeroContent = {
     {
       src: coverGreenSofa.url,
       alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior",
+      eyebrow: "EST. 2020 · KERALA, INDIA",
+      heading: "Architecture that *listens*.\nInteriors that **last**.",
+      subheading:
+        "At AM Concepts Architects & Interiors, we create timeless architecture and bespoke interiors that combine elegance, functionality, and exceptional craftsmanship.",
     },
-    { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
-    { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
+    {
+      src: coverGallery.url,
+      alt: "Warm tan leather sofa with curated gallery wall and biophilic accents",
+      eyebrow: "RESIDENTIAL · COMMERCIAL · TURNKEY",
+      heading: "Spaces designed *around* the way you **live**.",
+      subheading:
+        "From the first sketch to the final styling, every detail is drawn, detailed and executed in-house by our architects and craftsmen.",
+    },
+    {
+      src: coverMinimal.url,
+      alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table",
+      eyebrow: "CALICUT · KASARAGOD · PAN INDIA",
+      heading: "Quiet luxury, *honest* materials, **timeless** detail.",
+      subheading:
+        "150+ completed projects built on clear budgets, disciplined timelines and design that still feels right a decade later.",
+    },
   ],
 };
 

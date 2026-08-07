@@ -4,11 +4,18 @@ import { useEffect, useState } from "react";
 export function HeroSlider({
   images,
   interval = 5000,
+  onIndexChange,
 }: {
   images: { src: string; alt: string }[];
   interval?: number;
+  onIndexChange?: (i: number) => void;
 }) {
   const [i, setI] = useState(0);
+
+  useEffect(() => {
+    onIndexChange?.(i);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [i]);
 
   // Preload all hero images upfront so transitions feel instant on desktop.
   useEffect(() => {
