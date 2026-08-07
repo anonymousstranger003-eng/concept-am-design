@@ -27,16 +27,40 @@ function seedFor(key: string): Data {
   return JSON.parse(JSON.stringify(DEFAULTS[key] ?? {})) as Data;
 }
 
-/** Fills any key missing from the stored row with the seed value. */
+function isRec(v: unknown): v is Data {
+  return !!v && typeof v === "object" && !Array.isArray(v);
+}
+
+/**
+ * Fills anything missing from the stored row with the seed value — including
+ * keys inside list items (e.g. per-slide headline/subline added after a save),
+ * so the editor always shows the copy that is actually live on the site.
+ */
 function withSeed(key: string, stored: Data | null): Data {
   const seed = seedFor(key);
   if (!stored) return seed;
-  const out: Data = { ...seed };
-  for (const [k, v] of Object.entries(stored)) {
-    if (v === undefined || v === null) continue;
-    out[k] = v;
+  return mergeDeep(seed, stored) as Data;
+}
+
+function mergeDeep(seed: unknown, stored: unknown): unknown {
+  if (Array.isArray(stored)) {
+    const seedArr = Array.isArray(seed) ? seed : [];
+    return stored.map((item, i) => mergeDeep(seedArr[i], item));
   }
-  return out;
+  if (isRec(stored)) {
+    const out: Data = isRec(seed) ? { ...seed } : {};
+    for (const [k, v] of Object.entries(stored)) {
+      if (v === undefined || v === null) continue;
+      if (typeof v === "string" && v === "" && isRec(seed) && typeof seed[k] === "string" && seed[k]) {
+        out[k] = seed[k];
+        continue;
+      }
+      out[k] = mergeDeep(isRec(seed) ? seed[k] : undefined, v);
+    }
+    return out;
+  }
+  if (stored === undefined || stored === null || stored === "") return seed ?? stored;
+  return stored;
 }
 
 function Editor() {
