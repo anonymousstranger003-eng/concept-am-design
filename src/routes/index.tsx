@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ArrowUpRight, Leaf, Sparkles, Compass, ShieldCheck } from "lucide-react";
 
 import heroWarm from "@/assets/hero-interior-warm.jpg.asset.json";
@@ -86,7 +86,7 @@ const portfolioFallback = [
  * Renders an editable hero heading. Authors can use *italic* and **accent**
  * inside the CMS field, and a newline to break the line.
  */
-function HeroHeading({ heading }: { heading: string }) {
+function HeroHeading({ heading, delay = 0.5 }: { heading: string; delay?: number }) {
   const lines = heading.split("\n").filter(Boolean);
   return (
     <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
@@ -95,7 +95,7 @@ function HeroHeading({ heading }: { heading: string }) {
           <motion.span
             initial={{ y: "110%" }}
             animate={{ y: 0 }}
-            transition={{ delay: 0.5 + li * 0.2, duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: delay + li * 0.15, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             className="inline-block"
           >
             {line.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g).map((part, pi) => {
@@ -144,46 +144,61 @@ function Home() {
         }))
       : portfolioFallback;
 
+  const [slide, setSlide] = useState(0);
+  const slides = useMemo(
+    () =>
+      hero.slides && hero.slides.length > 0
+        ? hero.slides
+        : [
+            { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
+            { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
+            { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
+          ],
+    [hero.slides],
+  );
+  const active = slides[Math.min(slide, slides.length - 1)] ?? slides[0];
+  const slideEyebrow = active?.eyebrow || hero.eyebrow;
+  const slideHeading = active?.heading || hero.heading;
+  const slideSub = toPlainText(active?.subheading || hero.subheading);
+  const firstSlide = slide === 0;
+  const base = firstSlide ? 0.4 : 0.05;
 
   return (
     <div className="overflow-clip">
       {/* HERO */}
       <section ref={heroRef} className="relative min-h-[640px] h-[92svh] md:h-[100svh] md:min-h-[720px] w-full overflow-hidden">
         <motion.div style={{ y, scale }} className="absolute inset-0">
-          <HeroSlider
-            images={
-              hero.slides && hero.slides.length > 0
-                ? hero.slides
-                : [
-                    { src: coverGreenSofa.url, alt: "Sculptural olive velvet sofa in a wainscoted living room — signature AM Concepts interior" },
-                    { src: coverGallery.url, alt: "Warm tan leather sofa with curated gallery wall and biophilic accents" },
-                    { src: coverMinimal.url, alt: "Minimalist Scandinavian living room with sage sofa and walnut coffee table" },
-                  ]
-            }
-            interval={5000}
-          />
+          <HeroSlider images={slides} interval={5000} onIndexChange={setSlide} />
         </motion.div>
 
         <div className="relative z-10 h-full container-x mx-auto max-w-7xl flex flex-col justify-center pt-28 sm:pt-32 md:pt-40 pb-16 md:pb-24">
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            key={`eyebrow-${slide}`}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: base, duration: 0.7 }}
             className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-6"
           >
-            <span className="w-6 md:w-8 h-px bg-white/50" />
-            {hero.eyebrow}
+            <motion.span
+              key={`rule-${slide}`}
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: base, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              className="w-6 md:w-8 h-px bg-white/50 origin-left"
+            />
+            {slideEyebrow}
           </motion.div>
 
-          <HeroHeading heading={hero.heading} />
+          <HeroHeading key={`heading-${slide}`} heading={slideHeading} delay={base + 0.1} />
 
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            key={`sub-${slide}`}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.95, duration: 0.9 }}
+            transition={{ delay: base + (firstSlide ? 0.55 : 0.35), duration: 0.8 }}
             className="mt-5 md:mt-7 max-w-xl text-white/85 text-sm md:text-base leading-relaxed"
           >
-            {toPlainText(hero.subheading)}
+            {slideSub}
           </motion.p>
 
 
