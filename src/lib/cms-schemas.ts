@@ -54,6 +54,12 @@ export const SECTIONS: Section[] = [
         itemFields: [
           { key: "src", label: "Image", type: "image" },
           { key: "alt", label: "Alt text", type: "text" },
+          {
+            key: "position",
+            label: "Image focus (mobile fit)",
+            type: "text",
+            hint: 'Optional CSS object-position, e.g. "center", "60% 50%", "center 30%".',
+          },
           { key: "eyebrow", label: "Slide eyebrow (optional)", type: "text" },
           {
             key: "heading",

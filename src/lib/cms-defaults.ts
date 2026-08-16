@@ -33,7 +33,7 @@ export type HeroContent = {
   primaryCtaHref: string;
   secondaryCtaLabel: string;
   secondaryCtaHref: string;
-  slides: { src: string; alt: string; eyebrow?: string; heading?: string; subheading?: string }[];
+  slides: { src: string; alt: string; position?: string; eyebrow?: string; heading?: string; subheading?: string }[];
 };
 
 export type ServiceItem = { title: string; desc: string; img: string };
@@ -107,6 +107,7 @@ export const HERO_DEFAULT: HeroContent = {
     {
       src: coverGallery.url,
       alt: "Warm tan leather sofa with curated gallery wall and biophilic accents",
+      position: "60% 50%",
       eyebrow: "RESIDENTIAL · COMMERCIAL · TURNKEY",
       heading: "Spaces designed *around* the way you **live**.",
       subheading:

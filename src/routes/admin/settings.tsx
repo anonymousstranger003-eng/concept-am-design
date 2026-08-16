@@ -6,6 +6,7 @@ import { RequireAdmin } from "@/components/admin/RequireAdmin";
 import { useSupabase } from "@/components/admin/SupabaseProvider";
 import { SETTINGS_FALLBACK, type SiteSettings } from "@/hooks/useSiteSettings";
 import { Save } from "lucide-react";
+import { FONT_OPTIONS, WEIGHT_OPTIONS } from "@/lib/typography";
 
 export const Route = createFileRoute("/admin/settings")({ component: SettingsPage });
 
@@ -123,6 +124,72 @@ function SettingsEditor() {
           </div>
         ))}
       </div>
+
+      <div className="mt-12 pt-8 border-t border-zinc-200">
+        <h2 className="text-xl font-semibold tracking-tight">Typography</h2>
+        <p className="text-sm text-zinc-500 mt-1">
+          Choose the fonts used across the public website. Leave on “Default” to keep the original
+          studio typography.
+        </p>
+
+        <div className="grid md:grid-cols-2 gap-5 mt-6">
+          {typographyFields.map((f) => (
+            <div key={f.key}>
+              <label className="block text-xs uppercase tracking-wider text-zinc-500 mb-1.5">
+                {f.label}
+              </label>
+              <select
+                value={(values[f.key] as string) ?? ""}
+                onChange={(e) => setValues((v) => ({ ...v, [f.key]: e.target.value }))}
+                className="w-full h-11 px-3 rounded-md border border-zinc-300 focus:outline-none focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 text-sm bg-white"
+                style={f.preview ? { fontFamily: (values[f.key] as string) || undefined } : undefined}
+              >
+                {f.options.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 rounded-lg border border-zinc-200 bg-white p-5">
+          <div className="text-[10px] uppercase tracking-[0.25em] text-zinc-400 mb-2">Preview</div>
+          <p
+            className="text-2xl"
+            style={{ fontFamily: values.headingFont || undefined, fontWeight: (values.headingWeight as any) || undefined }}
+          >
+            Architecture that listens.
+          </p>
+          <p
+            className="text-sm text-zinc-600 mt-2"
+            style={{ fontFamily: values.bodyFont || undefined, fontWeight: (values.bodyWeight as any) || undefined }}
+          >
+            Timeless architecture and bespoke interiors, drawn and detailed in-house.
+          </p>
+        </div>
+
+        <button
+          onClick={save}
+          disabled={saving || loading}
+          className="mt-6 inline-flex items-center gap-2 h-11 px-5 rounded-md bg-zinc-900 text-white text-sm font-medium hover:bg-zinc-800 disabled:opacity-50"
+        >
+          <Save className="w-4 h-4" /> {saving ? "Saving…" : "Save changes"}
+        </button>
+      </div>
     </div>
   );
 }
+
+const typographyFields: {
+  key: keyof SiteSettings;
+  label: string;
+  options: { value: string; label: string }[];
+  preview?: boolean;
+}[] = [
+  { key: "headingFont", label: "Heading font", options: FONT_OPTIONS, preview: true },
+  { key: "bodyFont", label: "Body font", options: FONT_OPTIONS, preview: true },
+  { key: "headingWeight", label: "Heading weight", options: WEIGHT_OPTIONS },
+  { key: "bodyWeight", label: "Body weight", options: WEIGHT_OPTIONS },
+];

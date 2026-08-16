@@ -6,7 +6,7 @@ export function HeroSlider({
   interval = 5000,
   onIndexChange,
 }: {
-  images: { src: string; alt: string }[];
+  images: { src: string; alt: string; position?: string }[];
   interval?: number;
   onIndexChange?: (i: number) => void;
 }) {
@@ -41,6 +41,7 @@ export function HeroSlider({
           decoding="async"
           fetchPriority={i === 0 ? "high" : "auto"}
           sizes="100vw"
+          style={{ objectPosition: images[i].position?.trim() || "center" }}
           initial={{ opacity: 0, scale: 1.08 }}
           animate={{ opacity: 1, scale: 1.01 }}
           exit={{ opacity: 0 }}
