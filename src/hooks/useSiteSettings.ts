@@ -17,6 +17,11 @@ export type SiteSettings = {
   mapKasaragod?: string;
   metaTitle?: string;
   metaDescription?: string;
+  /** Typography (optional — blank keeps the original site typography) */
+  headingFont?: string;
+  bodyFont?: string;
+  headingWeight?: string;
+  bodyWeight?: string;
 };
 
 export const SETTINGS_FALLBACK: SiteSettings = {
