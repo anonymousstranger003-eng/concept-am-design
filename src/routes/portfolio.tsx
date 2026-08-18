@@ -5,6 +5,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { ArrowUpRight, Eye } from "lucide-react";
 import { useSection } from "@/hooks/useContent";
 import { PORTFOLIO_CATEGORIES, type PortfolioItem } from "@/lib/cms-defaults";
+import { cmsClass } from "@/lib/cms-style";
 
 export const Route = createFileRoute("/portfolio")({
   component: Portfolio,
@@ -75,7 +76,7 @@ function Portfolio() {
                 : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
             }
           >
-            {visible.map((p) =>
+            {visible.map((p, i) =>
               p.link ? (
                 <a
                   key={p.title}
@@ -84,7 +85,7 @@ function Portfolio() {
                   rel="noopener noreferrer"
                   className="group relative block overflow-hidden bg-secondary aspect-[4/5]"
                 >
-                  <img src={p.img} alt={p.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110" />
+                  <img src={p.img} alt={p.title} loading="lazy" className={`${cmsClass("portfolio", `items.${i}.img`)} w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/20" />
                   <div className="absolute inset-0 grid place-items-center">
                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-full glass-dark grid place-items-center border border-white/30 group-hover:scale-110 transition-transform">
@@ -93,21 +94,21 @@ function Portfolio() {
                   </div>
                   <div className="absolute left-4 bottom-4 right-4 text-white flex items-end justify-between">
                     <div>
-                      <div className="text-[10px] uppercase tracking-[0.25em] text-brand">{p.location}</div>
-                      <div className="font-display text-lg md:text-xl mt-1">{p.title}</div>
+                      <div className={`${cmsClass("portfolio", `items.${i}.location`)} text-[10px] uppercase tracking-[0.25em] text-brand`}>{p.location}</div>
+                      <div className={`${cmsClass("portfolio", `items.${i}.title`)} font-display text-lg md:text-xl mt-1`}>{p.title}</div>
                     </div>
                     <ArrowUpRight className="w-5 h-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </a>
               ) : (
                 <div key={p.title} className="group relative overflow-hidden bg-secondary aspect-[3/4]">
-                  <img src={p.img} alt={p.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
+                  <img src={p.img} alt={p.title} loading="lazy" className={`${cmsClass("portfolio", `items.${i}.img`)} w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105`} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/0 to-black/0" />
                   <div className="absolute left-4 bottom-4 right-4 text-white">
-                    <div className="text-[10px] uppercase tracking-[0.25em] text-white/70">{p.location}</div>
-                    <div className="font-display text-xl md:text-2xl mt-1">{p.title}</div>
+                    <div className={`${cmsClass("portfolio", `items.${i}.location`)} text-[10px] uppercase tracking-[0.25em] text-white/70`}>{p.location}</div>
+                    <div className={`${cmsClass("portfolio", `items.${i}.title`)} font-display text-xl md:text-2xl mt-1`}>{p.title}</div>
                     {p.description && (
-                      <div className="text-xs text-white/70 mt-1 line-clamp-2">{p.description}</div>
+                      <div className={`${cmsClass("portfolio", `items.${i}.description`)} text-xs text-white/70 mt-1 line-clamp-2`}>{p.description}</div>
                     )}
                   </div>
                 </div>

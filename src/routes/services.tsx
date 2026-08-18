@@ -4,6 +4,7 @@ import { Reveal, Stagger, item } from "@/components/site/Reveal";
 import { ArrowUpRight } from "lucide-react";
 import { useSection } from "@/hooks/useContent";
 import type { ServiceItem } from "@/lib/cms-defaults";
+import { cmsClass } from "@/lib/cms-style";
 
 export const Route = createFileRoute("/services")({ component: Services });
 
@@ -42,7 +43,7 @@ function Services() {
                   alt={s.title}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  className={`${cmsClass("services", `items.${i}.img`)} absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                 <div className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.3em] text-white/85">
@@ -51,8 +52,8 @@ function Services() {
                 <ArrowUpRight className="absolute top-4 right-4 w-5 h-5 text-white/80 transition-transform group-hover:rotate-12" />
               </div>
               <div className="p-6 md:p-8 relative">
-                <h3 className="font-display text-xl md:text-2xl leading-tight">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{s.desc}</p>
+                <h3 className={`${cmsClass("services", `items.${i}.title`)} font-display text-xl md:text-2xl leading-tight`}>{s.title}</h3>
+                <p className={`${cmsClass("services", `items.${i}.desc`)} text-sm text-muted-foreground mt-3 leading-relaxed`}>{s.desc}</p>
                 <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
               </div>
             </motion.article>
