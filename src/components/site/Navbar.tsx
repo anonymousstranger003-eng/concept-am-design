@@ -6,11 +6,12 @@ import logo from "@/assets/logo.jpeg";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { useSection } from "@/hooks/useContent";
 import type { NavContent } from "@/lib/cms-defaults";
+import { cmsClass } from "@/lib/cms-style";
 
 export function Navbar() {
   const s = useSiteSettings();
   const nav = useSection<NavContent>("navigation");
-  const links = (nav.items ?? []).map((l) => ({ to: l.href as "/", label: l.label }));
+  const links = (nav.items ?? []).map((l, i) => ({ to: l.href as "/", label: l.label, i }));
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { location } = useRouterState();
@@ -55,7 +56,7 @@ export function Navbar() {
               <li key={l.to}>
                 <Link
                   to={l.to}
-                  className="relative px-4 py-2 text-sm tracking-wide text-foreground/80 hover:text-foreground transition-colors"
+                  className={`${cmsClass("navigation", `items.${l.i}.label`)} relative px-4 py-2 text-sm tracking-wide text-foreground/80 hover:text-foreground transition-colors`}
                 >
                   {l.label}
                   {active && (

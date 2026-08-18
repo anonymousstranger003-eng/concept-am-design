@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { useSection } from "@/hooks/useContent";
+import { cmsClass } from "@/lib/cms-style";
 import type { BlogPost } from "@/lib/cms-defaults";
 import { ArrowUpRight } from "lucide-react";
 
@@ -31,7 +32,9 @@ function formatDate(d?: string) {
 
 function BlogIndex() {
   const blog = useSection<{ items: BlogPost[] }>("blog");
-  const posts = (blog.items ?? []).slice().sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1));
+  const posts = (blog.items ?? [])
+    .map((p, idx) => ({ post: p, idx }))
+    .sort((a, b) => (a.post.publishedAt < b.post.publishedAt ? 1 : -1));
 
   return (
     <div>
@@ -48,7 +51,7 @@ function BlogIndex() {
 
       <section className="container-x mx-auto max-w-7xl pb-28">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {posts.map((p, i) => (
+          {posts.map(({ post: p, idx }, i) => (
             <Reveal key={p.slug} delay={i * 0.06}>
               <Link
                 to="/blog/$slug"
@@ -62,7 +65,7 @@ function BlogIndex() {
                       alt={p.title}
                       loading="lazy"
                       decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                      className={`${cmsClass("blog", `items.${idx}.cover`)} w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105`}
                     />
                   </div>
                 )}
@@ -70,10 +73,10 @@ function BlogIndex() {
                   <div className="text-[10px] uppercase tracking-[0.25em] text-brand">
                     {formatDate(p.publishedAt)}
                   </div>
-                  <h2 className="font-display text-xl md:text-2xl mt-3 leading-tight group-hover:text-brand transition-colors">
+                  <h2 className={`${cmsClass("blog", `items.${idx}.title`)} font-display text-xl md:text-2xl mt-3 leading-tight group-hover:text-brand transition-colors`}>
                     {p.title}
                   </h2>
-                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{p.excerpt}</p>
+                  <p className={`${cmsClass("blog", `items.${idx}.excerpt`)} text-sm text-muted-foreground mt-3 leading-relaxed`}>{p.excerpt}</p>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium">
                     Read article
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
