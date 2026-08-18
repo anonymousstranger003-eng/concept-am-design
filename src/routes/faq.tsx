@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { faqs as staticFaqs } from "@/lib/site-data";
 import { useSection } from "@/hooks/useContent";
 import { RichText } from "@/components/site/RichText";
+import { cmsClass } from "@/lib/cms-style";
 
 export const Route = createFileRoute("/faq")({ component: FAQ });
 
@@ -39,7 +40,7 @@ function FAQ() {
                   >
                     <div className="flex gap-6 items-start">
                       <div className="text-xs text-muted-foreground pt-1 tabular-nums">{String(i + 1).padStart(2, "0")}</div>
-                      <div className="font-display text-xl md:text-2xl group-hover:text-brand transition-colors">{f.q}</div>
+                      <div className={`${cmsClass("faqs", `items.${i}.q`)} font-display text-xl md:text-2xl group-hover:text-brand transition-colors`}>{f.q}</div>
                     </div>
                     <motion.div animate={{ rotate: isOpen ? 45 : 0 }} transition={{ duration: 0.3 }} className="shrink-0 mt-1">
                       <Plus className="w-5 h-5" />
@@ -54,7 +55,7 @@ function FAQ() {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <div className="pl-12 pb-6 pr-10 text-muted-foreground leading-relaxed"><RichText html={f.a} /></div>
+                        <div className={`${cmsClass("faqs", `items.${i}.a`)} pl-12 pb-6 pr-10 text-muted-foreground leading-relaxed`}><RichText html={f.a} /></div>
                       </motion.div>
                     )}
                   </AnimatePresence>

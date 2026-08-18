@@ -3,6 +3,8 @@ import { ArrowDown, ArrowUp, GripVertical, Plus, Trash2 } from "lucide-react";
 import type { Field } from "@/lib/cms-schemas";
 import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { ImagePicker } from "@/components/admin/ImagePicker";
+import { StylePanel } from "@/components/admin/StylePanel";
+import type { AnyStyle, StyleMap } from "@/lib/cms-style";
 
 type AnyRecord = Record<string, unknown>;
 
@@ -30,14 +32,28 @@ export function FieldRenderer({
   value,
   onChange,
   depth = 0,
+  path,
+  styles,
+  onStyleChange,
 }: {
   field: Field;
   value: unknown;
   onChange: (v: unknown) => void;
   depth?: number;
+  /** Dotted path of this field inside the block, e.g. "slides.0.heading". */
+  path?: string;
+  styles?: StyleMap;
+  onStyleChange?: (path: string, style: AnyStyle) => void;
 }) {
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [overIndex, setOverIndex] = useState<number | null>(null);
+
+  const fieldPath = path ?? field.key;
+  const myStyle: AnyStyle = (styles?.[fieldPath] ?? {}) as AnyStyle;
+  const setStyle = (next: AnyStyle) => onStyleChange?.(fieldPath, next);
+  const textPanel = onStyleChange ? (
+    <StylePanel kind="text" style={myStyle} onChange={setStyle} previewText={typeof value === "string" ? value : ""} />
+  ) : null;
 
   const label = (
     <label className="block text-xs uppercase tracking-wider text-zinc-500 mb-1.5">
@@ -56,6 +72,7 @@ export function FieldRenderer({
           className="w-full h-10 px-3 rounded-md border border-zinc-300 text-sm bg-white focus:outline-none focus:border-zinc-900"
         />
         {field.hint && <p className="text-[11px] text-zinc-500 mt-1">{field.hint}</p>}
+        {textPanel}
       </div>
     );
   }
@@ -86,6 +103,7 @@ export function FieldRenderer({
           className="w-full px-3 py-2 rounded-md border border-zinc-300 text-sm bg-white focus:outline-none focus:border-zinc-900"
         />
         {field.hint && <p className="text-[11px] text-zinc-500 mt-1">{field.hint}</p>}
+        {textPanel}
       </div>
     );
   }
@@ -96,6 +114,7 @@ export function FieldRenderer({
         {label}
         <RichTextEditor value={(value as string) ?? ""} onChange={onChange} />
         {field.hint && <p className="text-[11px] text-zinc-500 mt-1">{field.hint}</p>}
+        {textPanel}
       </div>
     );
   }
@@ -105,6 +124,14 @@ export function FieldRenderer({
       <div>
         {label}
         <ImagePicker value={(value as string) ?? ""} onChange={onChange} />
+        {onStyleChange && (
+          <StylePanel
+            kind="image"
+            style={myStyle}
+            onChange={setStyle}
+            previewSrc={typeof value === "string" ? value : ""}
+          />
+        )}
       </div>
     );
   }
@@ -217,6 +244,9 @@ export function FieldRenderer({
                       field={sub}
                       value={rec[sub.key]}
                       depth={depth + 1}
+                      path={`${fieldPath}.${idx}.${sub.key}`}
+                      styles={styles}
+                      onStyleChange={onStyleChange}
                       onChange={(v) => {
                         const next = items.slice();
                         next[idx] = { ...rec, [sub.key]: v };

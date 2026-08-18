@@ -23,6 +23,7 @@ import { Testimonials } from "@/components/site/Testimonials";
 import { services as staticServices, stats as staticStats } from "@/lib/site-data";
 import { useContent, useSection } from "@/hooks/useContent";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
+import { cmsClass } from "@/lib/cms-style";
 
 import { RichText, toPlainText } from "@/components/site/RichText";
 import type { HeroContent, PortfolioItem, TeamMember } from "@/lib/cms-defaults";
@@ -86,10 +87,10 @@ const portfolioFallback = [
  * Renders an editable hero heading. Authors can use *italic* and **accent**
  * inside the CMS field, and a newline to break the line.
  */
-function HeroHeading({ heading, delay = 0.5 }: { heading: string; delay?: number }) {
+function HeroHeading({ heading, delay = 0.5, className = "" }: { heading: string; delay?: number; className?: string }) {
   const lines = heading.split("\n").filter(Boolean);
   return (
-    <h1 className="font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
+    <h1 className={`${className} font-display text-white text-[1.85rem] sm:text-5xl md:text-6xl xl:text-8xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]`}>
       {lines.map((line, li) => (
         <span key={li} className="block overflow-hidden">
           <motion.span
@@ -178,7 +179,7 @@ function Home() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: base, duration: 0.7 }}
-            className="flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-6"
+            className={`${cmsClass("home_hero", "eyebrow")} ${cmsClass("home_hero", `slides.${slide}.eyebrow`)} flex items-center gap-3 text-white/70 text-[10px] md:text-[11px] uppercase tracking-[0.3em] mb-5 md:mb-6`}
           >
             <motion.span
               key={`rule-${slide}`}
@@ -190,14 +191,19 @@ function Home() {
             {slideEyebrow}
           </motion.div>
 
-          <HeroHeading key={`heading-${slide}`} heading={slideHeading} delay={base + 0.1} />
+          <HeroHeading
+            key={`heading-${slide}`}
+            heading={slideHeading}
+            delay={base + 0.1}
+            className={`${cmsClass("home_hero", "heading")} ${cmsClass("home_hero", `slides.${slide}.heading`)}`}
+          />
 
           <motion.p
             key={`sub-${slide}`}
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: base + (firstSlide ? 0.55 : 0.35), duration: 0.8 }}
-            className="mt-5 md:mt-7 max-w-xl text-white/85 text-sm md:text-base leading-relaxed"
+            className={`${cmsClass("home_hero", "subheading")} ${cmsClass("home_hero", `slides.${slide}.subheading`)} mt-5 md:mt-7 max-w-xl text-white/85 text-sm md:text-base leading-relaxed`}
           >
             {slideSub}
           </motion.p>
@@ -210,13 +216,13 @@ function Home() {
             className="mt-8 md:mt-10 flex flex-wrap items-center gap-3"
           >
             <Magnetic>
-              <a href={hero.primaryCtaHref || "/contact"} className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors">
+              <a href={hero.primaryCtaHref || "/contact"} className={`${cmsClass("home_hero", "primaryCtaLabel")} group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 bg-brand text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white hover:text-ink transition-colors`}>
                 {hero.primaryCtaLabel}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </Magnetic>
             <Magnetic>
-              <a href={hero.secondaryCtaHref || "/portfolio"} className="group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors">
+              <a href={hero.secondaryCtaHref || "/portfolio"} className={`${cmsClass("home_hero", "secondaryCtaLabel")} group inline-flex items-center gap-3 px-6 md:px-7 py-3.5 md:py-4 glass-dark text-white text-[11px] md:text-xs uppercase tracking-[0.2em] rounded-full hover:bg-white/15 transition-colors`}>
                 {hero.secondaryCtaLabel}
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
@@ -278,7 +284,7 @@ function Home() {
               <div className="font-display text-4xl md:text-6xl text-ink">
                 <Counter to={s.value} suffix={s.suffix} />
               </div>
-              <div className="mt-2 text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground px-2">{s.label}</div>
+              <div className={`${cmsClass("stats", `items.${i}.label`)} mt-2 text-[10px] md:text-xs uppercase tracking-[0.2em] text-muted-foreground px-2`}>{s.label}</div>
             </Reveal>
           ))}
         </div>
@@ -324,7 +330,7 @@ function Home() {
                   alt={s.title}
                   loading="lazy"
                   decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  className={`${cmsClass("services", `items.${i}.img`)} absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
                 <div className="absolute top-4 left-4 text-[10px] uppercase tracking-[0.3em] text-white/85">
@@ -333,8 +339,8 @@ function Home() {
                 <ArrowUpRight className="absolute top-4 right-4 w-5 h-5 text-white/80 transition-transform group-hover:rotate-12 group-hover:translate-x-0.5" />
               </div>
               <div className="p-6 md:p-7 relative">
-                <h3 className="font-display text-xl md:text-2xl leading-tight">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{s.desc}</p>
+                <h3 className={`${cmsClass("services", `items.${i}.title`)} font-display text-xl md:text-2xl leading-tight`}>{s.title}</h3>
+                <p className={`${cmsClass("services", `items.${i}.desc`)} text-sm text-muted-foreground mt-3 leading-relaxed`}>{s.desc}</p>
                 <span className="absolute left-0 bottom-0 h-px w-0 bg-brand group-hover:w-full transition-all duration-700" />
               </div>
             </motion.article>
@@ -380,13 +386,13 @@ function Home() {
                     alt={p.title}
                     from={dir[i]}
                     className="w-full h-full"
-                    imgClassName="transition-transform duration-[1400ms] ease-out group-hover:scale-105"
+                    imgClassName={`${cmsClass("portfolio", `items.${i}.img`)} transition-transform duration-[1400ms] ease-out group-hover:scale-105`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/0 to-black/0 opacity-90 pointer-events-none" />
                   <div className="absolute left-4 md:left-5 bottom-4 md:bottom-5 right-4 md:right-5 text-white flex items-end justify-between pointer-events-none">
                     <div>
-                      <div className="text-[10px] uppercase tracking-[0.25em] text-white/70">{p.category}</div>
-                      <div className="font-display text-xl md:text-2xl mt-1">{p.title}</div>
+                      <div className={`${cmsClass("portfolio", `items.${i}.category`)} text-[10px] uppercase tracking-[0.25em] text-white/70`}>{p.category}</div>
+                      <div className={`${cmsClass("portfolio", `items.${i}.title`)} font-display text-xl md:text-2xl mt-1`}>{p.title}</div>
                     </div>
                     <div className="w-9 h-9 md:w-10 md:h-10 rounded-full glass-dark grid place-items-center opacity-0 group-hover:opacity-100 transition-opacity">
                       <ArrowUpRight className="w-4 h-4" />
@@ -423,13 +429,13 @@ function Home() {
                 <div className="group bg-background border border-black/5 overflow-hidden">
                   <div className="overflow-hidden aspect-[4/5]">
                     <Parallax range={20}>
-                      <img src={f.photo || founderManoj.url} alt={f.name} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105" />
+                      <img src={f.photo || founderManoj.url} alt={f.name} loading="lazy" className={`${cmsClass("team", `items.${idx}.photo`)} w-full h-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105`} />
                     </Parallax>
                   </div>
                   <div className="p-6 md:p-8">
-                    <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
-                    <div className="font-display text-2xl md:text-3xl mt-2 text-ink">{f.name}</div>
-                    <RichText html={f.bio} className="text-sm text-muted-foreground mt-4 leading-relaxed" />
+                    <div className={`${cmsClass("team", `items.${idx}.role`)} text-[10px] md:text-xs uppercase tracking-[0.25em] text-brand`}>{f.role}</div>
+                    <div className={`${cmsClass("team", `items.${idx}.name`)} font-display text-2xl md:text-3xl mt-2 text-ink`}>{f.name}</div>
+                    <RichText html={f.bio} className={`${cmsClass("team", `items.${idx}.bio`)} text-sm text-muted-foreground mt-4 leading-relaxed`} />
                   </div>
                 </div>
               </SlideIn>

@@ -4,6 +4,7 @@ import logo from "@/assets/logo.jpeg";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { useSection } from "@/hooks/useContent";
 import type { FooterContent } from "@/lib/cms-defaults";
+import { cmsClass } from "@/lib/cms-style";
 
 export function Footer() {
   const s = useSiteSettings();
@@ -29,7 +30,7 @@ export function Footer() {
               <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">{s.tagline?.toUpperCase()}&nbsp;</div>
             </div>
           </div>
-          <p className="mt-6 max-w-md text-sm leading-relaxed text-white/60">{f.tagline}</p>
+          <p className={`${cmsClass("footer", "tagline")} mt-6 max-w-md text-sm leading-relaxed text-white/60`}>{f.tagline}</p>
           <div className="mt-6 flex items-center gap-3">
             {socials.map(({ Icon, href }) => (
               <a key={href} href={href} aria-label={href} className="w-9 h-9 rounded-full border border-white/15 grid place-items-center hover:bg-brand hover:border-brand transition-colors">
@@ -40,13 +41,13 @@ export function Footer() {
         </div>
 
         <div className="md:col-span-3">
-          {(f.columns ?? []).map((col) => (
+          {(f.columns ?? []).map((col, ci) => (
             <div key={col.title} className="mb-8 last:mb-0">
-              <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-5">{col.title}</div>
+              <div className={`${cmsClass("footer", `columns.${ci}.title`)} text-xs uppercase tracking-[0.2em] text-white/40 mb-5`}>{col.title}</div>
               <ul className="space-y-3 text-sm">
-                {(col.links ?? []).map((l) => (
+                {(col.links ?? []).map((l, li) => (
                   <li key={`${col.title}-${l.href}`}>
-                    <Link to={l.href as "/"} className="hover:text-white transition-colors">{l.label}</Link>
+                    <Link to={l.href as "/"} className={`${cmsClass("footer", `columns.${ci}.links.${li}.label`)} hover:text-white transition-colors`}>{l.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -73,7 +74,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
           <div>© {new Date().getFullYear()} {s.siteName}. All rights reserved.</div>
-          <div className="font-display tracking-wide">{f.credits}</div>
+          <div className={`${cmsClass("footer", "credits")} font-display tracking-wide`}>{f.credits}</div>
         </div>
       </div>
     </footer>

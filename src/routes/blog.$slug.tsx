@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound, useParams } from "@tanstack/react-router";
 import { Reveal } from "@/components/site/Reveal";
 import { useSection } from "@/hooks/useContent";
+import { cmsClass } from "@/lib/cms-style";
 import { RichText } from "@/components/site/RichText";
 import type { BlogPost } from "@/lib/cms-defaults";
 import { ArrowLeft } from "lucide-react";
@@ -45,7 +46,8 @@ function BlogDetail() {
   const { slug } = useParams({ from: "/blog/$slug" });
   const blog = useSection<{ items: BlogPost[] }>("blog");
   const posts = blog.items ?? [];
-  const post = posts.find((p) => p.slug === slug);
+  const postIndex = posts.findIndex((p) => p.slug === slug);
+  const post = postIndex >= 0 ? posts[postIndex] : undefined;
 
   if (!post) {
     if (posts.length === 0) {
@@ -61,7 +63,7 @@ function BlogDetail() {
           <Link to="/blog" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-brand">
             <ArrowLeft className="w-3.5 h-3.5" /> Journal
           </Link>
-          <h1 className="mt-6 font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] tracking-[-0.02em]">
+          <h1 className={`${cmsClass("blog", `items.${postIndex}.title`)} mt-6 font-display text-3xl sm:text-4xl md:text-6xl leading-[1.05] tracking-[-0.02em]`}>
             {post.title}
           </h1>
           <div className="mt-5 text-xs uppercase tracking-[0.2em] text-muted-foreground">
@@ -76,7 +78,7 @@ function BlogDetail() {
             <img
               src={post.cover}
               alt={post.title}
-              className="w-full aspect-[16/9] object-cover"
+              className={`${cmsClass("blog", `items.${postIndex}.cover`)} w-full aspect-[16/9] object-cover`}
               loading="lazy"
               decoding="async"
             />
@@ -88,7 +90,7 @@ function BlogDetail() {
         <Reveal>
           <RichText
             html={post.body}
-            className="prose-am text-[17px] leading-relaxed text-foreground/90 space-y-5"
+            className={`${cmsClass("blog", `items.${postIndex}.body`)} prose-am text-[17px] leading-relaxed text-foreground/90 space-y-5`}
           />
         </Reveal>
       </section>

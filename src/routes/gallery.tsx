@@ -5,6 +5,7 @@ import { useSection } from "@/hooks/useContent";
 import { RichText } from "@/components/site/RichText";
 import type { GalleryContent } from "@/lib/cms-defaults";
 import { ArrowUpRight } from "lucide-react";
+import { cmsClass } from "@/lib/cms-style";
 
 export const Route = createFileRoute("/gallery")({
   component: Gallery,
@@ -38,7 +39,7 @@ function Gallery() {
           <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
             <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Gallery
           </div>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]">
+          <h1 className={`${cmsClass("gallery", "heading")} font-display text-4xl sm:text-5xl md:text-7xl leading-[1.05] md:leading-[1] max-w-5xl tracking-[-0.02em]`}>
             {gallery.heading}
           </h1>
         </Reveal>
@@ -57,12 +58,12 @@ function Gallery() {
                 alt={g.caption || "AM Concepts project photograph"}
                 loading="lazy"
                 decoding="async"
-                className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                className={`${cmsClass("gallery", `items.${i}.src`)} w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105`}
               />
               {g.caption && (
                 <>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <figcaption className="absolute left-4 bottom-4 right-4 text-white text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity">
+                  <figcaption className={`${cmsClass("gallery", `items.${i}.caption`)} absolute left-4 bottom-4 right-4 text-white text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity`}>
                     {g.caption}
                   </figcaption>
                 </>

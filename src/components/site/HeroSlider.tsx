@@ -1,3 +1,4 @@
+import { cmsClass } from "@/lib/cms-style";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -49,7 +50,7 @@ export function HeroSlider({
             opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
             scale: { duration: 7, ease: "linear" },
           }}
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
+          className={`${cmsClass("home_hero", `slides.${i}.src`)} absolute inset-0 w-full h-full object-cover will-change-transform`}
         />
       </AnimatePresence>
       {/* Subtle vignette — keeps the image bright and highlighted while text stays readable */}
