@@ -73,6 +73,7 @@ import { WhatsAppButton } from "@/components/site/WhatsAppButton";
 import { PageLoader } from "@/components/site/PageLoader";
 import { SeoOverrides } from "@/components/site/SeoOverrides";
 import { TypographyStyles } from "@/components/site/TypographyStyles";
+import { CmsStyleSheet } from "@/components/site/CmsStyleSheet";
 import { SupabaseProvider } from "@/components/admin/SupabaseProvider";
 import { getPublicConfig } from "@/lib/config.functions";
 
@@ -135,6 +136,7 @@ function RootComponent() {
         ) : (
           <>
             <TypographyStyles />
+            <CmsStyleSheet />
             <SeoOverrides />
             <PageLoader />
             <Navbar />
