@@ -5,6 +5,7 @@ import { ArrowUpRight, Award, Leaf, Users, Building2 } from "lucide-react";
 import { useSection } from "@/hooks/useContent";
 import { RichText, toPlainText } from "@/components/site/RichText";
 import type { AboutContent, TeamMember } from "@/lib/cms-defaults";
+import { cmsClass } from "@/lib/cms-style";
 
 export const Route = createFileRoute("/about")({
   component: About,
@@ -27,15 +28,15 @@ export const Route = createFileRoute("/about")({
   }),
 });
 
-function PageHeader({ kicker, title, sub }: { kicker: string; title: string; sub?: string }) {
+function PageHeader({ kicker, title, sub, section = "about" }: { kicker: string; title: string; sub?: string; section?: string }) {
   return (
     <section className="container-x mx-auto max-w-7xl pt-40 pb-20">
       <Reveal>
-        <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">
+        <div className={`${cmsClass(section, "eyebrow")} text-xs uppercase tracking-[0.3em] text-brand mb-6`}>
           <span className="inline-block w-8 h-px bg-brand align-middle mr-3" />{kicker}
         </div>
-        <h1 className="font-display text-5xl md:text-7xl leading-[1] max-w-5xl">{title}</h1>
-        {sub && <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">{sub}</p>}
+        <h1 className={`${cmsClass(section, "heading")} font-display text-5xl md:text-7xl leading-[1] max-w-5xl`}>{title}</h1>
+        {sub && <p className={`${cmsClass(section, "intro")} mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed`}>{sub}</p>}
       </Reveal>
     </section>
   );
@@ -54,22 +55,22 @@ function About() {
           <img
             src={about.image1}
             alt="AM Concepts studio work"
-            className="w-full aspect-[4/3] object-cover"
+            className={`${cmsClass("about", "image1")} w-full aspect-[4/3] object-cover`}
             loading="lazy"
           />
         </Reveal>
         <div className="md:col-span-5 md:pt-10 space-y-8">
           <Reveal>
             <h3 className="font-display text-3xl">Our mission</h3>
-            <RichText html={about.mission} className="mt-3 text-muted-foreground leading-relaxed" />
+            <RichText html={about.mission} className={`${cmsClass("about", "mission")} mt-3 text-muted-foreground leading-relaxed`} />
           </Reveal>
           <Reveal delay={0.1}>
             <h3 className="font-display text-3xl">Our vision</h3>
-            <RichText html={about.vision} className="mt-3 text-muted-foreground leading-relaxed" />
+            <RichText html={about.vision} className={`${cmsClass("about", "vision")} mt-3 text-muted-foreground leading-relaxed`} />
           </Reveal>
           <Reveal delay={0.2}>
             <h3 className="font-display text-3xl">Design philosophy</h3>
-            <RichText html={about.philosophy} className="mt-3 text-muted-foreground leading-relaxed" />
+            <RichText html={about.philosophy} className={`${cmsClass("about", "philosophy")} mt-3 text-muted-foreground leading-relaxed`} />
           </Reveal>
         </div>
       </section>
@@ -86,20 +87,20 @@ function About() {
           <div className="grid md:grid-cols-2 gap-10 md:gap-14 mt-16">
             {(team.items ?? []).map((f, idx) => (
               <SlideIn key={f.name} from={idx === 0 ? "left" : "right"}>
-                <img src={f.photo} alt={f.name} loading="lazy" className="w-full aspect-[4/5] object-cover" />
+                <img src={f.photo} alt={f.name} loading="lazy" className={`${cmsClass("team", `items.${idx}.photo`)} w-full aspect-[4/5] object-cover`} />
                 <div className="mt-6">
-                  <div className="text-xs uppercase tracking-[0.25em] text-brand">{f.role}</div>
-                  <h3 className={`font-display text-3xl md:text-4xl mt-2 ${idx === 0 ? "italic tracking-tight" : ""}`}>
+                  <div className={`${cmsClass("team", `items.${idx}.role`)} text-xs uppercase tracking-[0.25em] text-brand`}>{f.role}</div>
+                  <h3 className={`${cmsClass("team", `items.${idx}.name`)} font-display text-3xl md:text-4xl mt-2 ${idx === 0 ? "italic tracking-tight" : ""}`}>
                     {f.name}
                   </h3>
                   {f.quote && (
-                    <blockquote className="mt-4 border-l-2 border-brand pl-4 italic text-foreground/85 leading-relaxed">
+                    <blockquote className={`${cmsClass("team", `items.${idx}.quote`)} mt-4 border-l-2 border-brand pl-4 italic text-foreground/85 leading-relaxed`}>
                       "{f.quote}"
                     </blockquote>
                   )}
                   <RichText
                     html={f.bio}
-                    className={`mt-4 text-muted-foreground leading-relaxed ${
+                    className={`${cmsClass("team", `items.${idx}.bio`)} mt-4 text-muted-foreground leading-relaxed ${
                       idx === 0 ? "first-line:italic first-line:text-foreground/90" : ""
                     }`}
                   />
@@ -156,7 +157,7 @@ function About() {
           <img
             src={about.image2}
             alt="Architectural blueprints and construction drawings by AM Concepts"
-            className="w-full aspect-[16/8] object-cover"
+            className={`${cmsClass("about", "image2")} w-full aspect-[16/8] object-cover`}
             loading="lazy"
           />
         </Reveal>
