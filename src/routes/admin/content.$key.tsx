@@ -8,6 +8,7 @@ import { SECTION_BY_KEY, type Field } from "@/lib/cms-schemas";
 import { DEFAULTS } from "@/lib/cms-defaults";
 import { FieldRenderer } from "@/components/admin/FieldRenderer";
 import { ArrowLeft, ExternalLink, RotateCcw, Save } from "lucide-react";
+import { STYLES_KEY, readStyleMap, type AnyStyle } from "@/lib/cms-style";
 
 export const Route = createFileRoute("/admin/content/$key")({ component: ContentEditorPage });
 
@@ -108,6 +109,22 @@ function Editor() {
     setDirty(true);
   };
 
+  const styles = readStyleMap(data);
+  const setStyle = (fieldPath: string, style: AnyStyle) => {
+    const cleaned: AnyStyle = {};
+    for (const [k, v] of Object.entries(style)) {
+      if (v === "" || v === undefined || v === null || v === false) continue;
+      (cleaned as Record<string, unknown>)[k] = v;
+    }
+    setData((d) => {
+      const map = { ...readStyleMap(d) };
+      if (Object.keys(cleaned).length === 0) delete map[fieldPath];
+      else map[fieldPath] = cleaned;
+      return { ...d, [STYLES_KEY]: map };
+    });
+    setDirty(true);
+  };
+
   const save = async () => {
     if (!client) return;
     setSaving(true);
@@ -184,7 +201,15 @@ function Editor() {
       ) : (
         <div className="mt-8 space-y-6 max-w-4xl">
           {section.fields.map((f: Field) => (
-            <FieldRenderer key={f.key} field={f} value={data[f.key]} onChange={(v) => set(f.key, v)} />
+            <FieldRenderer
+              key={f.key}
+              field={f}
+              value={data[f.key]}
+              onChange={(v) => set(f.key, v)}
+              path={f.key}
+              styles={styles}
+              onStyleChange={setStyle}
+            />
           ))}
         </div>
       )}
