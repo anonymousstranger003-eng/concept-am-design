@@ -71,7 +71,10 @@ function VideoCard({ v, idx }: { v: VideosContent["items"][number]; idx: number 
 
 /** Homepage video section — hidden entirely until videos are added in the CMS. */
 export function VideoSection({ content }: { content: VideosContent }) {
-  const items = (content.items ?? []).filter((v) => (v?.url ?? "").trim().length > 0);
+  // Keep the original index so saved per-field styles stay attached to the right video.
+  const items = (content.items ?? [])
+    .map((v, idx) => ({ v, idx }))
+    .filter(({ v }) => (v?.url ?? "").trim().length > 0);
   if (items.length === 0) return null;
 
   return (
@@ -97,7 +100,7 @@ export function VideoSection({ content }: { content: VideosContent }) {
         </Reveal>
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-10 mt-12 md:mt-16">
-          {items.map((v, idx) => (
+          {items.map(({ v, idx }) => (
             <SlideIn key={`${v.url}-${idx}`} from={idx % 2 === 0 ? "left" : "right"} delay={(idx % 2) * 0.1}>
               <VideoCard v={v} idx={idx} />
             </SlideIn>
