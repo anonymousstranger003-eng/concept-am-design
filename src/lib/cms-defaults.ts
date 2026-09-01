@@ -76,7 +76,18 @@ export type BlogPost = {
   author: string;
   publishedAt: string;
 };
-export type NavContent = { items: { label: string; href: string }[] };
+export type VisionContent = {
+  eyebrow: string;
+  quote: string;
+  pillars: { title: string; desc: string }[];
+};
+export type VideosContent = {
+  eyebrow: string;
+  heading: string;
+  subheading: string;
+  items: { title: string; caption: string; url: string; poster: string }[];
+};
+export type NavContent = { items: { label: string; href: string }[]; brandName?: string; brandTagline?: string };
 export type FooterContent = {
   tagline: string;
   credits: string;
@@ -327,6 +338,24 @@ export const BLOG_DEFAULT: { items: BlogPost[] } = {
   ],
 };
 
+export const VISION_DEFAULT: VisionContent = {
+  eyebrow: "Our Vision",
+  quote: '"Design should feel inevitable — calm, considered, built to outlast trend."',
+  pillars: [
+    { title: "Site-led design", desc: "Every project starts with land, light and life around it." },
+    { title: "Eco-conscious", desc: "Climate-responsive buildings using regional, low-impact materials." },
+    { title: "Crafted detail", desc: "Joinery, materiality and lighting resolved to the millimetre." },
+    { title: "Integrity", desc: "Transparent fees, honest timelines, full documentation." },
+  ],
+};
+
+export const VIDEOS_DEFAULT: VideosContent = {
+  eyebrow: "Films",
+  heading: "Walk through our work.",
+  subheading: "Project films, walkthroughs and studio stories.",
+  items: [],
+};
+
 export const NAV_DEFAULT: NavContent = {
   items: [
     { label: "Home", href: "/" },
@@ -426,6 +455,8 @@ export const DEFAULTS: Record<string, Record<string, unknown>> = {
   portfolio: PORTFOLIO_DEFAULT as unknown as Record<string, unknown>,
   gallery: GALLERY_DEFAULT as unknown as Record<string, unknown>,
   blog: BLOG_DEFAULT as unknown as Record<string, unknown>,
+  home_vision: VISION_DEFAULT as unknown as Record<string, unknown>,
+  home_videos: VIDEOS_DEFAULT as unknown as Record<string, unknown>,
   navigation: NAV_DEFAULT as unknown as Record<string, unknown>,
   footer: FOOTER_DEFAULT as unknown as Record<string, unknown>,
   seo: SEO_DEFAULT as unknown as Record<string, unknown>,

@@ -305,6 +305,49 @@ export const SECTIONS: Section[] = [
     ],
   },
   {
+    key: "home_vision",
+    label: "Home — Our Vision",
+    description: "The Our Vision statement and the four principle cards on the homepage.",
+    previewPath: "/",
+    fields: [
+      { key: "eyebrow", label: "Eyebrow (small caps text)", type: "text" },
+      { key: "quote", label: "Vision statement", type: "textarea" },
+      {
+        key: "pillars",
+        label: "Principles",
+        type: "list",
+        itemLabel: "Principle",
+        itemFields: [
+          { key: "title", label: "Title", type: "text" },
+          { key: "desc", label: "Description", type: "textarea" },
+        ],
+      },
+    ],
+  },
+  {
+    key: "home_videos",
+    label: "Home — Videos",
+    description: "Video section on the homepage (YouTube / Vimeo links or uploaded video URLs). Leave empty to hide.",
+    previewPath: "/",
+    fields: [
+      { key: "eyebrow", label: "Eyebrow (small caps text)", type: "text" },
+      { key: "heading", label: "Heading", type: "text" },
+      { key: "subheading", label: "Subheading", type: "textarea" },
+      {
+        key: "items",
+        label: "Videos",
+        type: "list",
+        itemLabel: "Video",
+        itemFields: [
+          { key: "title", label: "Title", type: "text" },
+          { key: "caption", label: "Caption", type: "textarea" },
+          { key: "url", label: "Video URL", type: "url", hint: "YouTube, Vimeo or a direct .mp4 link." },
+          { key: "poster", label: "Thumbnail / poster (optional)", type: "image" },
+        ],
+      },
+    ],
+  },
+  {
     key: "seo",
     label: "SEO — Per Page",
     description: "Per-page SEO overrides (title / description / OG image).",
