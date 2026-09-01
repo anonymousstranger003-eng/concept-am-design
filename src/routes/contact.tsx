@@ -121,21 +121,43 @@ function Contact() {
         </Reveal>
         <Stagger className="grid md:grid-cols-2 gap-6 mt-10">
           {[
-            { city: "Calicut", role: "Corporate Head Office", addr: "PRAGATHI, 13/1640, Madhuravanam Road, Civil Station, Kozhikode, Kerala 673020", map: "https://www.google.com/maps?q=11.284812,75.7939884&hl=en&z=17&output=embed" },
-            { city: "Kasaragod", role: "Branch Office", addr: "Ali & Son's Complex, 1/136, Chemnad, Kerala 671317", map: "https://www.google.com/maps?q=12.493856,75.0020172&hl=en&z=17&output=embed" },
-          ].map((o) => (
-            <motion.div key={o.city} variants={item} className="bg-background border border-black/10 overflow-hidden">
-              <div className="aspect-[16/10] bg-secondary">
-                <iframe src={o.map} title={o.city} loading="lazy" className="w-full h-full grayscale-[40%] hover:grayscale-0 transition-all duration-700" />
-              </div>
-              <div className="p-8">
-                <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
-                <div className="font-display text-2xl mt-2">{o.city}, Kerala</div>
-                <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="w-4 h-4" /> {o.addr}</div>
-              </div>
-            </motion.div>
-          ))}
+            { city: "Calicut", role: "Corporate Head Office", addr: s.addressCalicut ?? "", lat: 11.284812, lng: 75.7939884, map: s.mapCalicut },
+            { city: "Kasaragod", role: "Branch Office", addr: s.addressKasaragod ?? "", lat: 12.493856, lng: 75.0020172, map: s.mapKasaragod },
+          ].map((o) => {
+            const d = 0.004;
+            const bbox = `${o.lng - d}%2C${o.lat - d / 2}%2C${o.lng + d}%2C${o.lat + d / 2}`;
+            const src = o.map || `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${o.lat}%2C${o.lng}`;
+            const directions = `https://www.google.com/maps/dir/?api=1&destination=${o.lat},${o.lng}`;
+            return (
+              <motion.div key={o.city} variants={item} className="bg-background border border-black/10 overflow-hidden">
+                <div className="aspect-[16/10] bg-secondary">
+                  <iframe
+                    src={src}
+                    title={`${o.city} office location map`}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    allowFullScreen
+                    className="w-full h-full border-0"
+                  />
+                </div>
+                <div className="p-8">
+                  <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
+                  <div className="font-display text-2xl mt-2">{o.city}, Kerala</div>
+                  <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="w-4 h-4" /> {o.addr}</div>
+                  <a
+                    href={directions}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-brand hover:underline"
+                  >
+                    Get directions <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </motion.div>
+            );
+          })}
         </Stagger>
+
       </section>
     </div>
   );
