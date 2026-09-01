@@ -260,9 +260,11 @@ export const SECTIONS: Section[] = [
   {
     key: "navigation",
     label: "Navigation",
-    description: "Header navigation links.",
+    description: "Header logo text and navigation links.",
     previewPath: "/",
     fields: [
+      { key: "brandName", label: "Logo brand name", type: "text", hint: "Leave blank to use the name from Site Settings." },
+      { key: "brandTagline", label: "Logo sub-line", type: "text", hint: "Leave blank to use the tagline from Site Settings." },
       {
         key: "items",
         label: "Links",
