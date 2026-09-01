@@ -26,7 +26,10 @@ import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { cmsClass } from "@/lib/cms-style";
 
 import { RichText, toPlainText } from "@/components/site/RichText";
-import type { HeroContent, PortfolioItem, TeamMember } from "@/lib/cms-defaults";
+import type { HeroContent, PortfolioItem, TeamMember, VideosContent, VisionContent } from "@/lib/cms-defaults";
+import { VideoSection } from "@/components/site/VideoSection";
+
+const VISION_ICONS = [Compass, Leaf, Sparkles, ShieldCheck];
 
 
 export const Route = createFileRoute("/")({
@@ -136,6 +139,8 @@ function Home() {
 
   const team = useSection<{ items: TeamMember[] }>("team");
   const portfolio = useSection<{ items: PortfolioItem[] }>("portfolio");
+  const vision = useSection<VisionContent>("home_vision");
+  const videos = useSection<VideosContent>("home_videos");
   const portfolioPreview =
     portfolio.items && portfolio.items.length > 0
       ? portfolio.items.slice(0, 6).map((p) => ({
@@ -444,33 +449,33 @@ function Home() {
 
 
           <Reveal delay={0.2} className="mt-16 md:mt-20">
-            <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6">
-              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />Our Vision
+            <div className={`${cmsClass("home_vision", "eyebrow")} text-[10px] md:text-xs uppercase tracking-[0.3em] text-brand mb-5 md:mb-6`}>
+              <span className="inline-block w-6 md:w-8 h-px bg-brand align-middle mr-3" />{vision.eyebrow}
             </div>
             <WordsReveal
-              text={`"Design should feel inevitable — calm, considered, built to outlast trend."`}
-              className="font-display italic text-2xl sm:text-3xl md:text-5xl leading-[1.15] max-w-4xl tracking-[-0.015em]"
+              text={vision.quote}
+              className={`${cmsClass("home_vision", "quote")} font-display italic text-2xl sm:text-3xl md:text-5xl leading-[1.15] max-w-4xl tracking-[-0.015em]`}
             />
           </Reveal>
 
           <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-10 md:mt-14">
-            {[
-              { Icon: Compass, t: "Site-led design", d: "Every project starts with land, light and life around it." },
-              { Icon: Leaf, t: "Eco-conscious", d: "Climate-responsive buildings using regional, low-impact materials." },
-              { Icon: Sparkles, t: "Crafted detail", d: "Joinery, materiality and lighting resolved to the millimetre." },
-              { Icon: ShieldCheck, t: "Integrity", d: "Transparent fees, honest timelines, full documentation." },
-            ].map(({ Icon, t, d }) => (
-              <motion.div key={t} variants={item} className="p-5 md:p-6 bg-background border border-black/5 group hover:border-brand/40 transition-colors">
-                <Icon className="w-5 h-5 text-brand transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110" />
-                <div className="font-display text-lg md:text-xl mt-3 md:mt-4">{t}</div>
-                <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{d}</p>
-              </motion.div>
-            ))}
+            {(vision.pillars ?? []).map((p, idx) => {
+              const Icon = VISION_ICONS[idx % VISION_ICONS.length];
+              return (
+                <motion.div key={`${p.title}-${idx}`} variants={item} className="p-5 md:p-6 bg-background border border-black/5 group hover:border-brand/40 transition-colors">
+                  <Icon className="w-5 h-5 text-brand transition-transform duration-500 group-hover:rotate-[8deg] group-hover:scale-110" />
+                  <div className={`${cmsClass("home_vision", `pillars.${idx}.title`)} font-display text-lg md:text-xl mt-3 md:mt-4`}>{p.title}</div>
+                  <p className={`${cmsClass("home_vision", `pillars.${idx}.desc`)} text-sm text-muted-foreground mt-2 leading-relaxed`}>{p.desc}</p>
+                </motion.div>
+              );
+            })}
           </Stagger>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
+      <VideoSection content={videos} />
+
       <Testimonials />
 
       {/* OFFICES */}

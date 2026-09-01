@@ -260,9 +260,11 @@ export const SECTIONS: Section[] = [
   {
     key: "navigation",
     label: "Navigation",
-    description: "Header navigation links.",
+    description: "Header logo text and navigation links.",
     previewPath: "/",
     fields: [
+      { key: "brandName", label: "Logo brand name", type: "text", hint: "Leave blank to use the name from Site Settings." },
+      { key: "brandTagline", label: "Logo sub-line", type: "text", hint: "Leave blank to use the tagline from Site Settings." },
       {
         key: "items",
         label: "Links",
@@ -300,6 +302,49 @@ export const SECTIONS: Section[] = [
               { key: "href", label: "URL", type: "url" },
             ],
           },
+        ],
+      },
+    ],
+  },
+  {
+    key: "home_vision",
+    label: "Home — Our Vision",
+    description: "The Our Vision statement and the four principle cards on the homepage.",
+    previewPath: "/",
+    fields: [
+      { key: "eyebrow", label: "Eyebrow (small caps text)", type: "text" },
+      { key: "quote", label: "Vision statement", type: "textarea" },
+      {
+        key: "pillars",
+        label: "Principles",
+        type: "list",
+        itemLabel: "Principle",
+        itemFields: [
+          { key: "title", label: "Title", type: "text" },
+          { key: "desc", label: "Description", type: "textarea" },
+        ],
+      },
+    ],
+  },
+  {
+    key: "home_videos",
+    label: "Home — Videos",
+    description: "Video section on the homepage (YouTube / Vimeo links or uploaded video URLs). Leave empty to hide.",
+    previewPath: "/",
+    fields: [
+      { key: "eyebrow", label: "Eyebrow (small caps text)", type: "text" },
+      { key: "heading", label: "Heading", type: "text" },
+      { key: "subheading", label: "Subheading", type: "textarea" },
+      {
+        key: "items",
+        label: "Videos",
+        type: "list",
+        itemLabel: "Video",
+        itemFields: [
+          { key: "title", label: "Title", type: "text" },
+          { key: "caption", label: "Caption", type: "textarea" },
+          { key: "url", label: "Video URL", type: "url", hint: "YouTube, Vimeo or a direct .mp4 link." },
+          { key: "poster", label: "Thumbnail / poster (optional)", type: "image" },
         ],
       },
     ],
