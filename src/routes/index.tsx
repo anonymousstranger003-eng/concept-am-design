@@ -139,6 +139,8 @@ function Home() {
 
   const team = useSection<{ items: TeamMember[] }>("team");
   const portfolio = useSection<{ items: PortfolioItem[] }>("portfolio");
+  const vision = useSection<VisionContent>("home_vision");
+  const videos = useSection<VideosContent>("home_videos");
   const portfolioPreview =
     portfolio.items && portfolio.items.length > 0
       ? portfolio.items.slice(0, 6).map((p) => ({
@@ -472,6 +474,8 @@ function Home() {
       </section>
 
       {/* TESTIMONIALS */}
+      <VideoSection content={videos} />
+
       <Testimonials />
 
       {/* OFFICES */}
