@@ -39,12 +39,12 @@ export function Navbar() {
           <div className="relative w-11 h-11 rounded-full overflow-hidden ring-1 ring-black/10 bg-white">
             <img src={logo} alt={`${s.siteName} logo`} className="w-full h-full object-cover" />
           </div>
-          <div className="leading-tight">
-            <div className="font-display text-[17px] font-semibold tracking-tight text-ink">
-              {s.siteName}
+          <div className="leading-tight min-w-0">
+            <div className={`${cmsClass("navigation", "brandName")} font-display text-[15px] sm:text-[17px] font-semibold tracking-tight text-ink lg:whitespace-nowrap`}>
+              {nav.brandName || s.siteName}
             </div>
-            <div className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground mt-0.5">
-              {s.tagline}
+            <div className={`${cmsClass("navigation", "brandTagline")} text-[9px] sm:text-[10px] uppercase tracking-[0.16em] sm:tracking-[0.2em] text-muted-foreground mt-0.5 whitespace-nowrap`}>
+              {nav.brandTagline || s.tagline}
             </div>
           </div>
         </Link>
