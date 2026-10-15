@@ -1,14 +1,13 @@
-```tsx
 import { Link } from "@tanstack/react-router";
 import {
-  Instagram,
-  Facebook,
-  Linkedin,
-  Youtube,
-  MessageCircle,
-  Mail,
-  Phone,
-  MapPin,
+Instagram,
+Facebook,
+Linkedin,
+Youtube,
+MessageCircle,
+Mail,
+Phone,
+MapPin,
 } from "lucide-react";
 import logo from "@/assets/logo.jpeg";
 import { useSiteSettings } from "@/hooks/useSiteSettings";
@@ -17,159 +16,154 @@ import type { FooterContent } from "@/lib/cms-defaults";
 import { cmsClass } from "@/lib/cms-style";
 
 export function Footer() {
-  const s = useSiteSettings();
-  const f = useSection<FooterContent>("footer");
+const s = useSiteSettings();
+const f = useSection<FooterContent>("footer");
 
-  const socials = [
-    { Icon: Instagram, href: s.instagram },
-    { Icon: Facebook, href: s.facebook },
-    { Icon: Linkedin, href: s.linkedin },
-    { Icon: Youtube, href: s.youtube },
-    {
-      Icon: MessageCircle,
-    ```
-    href: s.whatsapp ? `https://wa.me/${s.whatsapp}` : undefined,
+const socials = [
+{ Icon: Instagram, href: s.instagram },
+{ Icon: Facebook, href: s.facebook },
+{ Icon: Linkedin, href: s.linkedin },
+{ Icon: Youtube, href: s.youtube },
+{
+Icon: MessageCircle,
+href: s.whatsapp ? `https://wa.me/${s.whatsapp}` : undefined,
+},
+].filter((x): x is { Icon: typeof Instagram; href: string } => !!x.href);
+
+return ( <footer className="bg-ink text-white/80 mt-32"> <div className="container-x mx-auto max-w-7xl py-20 grid grid-cols-1 md:grid-cols-12 gap-12"> <div className="md:col-span-5"> <div className="flex items-center gap-3"> <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 bg-white">
+<img
+src={logo}
+alt={s.siteName ?? "AM Concepts"}
+className="w-full h-full object-cover"
+/> </div>
+
 ```
-
-    },
-  ].filter((x): x is { Icon: typeof Instagram; href: string } => !!x.href);
-
-  return (
-    <footer className="bg-ink text-white/80 mt-32">
-      <div className="container-x mx-auto max-w-7xl py-20 grid grid-cols-1 md:grid-cols-12 gap-12">
-        <div className="md:col-span-5">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full overflow-hidden ring-1 ring-white/10 bg-white">
-              <img
-                src={logo}
-                alt={s.siteName ?? "AM Concepts"}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div className="leading-tight">
-              <div className="font-display text-white text-lg">
-                {s.siteName}
-              </div>
-              <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">
-                {s.tagline?.toUpperCase()}&nbsp;
-              </div>
-            </div>
+        <div className="leading-tight">
+          <div className="font-display text-white text-lg">
+            {s.siteName}
           </div>
+          <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+            {s.tagline?.toUpperCase()}&nbsp;
+          </div>
+        </div>
+      </div>
 
-          <p
-            className={`${cmsClass("footer", "tagline")} mt-6 max-w-md text-sm leading-relaxed text-white/60`}
+      <p
+        className={`${cmsClass("footer", "tagline")} mt-6 max-w-md text-sm leading-relaxed text-white/60`}
+      >
+        {f.tagline}
+      </p>
+
+      <div className="mt-6 flex items-center gap-3">
+        {socials.map(({ Icon, href }) => (
+          <a
+            key={href}
+            href={href}
+            aria-label={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-9 h-9 rounded-full border border-white/15 grid place-items-center hover:bg-brand hover:border-brand transition-colors"
           >
-            {f.tagline}
-          </p>
+            <Icon className="w-4 h-4" />
+          </a>
+        ))}
+      </div>
+    </div>
 
-          <div className="mt-6 flex items-center gap-3">
-            {socials.map(({ Icon, href }) => (
-              <a
-                key={href}
-                href={href}
-                aria-label={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full border border-white/15 grid place-items-center hover:bg-brand hover:border-brand transition-colors"
-              >
-                <Icon className="w-4 h-4" />
-              </a>
+    <div className="md:col-span-3">
+      {(f.columns ?? []).map((col, ci) => (
+        <div key={col.title} className="mb-8 last:mb-0">
+          <div
+            className={`${cmsClass("footer", `columns.${ci}.title`)} text-xs uppercase tracking-[0.2em] text-white/40 mb-5`}
+          >
+            {col.title}
+          </div>
+
+          <ul className="space-y-3 text-sm">
+            {(col.links ?? []).map((l, li) => (
+              <li key={`${col.title}-${l.href}`}>
+                <Link
+                  to={l.href as "/"}
+                  className={`${cmsClass("footer", `columns.${ci}.links.${li}.label`)} hover:text-white transition-colors`}
+                >
+                  {l.label}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
+      ))}
+    </div>
 
-        <div className="md:col-span-3">
-          {(f.columns ?? []).map((col, ci) => (
-            <div key={col.title} className="mb-8 last:mb-0">
-              <div
-                className={`${cmsClass("footer", `columns.${ci}.title`)} text-xs uppercase tracking-[0.2em] text-white/40 mb-5`}
-              >
-                {col.title}
-              </div>
-
-              <ul className="space-y-3 text-sm">
-                {(col.links ?? []).map((l, li) => (
-                  <li key={`${col.title}-${l.href}`}>
-                    <Link
-                      to={l.href as "/"}
-                      className={`${cmsClass("footer", `columns.${ci}.links.${li}.label`)} hover:text-white transition-colors`}
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-
-        <div className="md:col-span-4">
-          <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-5">
-            Studios
-          </div>
-
-          <div className="space-y-5 text-sm">
-            <div>
-              <div className="text-white font-medium">
-                Corporate Head Office
-              </div>
-              <div className="flex items-start gap-2 mt-1 text-white/60">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                {s.addressCalicut}
-              </div>
-            </div>
-
-            <div>
-              <div className="text-white font-medium">Branch Office</div>
-              <div className="flex items-start gap-2 mt-1 text-white/60">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                {s.addressKasaragod}
-              </div>
-            </div>
-
-            <a
-              href={s.phone ? `tel:${s.phone}` : undefined}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
-            >
-              <Phone className="w-4 h-4 shrink-0" />
-              <span>{s.phone}</span>
-            </a>
-
-            <a
-              href="https://wa.me/919074458218"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
-              aria-label="Contact us on WhatsApp at +91 90744 58218"
-            >
-              <MessageCircle className="w-4 h-4 shrink-0" />
-              <span>+91 90744 58218 (WhatsApp)</span>
-            </a>
-
-            <a
-              href={s.email ? `mailto:${s.email}` : undefined}
-              className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
-            >
-              <Mail className="w-4 h-4 shrink-0" />
-              <span>{s.email}</span>
-            </a>
-          </div>
-        </div>
+    <div className="md:col-span-4">
+      <div className="text-xs uppercase tracking-[0.2em] text-white/40 mb-5">
+        Studios
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
-          <div>
-            © {new Date().getFullYear()} {s.siteName}. All rights reserved.
+      <div className="space-y-5 text-sm">
+        <div>
+          <div className="text-white font-medium">
+            Corporate Head Office
           </div>
-
-          <div className={`${cmsClass("footer", "credits")} font-display tracking-wide`}>
-            {f.credits}
+          <div className="flex items-start gap-2 mt-1 text-white/60">
+            <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+            {s.addressCalicut}
           </div>
         </div>
+
+        <div>
+          <div className="text-white font-medium">Branch Office</div>
+          <div className="flex items-start gap-2 mt-1 text-white/60">
+            <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
+            {s.addressKasaragod}
+          </div>
+        </div>
+
+        <a
+          href={s.phone ? `tel:${s.phone}` : undefined}
+          className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+        >
+          <Phone className="w-4 h-4 shrink-0" />
+          <span>{s.phone}</span>
+        </a>
+
+        <a
+          href="https://wa.me/919074458218"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+          aria-label="Contact us on WhatsApp at +91 90744 58218"
+        >
+          <MessageCircle className="w-4 h-4 shrink-0" />
+          <span>+91 90744 58218 (WhatsApp)</span>
+        </a>
+
+        <a
+          href={s.email ? `mailto:${s.email}` : undefined}
+          className="flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+        >
+          <Mail className="w-4 h-4 shrink-0" />
+          <span>{s.email}</span>
+        </a>
       </div>
-    </footer>
-  );
-}
+    </div>
+  </div>
+
+  <div className="border-t border-white/10">
+    <div className="container-x mx-auto max-w-7xl py-6 flex flex-col md:flex-row gap-3 items-center justify-between text-xs text-white/40">
+      <div>
+        © {new Date().getFullYear()} {s.siteName}. All rights reserved.
+      </div>
+
+      <div
+        className={`${cmsClass("footer", "credits")} font-display tracking-wide`}
+      >
+        {f.credits}
+      </div>
+    </div>
+  </div>
+</footer>
 ```
+
+);
+}
