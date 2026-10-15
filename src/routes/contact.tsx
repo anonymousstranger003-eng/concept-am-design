@@ -119,44 +119,92 @@ function Contact() {
           <div className="text-xs uppercase tracking-[0.3em] text-brand mb-6">Studios</div>
           <h2 className="font-display text-4xl md:text-5xl leading-[1.05]">Visit us in Kerala.</h2>
         </Reveal>
-        <Stagger className="grid md:grid-cols-2 gap-6 mt-10">
-          {[
-            { city: "Calicut", role: "Corporate Head Office", addr: s.addressCalicut ?? "", lat: 11.284812, lng: 75.7939884, map: s.mapCalicut },
-            { city: "Kasaragod", role: "Branch Office", addr: s.addressKasaragod ?? "", lat: 12.493856, lng: 75.0020172, map: s.mapKasaragod },
-          ].map((o) => {
-            const d = 0.004;
-            const bbox = `${o.lng - d}%2C${o.lat - d / 2}%2C${o.lng + d}%2C${o.lat + d / 2}`;
-            const src = o.map || `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${o.lat}%2C${o.lng}`;
-            const directions = `https://www.google.com/maps/dir/?api=1&destination=${o.lat},${o.lng}`;
-            return (
-              <motion.div key={o.city} variants={item} className="bg-background border border-black/10 overflow-hidden">
-                <div className="aspect-[16/10] bg-secondary">
-                  <iframe
-                    src={src}
-                    title={`${o.city} office location map`}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    allowFullScreen
-                    className="w-full h-full border-0"
-                  />
-                </div>
-                <div className="p-8">
-                  <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
-                  <div className="font-display text-2xl mt-2">{o.city}, Kerala</div>
-                  <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground"><MapPin className="w-4 h-4" /> {o.addr}</div>
-                  <a
-                    href={directions}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-brand hover:underline"
-                  >
-                    Get directions <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </motion.div>
-            );
-          })}
-        </Stagger>
+     ```tsx
+<Stagger className="grid md:grid-cols-2 gap-6 mt-10">
+  {[
+    {
+      city: "Calicut",
+      role: "Corporate Head Office",
+      addr: s.addressCalicut ?? "",
+      lat: 11.284812,
+      lng: 75.7939884,
+      map: s.mapCalicut,
+    },
+    {
+      city: "Kasaragod",
+      role: "Branch Office",
+      addr: s.addressKasaragod ?? "",
+      lat: 12.493856,
+      lng: 75.0020172,
+      map: s.mapKasaragod,
+    },
+  ].map((o) => {
+    const destination = `${o.lat},${o.lng}`;
+
+    // Use a configured Google Maps embed URL when available.
+    // Otherwise, use Google's search embed instead of OpenStreetMap.
+    const configuredMap = o.map?.trim();
+
+    const isGoogleEmbed =
+      !!configuredMap &&
+      /^https:\/\/(www\.)?google\.com\/maps\/embed/.test(configuredMap);
+
+    const src = isGoogleEmbed
+      ? configuredMap
+      : `https://maps.google.com/maps?q=${encodeURIComponent(
+          `${o.city}, Kerala, India`
+        )}&z=14&output=embed`;
+
+    const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+      `${o.city}, Kerala, India`
+    )}`;
+
+    return (
+      <motion.div
+        key={o.city}
+        variants={item}
+        className="bg-background border border-black/10 overflow-hidden"
+      >
+        <div className="aspect-[16/10] bg-secondary">
+          <iframe
+            src={src}
+            title={`${o.city} office location map`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+            className="w-full h-full border-0"
+          />
+        </div>
+
+        <div className="p-8">
+          <div className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+            {o.role}
+          </div>
+
+          <div className="font-display text-2xl mt-2">
+            {o.city}, Kerala
+          </div>
+
+          <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+            <MapPin className="w-4 h-4 shrink-0" />
+            {o.addr}
+          </div>
+
+          <a
+            href={directions}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-brand hover:underline"
+          >
+            Get directions <ArrowUpRight className="w-4 h-4" />
+          </a>
+        </div>
+      </motion.div>
+    );
+  })}
+</Stagger>
+```
+
 
       </section>
     </div>
