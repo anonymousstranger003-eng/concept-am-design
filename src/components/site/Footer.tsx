@@ -27,7 +27,10 @@ export function Footer() {
     { Icon: Youtube, href: s.youtube },
     {
       Icon: MessageCircle,
-      href: s.whatsapp ? `https://wa.me/${s.whatsapp}` : undefined,
+    ```
+    href: s.whatsapp ? `https://wa.me/${s.whatsapp}` : undefined,
+```
+
     },
   ].filter((x): x is { Icon: typeof Instagram; href: string } => !!x.href);
 
