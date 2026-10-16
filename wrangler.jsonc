@@ -1,13 +1,11 @@
-// wrangler.jsonc
-"name": "concept-am-design65656565",
 {
-  // ...
   "observability": {
     "logs": {
       "enabled": true,
-      "invocation_logs": true,
-      "persist": true
+      "invocation_logs": true
+    },
+    "traces": {
+      "enabled": false
     }
-  },
-  // ...
+  }
 }
