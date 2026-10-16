@@ -142,7 +142,7 @@ function Contact() {
     const destination = `${o.lat},${o.lng}`;
 
     // Use a configured Google Maps embed URL when available.
-    // Otherwise, use Google's search embed instead of OpenStreetMap.
+    // Fall back to an OpenStreetMap embed when a valid Google embed isn't configured.
     const configuredMap = o.map?.trim();
 
     const isGoogleEmbed =
@@ -151,12 +151,10 @@ function Contact() {
 
     const src = isGoogleEmbed
       ? configuredMap
-      : `https://maps.google.com/maps?q=${encodeURIComponent(
-          `${o.city}, Kerala, India`
-        )}&z=14&output=embed`;
+      : `https://www.openstreetmap.org/export/embed.html?bbox=${o.lng - 0.015},${o.lat - 0.01},${o.lng + 0.015},${o.lat + 0.01}&layer=mapnik&marker=${o.lat},${o.lng}`;
 
     const directions = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-      `${o.city}, Kerala, India`
+      destination
     )}`;
 
     return (
