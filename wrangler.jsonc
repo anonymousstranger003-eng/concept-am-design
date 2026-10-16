@@ -1,7 +1,9 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "tanstack-start-app",
-  "compatibility_date": "2025-09-24",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "src/server.ts",
+  // ...
+  "vars": {
+    "VITE_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzZWlzcGlzZXVka2Z0dXVscHdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODUwNDEzOTIsImV4cCI6MjEwMDYxNzM5Mn0.PGT-YsttSQ1GDJeSLF70vYcW7MAKFyKShaeFXlJ8uJ4",
+    "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_VHEFGtEZqFd0zooYd46V2w_7MV49F8Z",
+    "VITE_SUPABASE_URL": "https://dseispiseudkftuulpwe"
+  },
+  // ...
 }
