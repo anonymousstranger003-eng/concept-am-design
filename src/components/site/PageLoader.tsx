@@ -75,15 +75,6 @@ export function PageLoader() {
                 Architects · Interiors
               </div>
 
-              <a
-                href="https://www.instagram.com/zavcodes/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-8 font-sans text-[11px] font-medium text-ink/55 transition-colors hover:text-ink md:text-xs"
-                aria-label="Designed by ZAV Codes — open Instagram"
-              >
-                Designed by <span className="font-semibold text-ink">ZAV Codes</span>
-              </a>
             </motion.div>
           </div>
         </motion.div>
