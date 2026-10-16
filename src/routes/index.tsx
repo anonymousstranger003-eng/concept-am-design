@@ -494,29 +494,45 @@ function Home() {
             {
               city: "Calicut",
               role: settings.addressCalicut ?? "",
-              map: settings.mapCalicut || "https://www.google.com/maps?q=11.284812,75.7939884&hl=en&z=17&output=embed",
+              lat: 11.284812,
+              lng: 75.7939884,
+              map: settings.mapCalicut,
             },
             {
               city: "Kasaragod",
               role: settings.addressKasaragod ?? "",
-              map: settings.mapKasaragod || "https://www.google.com/maps?q=12.493856,75.0020172&hl=en&z=17&output=embed",
+              lat: 12.493856,
+              lng: 75.0020172,
+              map: settings.mapKasaragod,
             },
           ].map((o) => (
+            (() => {
+              const configuredMap = o.map?.trim();
+              const mapUrl = configuredMap && /^https:\/\/(www\.)?google\.com\/maps\/embed/.test(configuredMap)
+                ? configuredMap
+                : `https://www.openstreetmap.org/export/embed.html?bbox=${o.lng - 0.015},${o.lat - 0.01},${o.lng + 0.015},${o.lat + 0.01}&layer=mapnik&marker=${o.lat},${o.lng}`;
+              const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${o.lat},${o.lng}`;
 
-            <motion.div key={o.city} variants={item} className="group bg-background border border-black/5 overflow-hidden">
+              return <motion.div key={o.city} variants={item} className="group bg-background border border-black/5 overflow-hidden">
               <div className="aspect-[16/10] overflow-hidden bg-secondary">
-                <iframe src={o.map} title={o.city} loading="lazy" className="w-full h-full grayscale-[40%] group-hover:grayscale-0 transition-all duration-700" />
+                <iframe src={mapUrl} title={`${o.city} office location map`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-full grayscale-[40%] group-hover:grayscale-0 transition-all duration-700" />
               </div>
-              <div className="p-6 md:p-8 flex items-end justify-between gap-4">
+              <div className="p-6 md:p-8 flex flex-wrap items-end justify-between gap-4">
                 <div>
                   <div className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-muted-foreground">{o.role}</div>
                   <div className="font-display text-2xl md:text-3xl mt-2">{o.city}, Kerala</div>
                 </div>
-                <Link to="/contact" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2 group/v whitespace-nowrap">
-                  Visit <ArrowUpRight className="w-4 h-4 transition-transform group-hover/v:translate-x-0.5 group-hover/v:-translate-y-0.5" />
-                </Link>
+                <div className="flex items-center gap-4">
+                  <Link to="/contact" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2 group/v whitespace-nowrap">
+                    Visit <ArrowUpRight className="w-4 h-4 transition-transform group-hover/v:translate-x-0.5 group-hover/v:-translate-y-0.5" />
+                  </Link>
+                  <a href={directionsUrl} target="_blank" rel="noopener noreferrer" className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-ink hover:text-brand inline-flex items-center gap-2 whitespace-nowrap">
+                    Directions <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
-            </motion.div>
+            </motion.div>;
+            })()
           ))}
         </Stagger>
       </section>
