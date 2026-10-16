@@ -35,7 +35,7 @@ export const getSetupState = createServerFn({ method: "GET" }).handler(async () 
 
 /** Creates the first admin. Refuses if an admin already exists. */
 export const bootstrapAdmin = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => BootstrapInput.parse(data))
+  .validator((data: unknown) => BootstrapInput.parse(data))
   .handler(async ({ data }) => {
     const { createClient } = await import("@supabase/supabase-js");
     const url = process.env.APP_SUPABASE_URL;

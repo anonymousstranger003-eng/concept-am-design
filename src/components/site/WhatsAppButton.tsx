@@ -1,4 +1,3 @@
-```tsx
 import { motion } from "framer-motion";
 
 export function WhatsAppButton() {
@@ -29,4 +28,3 @@ export function WhatsAppButton() {
     </motion.a>
   );
 }
-```

@@ -1,4 +1,3 @@
-```tsx
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/logo.jpeg";
@@ -196,4 +195,3 @@ export function PageLoader() {
     </AnimatePresence>
   );
 }
-```
